@@ -28,17 +28,16 @@ export class RegistrationComponent {
       console.log('Form Submitted', this.registrationform.value);
       
       // Navigate to the sidenav page
-      this.route.navigateByUrl('/sidenav');
+      this.route.navigateByUrl('/login');
     } else {
       // Mark all fields as touched to trigger validation messages
       this.registrationform.markAllAsTouched();
     }
   }
 
-  closeForm(): void {
-    // Add any logic to close the form or navigate away
-    console.log('Form closed');
-    this.route.navigateByUrl('/home'); // example route to navigate to home page
-  }
+  // closeForm(): void {
+  //   console.log('Form closed');
+  //   this.route.navigateByUrl('/home'); 
+  // }
   
 }

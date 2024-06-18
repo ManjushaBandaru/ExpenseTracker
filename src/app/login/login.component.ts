@@ -9,20 +9,30 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  a: string = '';
-  b: string = '';
+  username: string = '';
+  password: string = '';
   // router: any;
   // valCheck: string[] = ['remember'];
-  // loginForm!: FormGroup;
+  loginForm!: FormGroup;
 
   // password!: string;
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, private fb: FormBuilder) { }
+
+  ngOnInit(){
+
+  }
+
+  login(){
+    this.loginForm = this.fb.group({
+
+    })
+  }
 
 
   onSignIn() {
-    if (this.a === 'calibrage') {
-      if (this.b === '1234') {
+    if (this.username === 'calibrage') {
+      if (this.password === '1234') {
         this.route.navigateByUrl('/sidenav');
       } else {
         window.alert('Incorrect Password');
