@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,13 +14,31 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.registrationform = this.fb.group({
-      FirstName: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$'), this.onlyAlphabets]],
-      LastName: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
-      MobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      FirstName: ['', [Validators.required, this.alphaOnlyValidator()]],
+      LastName: ['', [Validators.required, this.alphaOnlyValidator()]],
+      MobileNumber: ['', [Validators.required, this.mobileNumberValidator()]],
       Email: ['', [Validators.required, Validators.email]],
       UserName: ['', Validators.required],
       Password: ['', Validators.required]
     });
+  }
+
+  alphaOnlyValidator(): any {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const valid = /^[a-zA-Z]*$/.test(control.value);
+      return valid ? null : { alphaOnly: true };
+    };
+  }
+
+  mobileNumberValidator(): any {
+    return (control: AbstractControl): ValidationErrors | null => {
+      // Check if input is numeric and exactly 10 digits
+      const valid = /^[0-9]{10}$/.test(control.value);
+      if (!valid) {
+        return { invalidMobileNumber: true };
+      }
+      return null;
+    };
   }
 
   submit(): void {
@@ -29,19 +47,6 @@ export class RegistrationComponent implements OnInit {
       this.router.navigateByUrl('/sidenav');
     } else {
       this.registrationform.markAllAsTouched();
-    }
-  }
-
-  closeForm(): void {
-    console.log('Form closed');
-    this.router.navigateByUrl('/home');
-  }
-
-  onlyAlphabets(event: KeyboardEvent): void {
-    const charCode = event.charCode || event.keyCode || event.which;
-    const inputChar = String.fromCharCode(charCode);
-    if (!/^[A-Za-z]+$/.test(inputChar)) {
-      event.preventDefault();
     }
   }
 }

@@ -77,60 +77,74 @@
     </form>
   </div>
 </div> -->
+
+
+
 <div class="d-flex justify-content-center align-items-center min-vh-100">
-    <div class="p-4" style="width: 100%; max-width: 600px;">
-      <div>
-        <header class="mb-4">
-          <h2>Registration Details</h2>
-        </header>
-        <form class="row g-3" [formGroup]="registrationform" (ngSubmit)="submit()">
-          <div class="col-md-6">
-            <label for="FirstName" class="form-label">First Name:</label>
-            <input type="text" pInputText class="form-control" id="FirstName" formControlName="FirstName" maxlength="20" />
-            <div *ngIf="registrationform.get('FirstName')?.touched && registrationform.get('FirstName')?.getError('required')">
-              <div style="color:red">* First Name is required</div>
-            </div>
+  <div class="p-4" style="width: 100%; max-width: 600px;">
+    <div>
+      <header class="mb-4">
+        <h2>Registration Details</h2>
+      </header>
+      <form class="row g-3" [formGroup]="registrationform" (ngSubmit)="submit()">
+        <div class="col-md-6">
+          <label for="FirstName" class="form-label">First Name:</label>
+          <input type="text" pInputText class="form-control" id="FirstName" formControlName="FirstName" maxlength="20" />
+          <div *ngIf="registrationform.get('FirstName')?.touched && registrationform.get('FirstName')?.getError('required')">
+            <div style="color:red">* First Name is required</div>
           </div>
-          <div class="col-md-6">
-            <label for="LastName" class="form-label">Last Name:</label>
-            <input type="text" pInputText class="form-control" id="LastName" formControlName="LastName" maxlength="20" />
-            <div *ngIf="registrationform.get('LastName')?.touched && registrationform.get('LastName')?.getError('required')">
-              <div style="color:red">* Last Name is required</div>
-            </div>
+          <div *ngIf="registrationform.get('FirstName')?.getError('alphaOnly') && registrationform.get('FirstName')?.touched">
+            <div style="color:red">* Only alphabets allowed</div>
           </div>
-          <div class="col-md-6">
-            <label for="MobileNumber" class="form-label">Mobile Number:</label>
-            <input type="text" pInputText class="form-control" id="MobileNumber" formControlName="MobileNumber" />
-            <div *ngIf="registrationform.get('MobileNumber')?.touched && registrationform.get('MobileNumber')?.getError('required')">
-              <div style="color:red">* Mobile Number is required</div>
-            </div>
+        </div>
+        <div class="col-md-6">
+          <label for="LastName" class="form-label">Last Name:</label>
+          <input type="text" pInputText class="form-control" id="LastName" formControlName="LastName" maxlength="20" />
+          <div *ngIf="registrationform.get('LastName')?.touched && registrationform.get('LastName')?.getError('required')">
+            <div style="color:red">* Last Name is required</div>
           </div>
-          <div class="col-md-6">
-            <label for="Email" class="form-label">Email:</label>
-            <input type="email" pInputText class="form-control" id="Email" formControlName="Email" />
-            <div *ngIf="registrationform.get('Email')?.touched && registrationform.get('Email')?.getError('required')">
-              <div style="color:red">* Email is required</div>
-            </div>
+          <div *ngIf="registrationform.get('LastName')?.getError('alphaOnly') && registrationform.get('LastName')?.touched">
+            <div style="color:red">* Only alphabets allowed</div>
           </div>
-          <div class="col-md-6">
-            <label for="UserName" class="form-label">User Name:</label>
-            <input type="text" pInputText class="form-control" id="UserName" formControlName="UserName" />
-            <div *ngIf="registrationform.get('UserName')?.touched && registrationform.get('UserName')?.getError('required')">
-              <div style="color:red">* User Name is required</div>
-            </div>
+        </div>
+        <div class="col-md-6">
+          <label for="MobileNumber" class="form-label">Mobile Number:</label>
+          <input type="text" pInputText class="form-control" id="MobileNumber" maxlength="10" formControlName="MobileNumber" />
+          <div *ngIf="registrationform.get('MobileNumber')?.touched && registrationform.get('MobileNumber')?.getError('required')">
+            <div style="color:red">* Mobile Number is required</div>
           </div>
-          <div class="col-md-6">
-            <label for="Password" class="form-label">Password:</label>
-            <input type="password" pInputText class="form-control" id="Password" formControlName="Password" />
-            <div *ngIf="registrationform.get('Password')?.touched && registrationform.get('Password')?.getError('required')">
-              <div style="color:red">* Password is required</div>
-            </div>
+          <div *ngIf="registrationform.get('MobileNumber')?.getError('pattern') && registrationform.get('MobileNumber')?.touched">
+            <div style="color:red">* Mobile Number must be 10 digits</div>
           </div>
-          <div class="col-12 mt-4 text-center">
-            <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid">Submit</button>
+        </div>
+        <div class="col-md-6">
+          <label for="Email" class="form-label">Email:</label>
+          <input type="email" pInputText class="form-control" id="Email" formControlName="Email" />
+          <div *ngIf="registrationform.get('Email')?.touched && registrationform.get('Email')?.getError('required')">
+            <div style="color:red">* Email is required</div>
           </div>
-        </form>
-      </div>
+          <div *ngIf="registrationform.get('Email')?.getError('email') && registrationform.get('Email')?.touched">
+            <div style="color:red">* Invalid email format</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="UserName" class="form-label">User Name:</label>
+          <input type="text" pInputText class="form-control" id="UserName" formControlName="UserName" />
+          <div *ngIf="registrationform.get('UserName')?.touched && registrationform.get('UserName')?.getError('required')">
+            <div style="color:red">* User Name is required</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="Password" class="form-label">Password:</label>
+          <input type="password" pInputText class="form-control" id="Password" formControlName="Password" />
+          <div *ngIf="registrationform.get('Password')?.touched && registrationform.get('Password')?.getError('required')">
+            <div style="color:red">* Password is required</div>
+          </div>
+        </div>
+        <div class="col-12 mt-4 text-center">
+          <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid">Submit</button>
+        </div>
+      </form>
     </div>
   </div>
-  
+</div>
