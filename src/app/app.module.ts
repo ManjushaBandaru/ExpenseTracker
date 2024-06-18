@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

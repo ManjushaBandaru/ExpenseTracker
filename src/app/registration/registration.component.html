@@ -1,31 +1,34 @@
-<div class="card_body p-5">
+<!-- <div class="card_body p-5">
     <div class="card_body p-6">
       <form class="row" [formGroup]="registrationform">
         <div class="form-group col-6">
+          <label for="FirstName">FirstName:</label>
+          <input pInputText id="FirstName" aria-describedby="name-help" formControlName="FirstName" />
+        </div>
+        <div class="form-group col-6">
+          <label for="LastName">LastName:</label>
+          <input pInputText id="LastName" aria-describedby="name-help" formControlName="LastName" />
+        </div>
+        <div class="form-group col-md-6">
+            <label for="MobileNumber">MobileNumber:</label>
+          <input pInputText id="MobileNumber" aria-describedby="name-help" formControlName="MobileNumber" />
+        </div>
+        <div class="form-group col-md-6">
+            <label for="Email">Email:</label>
+          <input pInputText id="Email" aria-describedby="name-help" formControlName="Email" />
+        </div>
+        <div class="form-group col-6">
           <label for="UserName">UserName:</label>
-          <!-- <p-dropdown [options]="CountryName" appendTo="body" [showClear]="true" placeholder="CountryName"
-                      optionLabel="CountryName" optionValue="CountryId" formControlName="CountryId">
-          </p-dropdown> -->
+          <input pInputText id="UserName" aria-describedby="name-help" formControlName="UserName" />
         </div>
-        
         <div class="form-group col-6">
-          <label for="StateName">statename:</label>
-          <!-- <p-dropdown [options]="StateName" appendTo="body" [showClear]="true" placeholder="StateName"
-                      optionLabel="StateName" optionValue="StateId" formControlName="StateId">
-          </p-dropdown> -->
+          <label for="Password">Password:</label>
+          <input pInputText id="Password" aria-describedby="name-help" formControlName="Password" />
         </div>
-  
-        <div class="form-group col-6">
-          <label for="PartyName">PartyName:</label>
-          <input pInputText id="PartyName" aria-describedby="name-help" formControlName="PartyName" />
+        <div class="d-flex flex-row justify-content-between p-3">
+          <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+          <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid" (click)="submit()">Submit</button>
         </div>
-        
-        <div class="form-group col-6">
-          <label for="MLA_Seats">MLA_Seats:</label>
-          <input pInputText id="MLA_Seats" aria-describedby="name-help" formControlName="MLA_Seats" />
-        </div>
-        
-        
       </form>
     </div>
   </div>
@@ -34,5 +37,43 @@
       <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
       <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid" (click)="submit()">Submit</button>
     </div>
-  </ng-template>
-  
+  </ng-template> -->
+
+
+  <div class="d-flex justify-content-center align-items-center min-vh-100">
+<div class="card_body p-5">
+    <form class="row g-3" [formGroup]="registrationform">
+        <div class="form-group col-md-6">
+            <label for="FirstName">FirstName:</label>
+            <input pInputText id="FirstName" aria-describedby="name-help" formControlName="FirstName" />
+        </div>
+        <div class="form-group col-md-6">
+            <label for="LastName">LastName:</label>
+            <input pInputText id="LastName" aria-describedby="name-help" formControlName="LastName" />
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="MobileNumber">MobileNumber:</label>
+            <input pInputText id="MobileNumber" aria-describedby="name-help" formControlName="MobileNumber" />
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="Email">Email:</label>
+            <input pInputText id="Email" aria-describedby="name-help" formControlName="Email" />
+        </div>
+        <div class="form-group col-md-6">
+            <label for="UserName">UserName:</label>
+            <input pInputText id="UserName" aria-describedby="name-help" formControlName="UserName" />
+        </div>
+        <div class="form-group col-6">
+            <label for="Password">Password:</label>
+            <input pInputText id="Password" aria-describedby="name-help" formControlName="Password" />
+        </div>
+        <div class="form-group col-12 d-flex justify-content-between">
+            <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid"
+                (click)="submit()">Submit</button>
+            <button type="button" class="btn btn-secondary" (click)="closeForm()">Close</button>
+        </div>
+    </form>
+</div>
+</div>
