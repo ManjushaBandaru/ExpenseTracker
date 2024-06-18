@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidenav.component.css']
 })
 export class SidenavComponent {
-  constructor(private router: Router) {}
+  constructor(private route: Router) {}
 
   toggleSidebar(): void {
     const sidebar = document.querySelector('.sidebar') as HTMLElement;
@@ -27,6 +27,7 @@ export class SidenavComponent {
     }
   }
 
-  logout(): void {
+  logout() {
+    this.route.navigateByUrl('/login')
   }
 }

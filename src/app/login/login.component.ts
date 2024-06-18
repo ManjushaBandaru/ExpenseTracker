@@ -32,7 +32,7 @@ export class LoginComponent {
     }
   }
   onSignup() {
-    
+    this.route.navigateByUrl('/registration')
   }
 
 }
