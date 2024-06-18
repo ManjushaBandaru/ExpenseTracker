@@ -11,6 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
@@ -31,6 +32,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     FormsModule,
     InputTextModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule
 
   ],
   providers: [],
