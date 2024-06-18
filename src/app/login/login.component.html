@@ -1,4 +1,4 @@
-<div class="my-8">
+<!-- <div class="my-8">
     <div [formGroup]="loginForm">
         <div
             class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
@@ -13,8 +13,8 @@
     
                         <div>
                             <label for="userName" class="block text-900 text-xl font-medium mb-2">Email</label>
-                            <!-- <input id="Email" type="text" placeholder="Email address" pInputText
-                                class="w-full md:w-30rem mb-5" style="padding:1rem"> -->
+                            <input id="Email" type="text" placeholder="Email address" pInputText
+                                class="w-full md:w-30rem mb-5" style="padding:1rem">
                             <input id="userName" type="text" formControlName="userName" placeholder="Email address" pInputText
                                 class="w-full md:w-30rem mb-5" style="padding:1rem">
     
@@ -39,4 +39,45 @@
             </div>
         </div>
     </div>
+</div> -->
+
+
+<div class="container">
+  <div class="screen">
+    <div class="screen__content">
+      <form class="login">
+        <div class="login__field">
+          <i class="login__icon fas fa-user"></i>
+          <input type="text" class="login__input" placeholder="Email">
+        </div>
+        <div class="login__field">
+          <i class="login__icon fas fa-lock"></i>
+          <input type="password" class="login__input" placeholder="Password">
+        </div>
+        <button class="button login__submit">
+          <span class="button__text" (click)="onSignIn()" >Log In</span>
+          <i class="button__icon fas fa-chevron-right"></i>
+        </button>       
+      </form>
+      <div class="social-login">
+       
+        
+        <h3><a href="sifremiunuttum.php"></a></h3>
+        <div class="social-icons">
+          <a href="https://instagram.com/isikabatay06" class="social-login__icon fab fa-instagram"></a>
+          <a href="#" class="social-login__icon fab fa-facebook"></a>
+          <a href="https://twitter.com/isikabatay06" class="social-login__icon fab fa-twitter"></a>
+        </div>
+      </div>
+    </div>
+    <div class="screen__background">
+      <span class="screen__background__shape screen__background__shape4"></span>
+      <span class="screen__background__shape screen__background__shape3"></span>    
+      <span class="screen__background__shape screen__background__shape2"></span>
+      <span class="screen__background__shape screen__background__shape1"></span>
+    </div>    
+  </div>
 </div>
+
+
+
