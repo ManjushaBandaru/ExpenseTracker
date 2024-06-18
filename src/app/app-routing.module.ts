@@ -6,7 +6,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'sidenav', component: SidenavComponent },
-  { path: 'dashboard', loadChildren: () => import('./admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule) }];
+  { path: 'dashboard', loadChildren: () => import('./admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule) }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

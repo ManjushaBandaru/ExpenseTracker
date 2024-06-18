@@ -16,6 +16,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  margin-left: 7%;
 }
 
 .screen {   
@@ -175,4 +176,8 @@ body {
 
 .social-login__icon:hover {
   transform: scale(1.5);  
+}
+
+.message{
+  cursor: pointer;
 }

@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     FormsModule,
     InputTextModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule
 
   ],
   providers: [],

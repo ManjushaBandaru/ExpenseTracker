@@ -42,40 +42,82 @@
 </div> -->
 
 
-<div class="container">
-  <div class="screen">
-    <div class="screen__content">
-      <form class="login">
-        <div class="login__field">
-          <i class="login__icon fas fa-user"></i>
-          <input type="text" class="login__input" placeholder="Email">
+<!-- <div class="container">
+    <div class="screen">
+        <div class="screen__content">
+            <form class="login">
+                <div class="login__field">
+                    <i class="login__icon fas fa-user"></i>
+                    <input type="text" class="login__input" placeholder="Email">
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-lock"></i>
+                    <input type="password" class="login__input" placeholder="Password">
+                </div><br>
+                <div class="d-flex gap-5 message">
+                    <small (click)="onSignup()">Sign Up</small>
+                    <small >Forgot Password?</small>
+                </div>
+                <button class="button login__submit">
+                    <span class="button__text" (click)="onSignIn()">Log In</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </form>
+            <div class="social-login">
+
+
+                <h3><a href="sifremiunuttum.php"></a></h3>
+                <div class="social-icons">
+                    <a href="https://instagram.com/isikabatay06" class="social-login__icon fab fa-instagram"></a>
+                    <a href="#" class="social-login__icon fab fa-facebook"></a>
+                    <a href="https://twitter.com/isikabatay06" class="social-login__icon fab fa-twitter"></a>
+                </div>
+            </div>
         </div>
-        <div class="login__field">
-          <i class="login__icon fas fa-lock"></i>
-          <input type="password" class="login__input" placeholder="Password">
-        </div><br>
-        <span class="">Forgot Password</span>
-        <button class="button login__submit">
-          <span class="button__text" (click)="onSignIn()" >Log In</span>
-          <i class="button__icon fas fa-chevron-right"></i>
-        </button>       
-      </form>
-      <div class="social-login">
-       
-        
-        <h3><a href="sifremiunuttum.php"></a></h3>
-        <div class="social-icons">
-          <a href="https://instagram.com/isikabatay06" class="social-login__icon fab fa-instagram"></a>
-          <a href="#" class="social-login__icon fab fa-facebook"></a>
-          <a href="https://twitter.com/isikabatay06" class="social-login__icon fab fa-twitter"></a>
+        <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
         </div>
-      </div>
     </div>
-    <div class="screen__background">
-      <span class="screen__background__shape screen__background__shape4"></span>
-      <span class="screen__background__shape screen__background__shape3"></span>    
-      <span class="screen__background__shape screen__background__shape2"></span>
-      <span class="screen__background__shape screen__background__shape1"></span>
-    </div>    
-  </div>
+</div> -->
+
+<div class="container">
+    <div class="screen">
+        <div class="screen__content">
+            <form class="login" (ngSubmit)="onSignIn()" #loginForm="ngForm">
+                <div class="login__field">
+                    <i class="login__icon fas fa-user"></i>
+                    <input type="text" class="login__input" placeholder="Email" [(ngModel)]="a" name="email" required>
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-lock"></i>
+                    <input type="password" class="login__input" placeholder="Password" [(ngModel)]="b" name="password" required>
+                </div><br>
+                <div class="d-flex gap-5 message">
+                    <small (click)="onSignup()">Sign Up</small>
+                    <small>Forgot Password?</small>
+                </div>
+                <button type="submit" class="button login__submit">
+                    <span class="button__text">Log In</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </form>
+            <div class="social-login">
+                <h3><a href="sifremiunuttum.php"></a></h3>
+                <div class="social-icons">
+                    <a href="https://instagram.com/isikabatay06" class="social-login__icon fab fa-instagram"></a>
+                    <a href="#" class="social-login__icon fab fa-facebook"></a>
+                    <a href="https://twitter.com/isikabatay06" class="social-login__icon fab fa-twitter"></a>
+                </div>
+            </div>
+        </div>
+        <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
+    </div>
 </div>
