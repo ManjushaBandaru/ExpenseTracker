@@ -32,7 +32,7 @@ export class LoginComponent {
 
   onSignIn() {
     if (this.username === 'calibrage') {
-      if (this.password === '1234') {
+      if (this.password === 'Calibrage@123') {
         this.route.navigateByUrl('/sidenav');
       } else {
         window.alert('Incorrect Password');
