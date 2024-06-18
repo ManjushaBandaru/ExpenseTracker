@@ -27,7 +27,7 @@ export class SidenavComponent {
     }
   }
 
-  logout() {
-    this.route.navigateByUrl('/login')
+  logout(): void {
+    this.route.navigate(['/login']);
   }
 }

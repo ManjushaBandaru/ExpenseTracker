@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -8,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegistrationComponent {
   registrationform!:FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private route:Router) {}
 
   ngOnInit(): void {
     this.registrationform = this.fb.group({
@@ -21,12 +22,23 @@ export class RegistrationComponent {
     });
   }
 
-  submit(){
-
+  submit(): void {
+    if (this.registrationform.valid) {
+      // Process form data here (e.g., send it to a server)
+      console.log('Form Submitted', this.registrationform.value);
+      
+      // Navigate to the sidenav page
+      this.route.navigateByUrl('/sidenav');
+    } else {
+      // Mark all fields as touched to trigger validation messages
+      this.registrationform.markAllAsTouched();
+    }
   }
 
-  closeForm(){
-    
+  closeForm(): void {
+    // Add any logic to close the form or navigate away
+    console.log('Form closed');
+    this.route.navigateByUrl('/home'); // example route to navigate to home page
   }
   
 }
