@@ -20,6 +20,13 @@ export class RegistrationComponent {
       Password: ['', Validators.required]
     });
   }
-  submit(){}
-  closeForm(){}
+
+  submit(){
+
+  }
+
+  closeForm(){
+    
+  }
+  
 }

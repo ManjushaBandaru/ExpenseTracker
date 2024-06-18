@@ -4,6 +4,7 @@
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import '~bootstrap/dist/css/bootstrap.min.css';
 :root{
     --color-default:#004f83;
     --color-second:#0067ac;
