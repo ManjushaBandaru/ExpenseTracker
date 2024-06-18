@@ -44,24 +44,9 @@ export class RegistrationComponent implements OnInit {
   submit(): void {
     if (this.registrationform.valid) {
       console.log('Form Submitted', this.registrationform.value);
-<<<<<<< HEAD
-      
-      // Navigate to the sidenav page
-      this.route.navigateByUrl('/login');
-=======
       this.router.navigateByUrl('/sidenav');
->>>>>>> 4eddaaa3973beaafda09156a515d0609af6934a5
     } else {
       this.registrationform.markAllAsTouched();
     }
   }
-<<<<<<< HEAD
-
-  // closeForm(): void {
-  //   console.log('Form closed');
-  //   this.route.navigateByUrl('/home'); 
-  // }
-  
-=======
->>>>>>> 4eddaaa3973beaafda09156a515d0609af6934a5
 }
