@@ -37,43 +37,99 @@
       <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
       <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid" (click)="submit()">Submit</button>
     </div>
-  </ng-template> -->
+</ng-template> -->
 
 
-  <div class="d-flex justify-content-center align-items-center min-vh-100">
-<div class="card_body p-5">
+<!-- <div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card_body p-5">
     <form class="row g-3" [formGroup]="registrationform">
-        <div class="form-group col-md-6">
-            <label for="FirstName">FirstName:</label>
-            <input pInputText id="FirstName" aria-describedby="name-help" formControlName="FirstName" />
-        </div>
-        <div class="form-group col-md-6">
-            <label for="LastName">LastName:</label>
-            <input pInputText id="LastName" aria-describedby="name-help" formControlName="LastName" />
-        </div>
+      <div class="form-group col-md-6">
+        <label for="FirstName">FirstName:</label>
+        <input pInputText id="FirstName" aria-describedby="name-help" formControlName="FirstName" />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="LastName">LastName:</label>
+        <input pInputText id="LastName" aria-describedby="name-help" formControlName="LastName" />
+      </div>
 
-        <div class="form-group col-md-6">
-            <label for="MobileNumber">MobileNumber:</label>
-            <input pInputText id="MobileNumber" aria-describedby="name-help" formControlName="MobileNumber" />
-        </div>
+      <div class="form-group col-md-6">
+        <label for="MobileNumber">MobileNumber:</label>
+        <input pInputText id="MobileNumber" aria-describedby="name-help" formControlName="MobileNumber" />
+      </div>
 
-        <div class="form-group col-md-6">
-            <label for="Email">Email:</label>
-            <input pInputText id="Email" aria-describedby="name-help" formControlName="Email" />
-        </div>
-        <div class="form-group col-md-6">
-            <label for="UserName">UserName:</label>
-            <input pInputText id="UserName" aria-describedby="name-help" formControlName="UserName" />
-        </div>
-        <div class="form-group col-6">
-            <label for="Password">Password:</label>
-            <input pInputText id="Password" aria-describedby="name-help" formControlName="Password" />
-        </div>
-        <div class="form-group col-12 d-flex justify-content-between">
-            <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid"
-                (click)="submit()">Submit</button>
-            <button type="button" class="btn btn-secondary" (click)="closeForm()">Close</button>
-        </div>
+      <div class="form-group col-md-6">
+        <label for="Email">Email:</label>
+        <input pInputText id="Email" aria-describedby="name-help" formControlName="Email" />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="UserName">UserName:</label>
+        <input pInputText id="UserName" aria-describedby="name-help" formControlName="UserName" />
+      </div>
+      <div class="form-group col-6">
+        <label for="Password">Password:</label>
+        <input pInputText id="Password" aria-describedby="name-help" formControlName="Password" />
+      </div>
+      <div class="form-group col-12 d-flex justify-content-between">
+        <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid"
+          (click)="submit()">Submit</button>
+        <button type="button" class="btn btn-secondary" (click)="closeForm()">Close</button>
+      </div>
     </form>
-</div>
-</div>
+  </div>
+</div> -->
+
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card p-4" style="width: 100%; max-width: 600px;">
+    <div class="card-body">
+      <form class="row g-3" [formGroup]="registrationform">
+        <div class="col-md-6">
+          <label for="FirstName" class="form-label">First Name:</label>
+          <input type="text" pInputText class="form-control" id="FirstName" formControlName="FirstName" maxlength="20" />
+          <div *ngIf="registrationform.get('FirstName')?.touched && registrationform.get('FirstName')?.getError('required')">
+            <div style="color:red">*FirstName is required</div>
+        </div>
+        </div>
+        <div class="col-md-6">
+          <label for="LastName" class="form-label">Last Name:</label>
+          <input type="text" pInputText class="form-control" id="LastName" formControlName="LastName" maxlength="20" />
+          <div *ngIf="registrationform.get('LastName')?.touched && registrationform.get('LastName')?.getError('required')">
+            <div style="color:red">*LastName is required</div>
+        </div>
+        </div>
+        <div class="col-md-6">
+          <label for="MobileNumber" class="form-label">Mobile Number:</label>
+          <input type="text" pInputText class="form-control" id="MobileNumber" formControlName="MobileNumber" />
+          <div *ngIf="registrationform.get('MobileNumber')?.touched && registrationform.get('MobileNumber')?.getError('required')">
+            <div style="color:red">*MobileNumber is required</div>
+        </div>
+        </div>
+        <div class="col-md-6">
+          <label for="Email" class="form-label">Email:</label>
+          <input type="email" pInputText class="form-control" id="Email" formControlName="Email" />
+          <div *ngIf="registrationform.get('Email')?.touched && registrationform.get('Email')?.getError('required')">
+            <div style="color:red">*Email is required</div>
+        </div>
+        </div>
+        <div class="col-md-6">
+          <label for="UserName" class="form-label">User Name:</label>
+          <input type="text" pInputText class="form-control" id="UserName" formControlName="UserName" />
+          <div *ngIf="registrationform.get('UserName')?.touched && registrationform.get('UserName')?.getError('required')">
+            <div style="color:red">*UserName is required</div>
+        </div>
+        </div>
+        <div class="col-md-6">
+          <label for="Password" class="form-label">Password:</label>
+          <input type="password" pInputText class="form-control" id="Password" formControlName="Password" />
+          <div *ngIf="registrationform.get('Password')?.touched && registrationform.get('Password')?.getError('required')">
+            <div style="color:red">*Password is required</div>
+        </div>
+        </div>
+        <div class="col-12 d-flex justify-content-between">
+          <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid" (click)="submit()">Submit</button>
+          <button type="button" class="btn btn-secondary" (click)="closeForm()">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>  
