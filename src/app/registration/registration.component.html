@@ -129,14 +129,14 @@
         </div>
         <div class="col-md-6">
           <label for="UserName" class="form-label">User Name:</label>
-          <input type="text" pInputText class="form-control" id="UserName" formControlName="UserName" />
+          <input type="text" pInputText class="form-control" id="UserName" formControlName="UserName" maxlength="15" />
           <div *ngIf="registrationform.get('UserName')?.touched && registrationform.get('UserName')?.getError('required')">
             <div style="color:red">* User Name is required</div>
           </div>
         </div>
         <div class="col-md-6">
           <label for="Password" class="form-label">Password:</label>
-          <input type="password" pInputText class="form-control" id="Password" formControlName="Password" />
+          <input type="password" pInputText class="form-control" id="Password" formControlName="Password" maxlength="15" />
           <div *ngIf="registrationform.get('Password')?.touched && registrationform.get('Password')?.getError('required')">
             <div style="color:red">* Password is required</div>
           </div>
