@@ -1,0 +1,38 @@
+<div class="card_body p-5">
+    <div class="card_body p-6">
+      <form class="row" [formGroup]="registrationform">
+        <div class="form-group col-6">
+          <label for="UserName">UserName:</label>
+          <!-- <p-dropdown [options]="CountryName" appendTo="body" [showClear]="true" placeholder="CountryName"
+                      optionLabel="CountryName" optionValue="CountryId" formControlName="CountryId">
+          </p-dropdown> -->
+        </div>
+        
+        <div class="form-group col-6">
+          <label for="StateName">statename:</label>
+          <!-- <p-dropdown [options]="StateName" appendTo="body" [showClear]="true" placeholder="StateName"
+                      optionLabel="StateName" optionValue="StateId" formControlName="StateId">
+          </p-dropdown> -->
+        </div>
+  
+        <div class="form-group col-6">
+          <label for="PartyName">PartyName:</label>
+          <input pInputText id="PartyName" aria-describedby="name-help" formControlName="PartyName" />
+        </div>
+        
+        <div class="form-group col-6">
+          <label for="MLA_Seats">MLA_Seats:</label>
+          <input pInputText id="MLA_Seats" aria-describedby="name-help" formControlName="MLA_Seats" />
+        </div>
+        
+        
+      </form>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="d-flex flex-row justify-content-between p-3">
+      <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+      <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid" (click)="submit()">Submit</button>
+    </div>
+  </ng-template>
+  

@@ -1,0 +1,49 @@
+<div class="sidebar">
+    <div class="logo_details">
+      <i class="bx bxl-audible icon"></i>
+      <div class="logo_name">Code Effect</div>
+      <i class="bx bx-menu" id="btn" (click)="toggleSidebar()"></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+        <a routerLink="/component1">
+          <i class="bx bx-grid-alt"></i>
+          <span class="link_name">Dashboard</span>
+        </a>
+        <span class="tooltip">Dashboard</span>
+      </li>
+      <li>
+        <a routerLink="/component1/Users">
+          <i class="bx bx-user"></i>
+          <span class="link_name">User</span>
+        </a>
+        <span class="tooltip">User</span>
+      </li>
+      <li>
+        <a routerLink="/component1/Roles">
+          <i class="bx bx-chat"></i>
+          <span class="link_name">Roles</span>
+        </a>
+        <span class="tooltip">Roles</span>
+      </li>
+      <li>
+        <a routerLink="/component1/Branch">
+          <i class="bx bx-pie-chart-alt-2"></i>
+          <span class="link_name">Branch</span>
+        </a>
+        <span class="tooltip">Branch</span>
+      </li>
+      <li class="profile">
+        <a (click)="logout()">
+          <i class="bx bx-log-out" id="log_out"></i>
+          <span class="link_name">Logout</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <section class="home-section">
+    <div class="text">Dashboard</div>
+    <router-outlet></router-outlet>
+  </section>
+  
+  

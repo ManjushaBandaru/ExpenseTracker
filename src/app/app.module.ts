@@ -4,14 +4,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
+import {HttpClientModule} from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms'; 
+import { InputTextModule } from 'primeng/inputtext';
+import { SidenavComponent } from './sidenav/sidenav.component';
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RegistrationComponent,
+    SidenavComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,HttpClientModule,ReactiveFormsModule,InputTextModule,
     AppRoutingModule
   ],
   providers: [],
