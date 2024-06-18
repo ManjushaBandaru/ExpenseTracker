@@ -5,13 +5,15 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { SuperAdminComponent } from './super-admin/super-admin.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     UserDashboardComponent,
-    SuperAdminComponent
+    SuperAdminComponent,
+    AdminComponent
   ],
   imports: [
     CommonModule,
