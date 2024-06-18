@@ -13,7 +13,7 @@ export class RegistrationComponent {
 
   ngOnInit(): void {
     this.registrationform = this.fb.group({
-      FirstName: ['', Validators.required],
+      FirstName: ['', Validators.required,Validators.minLength(5),Validators.maxLength(5)],
       LastName: ['', Validators.required],
       MobileNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       Email: ['', [Validators.required, Validators.email]],
