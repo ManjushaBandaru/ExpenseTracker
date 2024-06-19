@@ -15,10 +15,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
 import { RouterModule } from '@angular/router';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ToastrModule, } from 'ngx-toastr';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { DashboardRoutingModule } from './dashboard/dashboard-routing.module';
-import { UsersComponent } from './Security/users/users.component';
-import { RolesComponent } from './Security/roles/roles.component';
 
 
 
@@ -42,10 +42,12 @@ import { RolesComponent } from './Security/roles/roles.component';
     BrowserAnimationsModule,
     RouterModule,
     InputNumberModule,
-    DashboardRoutingModule,
-    
+    ToastModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',})
+
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
