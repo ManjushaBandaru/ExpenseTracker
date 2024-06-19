@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class RegistrationComponent implements OnInit {
   registrationform!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.registrationform = this.fb.group({
@@ -39,7 +39,7 @@ export class RegistrationComponent implements OnInit {
 
   passwordValidator(): any {
     return (control: AbstractControl): ValidationErrors | null => {
-      const valid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/.test(control.value);
+      const valid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{1,15}$/.test(control.value);
       return valid ? null : { invalidPassword: true };
     };
   }
@@ -52,6 +52,4 @@ export class RegistrationComponent implements OnInit {
       this.registrationform.markAllAsTouched();
     }
   }
-
-  
 }
