@@ -48,3 +48,7 @@
     transform: translateY(-5px); 
     transition: all 0.3s ease; 
 }
+
+.titles{
+    font-weight: 500;
+}
