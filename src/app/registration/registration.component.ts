@@ -10,16 +10,16 @@ import { Router } from '@angular/router';
 export class RegistrationComponent implements OnInit {
   registrationform!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.registrationform = this.fb.group({
       FirstName: ['', [Validators.required, this.alphaOnlyValidator()]],
       LastName: ['', [Validators.required, this.alphaOnlyValidator()]],
-      MobileNumber: ['', [Validators.required, this.mobileNumberValidator()]],
-      Email: ['', [Validators.required, Validators.email]],
+      MobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      Email: ['', [Validators.required, Validators.email, this.gmailOnlyValidator()]],
       UserName: ['', Validators.required],
-      Password: ['', Validators.required]
+      Password: ['', [Validators.required, this.passwordValidator()]]
     });
   }
 
@@ -30,14 +30,17 @@ export class RegistrationComponent implements OnInit {
     };
   }
 
-  mobileNumberValidator(): any {
+  gmailOnlyValidator(): any {
     return (control: AbstractControl): ValidationErrors | null => {
-      // Check if input is numeric and exactly 10 digits
-      const valid = /^[0-9]{10}$/.test(control.value);
-      if (!valid) {
-        return { invalidMobileNumber: true };
-      }
-      return null;
+      const valid = /@gmail\.com$/.test(control.value);
+      return valid ? null : { invalidEmail: true };
+    };
+  }
+
+  passwordValidator(): any {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const valid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/.test(control.value);
+      return valid ? null : { invalidPassword: true };
     };
   }
 
@@ -49,4 +52,6 @@ export class RegistrationComponent implements OnInit {
       this.registrationform.markAllAsTouched();
     }
   }
+
+  
 }
