@@ -16,6 +16,10 @@ import { RegistrationComponent } from './registration/registration.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { RouterModule } from '@angular/router';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ToastrModule, } from 'ngx-toastr';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
 
 
 @NgModule({
@@ -37,10 +41,13 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     RouterModule,
-    InputNumberModule
+    InputNumberModule,
+    ToastModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',})
 
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
