@@ -23,13 +23,15 @@
 </div> -->
 
 
-<div class="full-screen justify-content-center">
-    <div class="screen">
+<!-- <div class="full-screen justify-content-center"> -->
+    <!-- <div class="screen"> -->
         <div class="screen__content">
             <form [formGroup]="loginForm" class="login" (ngSubmit)="onSignIn()">
                 <h2 class="logo">Login</h2>
+                <span class="sublogo">Welcome to ExpenseTracker</span>
                 <div class="login__field">
-                    <input type="text" class="user" pInputText formControlName="username" placeholder="Username" maxlength="20"
+                    <input type="text" class="user" pInputText formControlName="username" placeholder="Username"
+                        maxlength="20"
                         [ngClass]="{'is-invalid ng-dirty': loginForm.controls['username'].touched && loginForm.controls['username'].errors}" />
                     <div *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched"
                         class="error-message">
@@ -39,7 +41,8 @@
                     </div>
                 </div>
                 <div class="login__field">
-                    <p-password formControlName="password" [toggleMask]="true" [feedback]="false" placeholder="Password"
+                    <p-password formControlName="password" class="password" [toggleMask]="true" [feedback]="false"
+                        placeholder="Password"
                         [ngClass]="{'is-invalid ng-dirty': loginForm.controls['password'].touched && loginForm.controls['password'].errors}"></p-password>
                     <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched"
                         class="error-message">
@@ -59,10 +62,10 @@
                     <span class="button__text">Log In</span>
                 </button><br>
                 <div class="message">
-                    <a (click)="onSignup()">Sign Up</a>
-                    <a >Forgot Password?</a>
+                    <a href="/registration" (click)="onSignup()">Sign Up</a>
+                    <a href="/">Forgot Password?</a>
                 </div>
             </form>
         </div>
-    </div>
-</div>
+    <!-- </div> -->
+<!-- </div> -->
