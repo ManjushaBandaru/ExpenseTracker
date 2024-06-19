@@ -7,7 +7,7 @@ import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'sidenav', component: SidenavComponent },
+  { path: 'sidenav', component: SidenavComponent, },
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   {path: 'registration', component : RegistrationComponent},
   {path: 'login', component : LoginComponent},
