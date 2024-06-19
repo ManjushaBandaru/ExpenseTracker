@@ -131,17 +131,17 @@
   /* background: #fff; */
   font-size: 14px;
   margin-top: 30px;
-  padding: 16px 20px;
-  border-radius: 26px;
+  padding: 12px;
+  border-radius: 10px;
   border: 1px solid #D4D3E8;
   text-transform: uppercase;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  color: #4C489D;
-  box-shadow: 0px 2px 2px #5C5696;
+  width: 105%;
+  /* color: #4C489D; */
+  /* box-shadow: 0px 2px 2px #5C5696; */
   cursor: pointer;
   transition: .2s;
 }
@@ -189,6 +189,10 @@
 
 .message{
   cursor: pointer;
+  display: flex;
+  /* justify-content: center; */
+  justify-content: space-between;
+  gap: 26%;
 }
 
 .logo{
@@ -201,4 +205,10 @@
   /* min-height: 100vh; */
   margin-left: 40%;
   position: fixed;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
 }

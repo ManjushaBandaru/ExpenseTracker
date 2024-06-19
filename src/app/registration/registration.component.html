@@ -88,42 +88,41 @@
       </header>
       <form class="row g-3" [formGroup]="registrationform" (ngSubmit)="submit()">
         <div class="col-md-6">
-          <label for="FirstName" class="form-label">First Name <span style="color: red;">*</span></label>
-          <input type="text" pInputText class="form-control" id="FirstName" formControlName="FirstName" maxlength="20"
-            placeholder="Enter firstname"
-            [ngClass]="{'is-invalid ng-dirty': registrationform.controls['FirstName'].touched && registrationform.controls['FirstName'].errors}" />
+          <label for="FirstName" class="form-label">First Name:</label>
+          <input type="text" pInputText class="form-control" id="FirstName" formControlName="FirstName"
+            maxlength="20" />
           <div
-            *ngIf="registrationform.get('FirstName')?.invalid && (registrationform.get('FirstName')?.dirty || registrationform.get('FirstName')?.touched)">
-            <small class="p-error" *ngIf="registrationform.get('FirstName')?.errors?.['required']">* First Name is
-              required.</small>
-            <small class="p-error" *ngIf="registrationform.get('FirstName')?.errors?.['alphaOnly']">* Only alphabets
-              allowed.</small>
+            *ngIf="registrationform.get('FirstName')?.touched && registrationform.get('FirstName')?.getError('required')">
+            <div style="color:red">* First Name is required</div>
+          </div>
+          <div
+            *ngIf="registrationform.get('FirstName')?.getError('alphaOnly') && registrationform.get('FirstName')?.touched">
+            <div style="color:red">* Only alphabets allowed</div>
           </div>
         </div>
         <div class="col-md-6">
-          <label for="LastName" class="form-label">Last Name <span style="color: red;">*</span></label>
-          <input type="text" pInputText class="form-control" id="LastName" formControlName="LastName" maxlength="20"
-            placeholder="Enter lastname"
-            [ngClass]="{'is-invalid ng-dirty': registrationform.controls['LastName'].touched && registrationform.controls['LastName'].errors}" />
+          <label for="LastName" class="form-label">Last Name:</label>
+          <input type="text" pInputText class="form-control" id="LastName" formControlName="LastName" maxlength="20" />
           <div
-            *ngIf="registrationform.get('LastName')?.invalid && (registrationform.get('LastName')?.dirty || registrationform.get('LastName')?.touched)">
-            <small class="p-error" *ngIf="registrationform.get('LastName')?.errors?.['required']">* First Name is
-              required.</small>
-            <small class="p-error" *ngIf="registrationform.get('LastName')?.errors?.['alphaOnly']">* Only alphabets
-              allowed.</small>
+            *ngIf="registrationform.get('LastName')?.touched && registrationform.get('LastName')?.getError('required')">
+            <div style="color:red">* Last Name is required</div>
+          </div>
+          <div
+            *ngIf="registrationform.get('LastName')?.getError('alphaOnly') && registrationform.get('LastName')?.touched">
+            <div style="color:red">* Only alphabets allowed</div>
           </div>
         </div>
         <div class="col-md-6">
-          <label for="MobileNumber" class="form-label">Mobile Number <span style="color: red;">*</span></label>
+          <label for="MobileNumber" class="form-label">Mobile Number:</label>
           <input type="text" pInputText class="form-control" id="MobileNumber" maxlength="10"
-            formControlName="MobileNumber" placeholder="Enter mobile number"
-            [ngClass]="{'is-invalid ng-dirty': registrationform.controls['MobileNumber'].touched && registrationform.controls['MobileNumber'].errors}" />
+            formControlName="MobileNumber" />
           <div
-            *ngIf="registrationform.get('MobileNumber')?.invalid && (registrationform.get('MobileNumber')?.dirty || registrationform.get('MobileNumber')?.touched)">
-            <small class="p-error" *ngIf="registrationform.get('MobileNumber')?.errors?.['required']">* Mobile Number is
-              required.</small>
-            <small class="p-error" *ngIf="registrationform.get('MobileNumber')?.errors?.['pattern']">* Mobile Number
-              must be 10 digits.</small>
+            *ngIf="registrationform.get('MobileNumber')?.touched && registrationform.get('MobileNumber')?.getError('required')">
+            <div style="color:red">* Mobile Number is required</div>
+          </div>
+          <div
+            *ngIf="registrationform.get('MobileNumber')?.getError('pattern') && registrationform.get('MobileNumber')?.touched">
+            <div style="color:red">* Mobile Number must be 10 digits</div>
           </div>
         </div>
         <div class="col-md-6">
@@ -142,27 +141,20 @@
           </div>
         </div>
         <div class="col-md-6">
-          <label for="UserName" class="form-label">User Name <span style="color: red;">*</span></label>
-          <input type="text" pInputText class="form-control" id="UserName" formControlName="UserName" maxlength="20"
-            placeholder="Enter username"
-            [ngClass]="{'is-invalid ng-dirty': registrationform.controls['UserName'].touched && registrationform.controls['UserName'].errors}" />
+          <label for="UserName" class="form-label">User Name:</label>
+          <input type="text" pInputText class="form-control" id="UserName" formControlName="UserName" maxlength="15" />
           <div
-            *ngIf="registrationform.get('UserName')?.invalid && (registrationform.get('UserName')?.dirty || registrationform.get('UserName')?.touched)">
-            <small class="p-error" *ngIf="registrationform.get('UserName')?.errors?.['required']">* First Name is
-              required.</small>
-            <small class="p-error" *ngIf="registrationform.get('UserName')?.errors?.['alphaOnly']">* Only alphabets
-              allowed.</small>
+            *ngIf="registrationform.get('UserName')?.touched && registrationform.get('UserName')?.getError('required')">
+            <div style="color:red">* User Name is required</div>
           </div>
         </div>
         <div class="col-md-6">
-          <label for="Password" class="form-label">Password <span style="color: red;">*</span></label>
-          <input type="password" pInputText class="form-control" id="Password" formControlName="Password" maxlength="15"
-            placeholder="Enter password" 
-            [ngClass]="{'is-invalid ng-dirty': registrationform.controls['Password'].touched && registrationform.controls['Password'].errors}" />
+          <label for="Password" class="form-label">Password:</label>
+          <input type="password" pInputText class="form-control" id="Password" formControlName="Password"
+            maxlength="15" />
           <div
-            *ngIf="registrationform.get('Password')?.invalid && (registrationform.get('Password')?.dirty || registrationform.get('Password')?.touched)">
-            <small class="p-error" *ngIf="registrationform.get('Password')?.errors?.['required']">* Password is
-              required.</small>
+            *ngIf="registrationform.get('Password')?.touched && registrationform.get('Password')?.getError('required')">
+            <div style="color:red">* Password is required</div>
           </div>
         </div>
         <div class="col-12 mt-4 text-center">
