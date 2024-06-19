@@ -13,17 +13,21 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
 import { RouterModule } from '@angular/router';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { DashboardRoutingModule } from './dashboard/dashboard-routing.module';
+import { UsersComponent } from './Security/users/users.component';
+import { RolesComponent } from './Security/roles/roles.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    SidenavComponent,
     RegistrationComponent,
-    SidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -37,8 +41,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     RouterModule,
-    InputNumberModule
-
+    InputNumberModule,
+    DashboardRoutingModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

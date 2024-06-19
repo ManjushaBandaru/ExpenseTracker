@@ -1,49 +1,54 @@
 <div class="sidebar">
-    <div class="logo_details">
-      <i class="bx bxl-audible icon"></i>
-      <div class="logo_name">ExpenseTracker</div>
-      <i class="bx bx-menu" id="btn" (click)="toggleSidebar()"></i>
-    </div>
-    <ul class="nav-list">
-      <li>
-        <a routerLink="/component1">
-          <i class="bx bx-grid-alt"></i>
-          <span class="link_name">Dashboard</span>
-        </a>
-        <span class="tooltip">Dashboard</span>
-      </li>
-      <li>
-        <a routerLink="/component1/Users">
-          <i class="bx bx-user"></i>
-          <span class="link_name">User</span>
-        </a>
-        <span class="tooltip">User</span>
-      </li>
-      <li>
-        <a routerLink="/component1/Roles">
-          <i class="bx bx-chat"></i>
-          <span class="link_name">Roles</span>
-        </a>
-        <span class="tooltip">Roles</span>
-      </li>
-      <li>
-        <a routerLink="/component1/Branch">
-          <i class="bx bx-pie-chart-alt-2"></i>
-          <span class="link_name">Branch</span>
-        </a>
-        <span class="tooltip">Branch</span>
-      </li>
-      <li class="profile">
-        <a (click)="logout()">
-          <i class="bx bx-log-out" id="log_out"></i>
-          <span class="link_name">Logout</span>
-        </a>
-      </li>
-    </ul>
+  <div class="logo_details">
+    <!-- <i class="pi pi-palette icon"></i>  -->
+    <div class="logo_name">ExpenseTracker</div>
+    <i class="pi pi-bars" id="btn" (click)="toggleSidebar()"></i> <!-- Example PrimeIcons icon -->
   </div>
-  <section class="home-section">
-    <div class="text">Dashboard</div>
-    <router-outlet></router-outlet>
-  </section>
-  
-  
+  <ul class="nav-list">
+    <li>
+      <div class="logo_details">
+        <div class="logo_name">Dashboard</div>
+      </div>
+      <a routerLink="/sidenav/dashboard/userDashboard">
+        <i class="pi pi-th-large"></i> <!-- PrimeIcons icon for dashboard/user -->
+        <span class="link_name">User</span>
+      </a>
+      <a routerLink="/sidenav/dashboard/admin">
+        <i class="pi pi-user"></i> <!-- PrimeIcons icon for dashboard/admin -->
+        <span class="link_name">Admin</span>
+      </a>
+    </li>
+    <li>
+      <div class="logo_details">
+        <div class="logo_name">Security</div>
+      </div>
+      <a routerLink="/sidenav/dashboard/user">
+        <i class="pi pi-user"></i> <!-- PrimeIcons icon for Security/Users -->
+        <span class="link_name">Users</span>
+      </a>
+      <a routerLink="/sidenav/dashboard/roles">
+        <i class="pi pi-users"></i> <!-- PrimeIcons icon for Security/Roles -->
+        <span class="link_name">Roles</span>
+      </a>
+    </li>
+    <li>
+      <div class="logo_details">
+        <div class="logo_name">Expenses</div>
+      </div>
+      <a routerLink="/component1/Roles">
+        <i class="pi pi-money-bill"></i> <!-- PrimeIcons icon for Expenses -->
+        <span class="link_name">Expenses</span>
+      </a>
+    </li>
+    <li class="profile">
+      <a (click)="logout()">
+        <i class="pi pi-sign-out"></i> <!-- PrimeIcons icon for Logout -->
+        <span class="link_name">Logout</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<section class="home-section">
+  <div class="text">Dashboard</div>
+  <router-outlet></router-outlet>
+</section>
