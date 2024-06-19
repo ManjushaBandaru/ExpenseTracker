@@ -10,6 +10,8 @@ import { Routes } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UsersComponent } from '../Security/users/users.component';
 import { RolesComponent } from '../Security/roles/roles.component';
+import { CardModule } from 'primeng/card';
+
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { RolesComponent } from '../Security/roles/roles.component';
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    CardModule
   ]
 })
 export class DashboardModule { }

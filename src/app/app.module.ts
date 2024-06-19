@@ -19,6 +19,7 @@ import { ToastrModule, } from 'ngx-toastr';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { CardModule } from 'primeng/card';
 
 
 
@@ -43,8 +44,9 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     RouterModule,
     InputNumberModule,
     ToastModule,
+    CardModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-top-right',})
+      positionClass: 'toast-top-right',}),
 
   ],
   providers: [MessageService],

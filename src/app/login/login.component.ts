@@ -33,19 +33,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
-  // onSignIn() {
-  //   if (this.username === 'calibrage') {
-  //     if (this.password === 'Calibrage@123') {
-  //       this.route.navigateByUrl('/sidenav');
-  //     } else {
-  //       window.alert('Incorrect Password');
-  //     }
-  //   } else {
-  //     window.alert('Incorrect UserName');
-  //   }
-  // }
-
   onSignIn() {
     if (this.loginForm.invalid) {
       return;

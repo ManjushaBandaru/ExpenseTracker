@@ -1,0 +1,29 @@
+.profile{
+    text-align: center;
+}
+.profile .card-body {
+    text-align: center;
+}
+.profile .image {
+    width: 150px;
+}
+.profilelist {
+    text-align: left;
+}
+.expensecard, .notificationcard {
+    text-align: center;
+}
+.notificationcard {
+    width: 100%;
+}
+.titles{
+    font-weight: 500;
+}
+/* .icons{
+    
+} */
+@media (min-width: 768px) {
+    .notificationcard {
+        width: auto;
+    }
+}
