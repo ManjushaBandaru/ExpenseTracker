@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="col-md-4 mb-4">
-            <div class="card expensecard shadow-sm">
+            <div class="card expensecard shadow-sm" (click)="OnClick()">
                 <div class="card-header titles">
                     Total Expenses
                 </div>
@@ -48,6 +48,20 @@
                     <h3>$60,000</h3>
                 </div>
             </div>
+            <div class="card expensecard shadow-sm mt-4">
+                <div class="card-header titles">
+                    Notifications
+                </div>
+                <div class="card-body text-center">
+                    <h3>No Notifications Right Now.</h3>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="card bar-graph mb-4">
+        <div class="card-header titles">
+            Graphical Representation
+        </div>
+        <p-chart type="bar" [data]="data" [options]="options" />
+    </div>

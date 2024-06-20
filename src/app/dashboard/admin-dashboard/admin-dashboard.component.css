@@ -52,3 +52,10 @@
 .titles{
     font-weight: 500;
 }
+
+.bar-graph{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}

@@ -11,8 +11,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { UsersComponent } from '../Security/users/users.component';
 import { RolesComponent } from '../Security/roles/roles.component';
 import { CardModule } from 'primeng/card';
+import { TotalexpensesinfoComponent } from './totalexpensesinfo/totalexpensesinfo.component';
 import { ChartModule } from 'primeng/chart';
-
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import { ChartModule } from 'primeng/chart';
     SuperAdminComponent,
     AdminDashboardComponent,
    UsersComponent,
-   RolesComponent
+   RolesComponent,
+   TotalexpensesinfoComponent
   ],
   imports: [
     CommonModule,
