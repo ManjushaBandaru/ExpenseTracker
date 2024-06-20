@@ -6,14 +6,17 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { DashboardComponent } from './dashboard.component';
 import { SuperAdminComponent } from './super-admin/super-admin.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { TotalexpensesinfoComponent } from './totalexpensesinfo/totalexpensesinfo.component';
 
 const routes: Routes = [
 
   { path: 'userDashboard', component: UserDashboardComponent },
   { path: 'superadminDashboard', component: SuperAdminComponent },
   { path: 'admin', component: AdminDashboardComponent },
-  {path:'user',component:UsersComponent},
-  {path:'roles',component:RolesComponent}
+  { path: 'totalexpensesinfo', component: TotalexpensesinfoComponent},
+  { path: 'user', component: UsersComponent },
+  { path: 'roles', component: RolesComponent },
+  
 ];
 
 
