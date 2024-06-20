@@ -12,6 +12,8 @@ import { UsersComponent } from '../Security/users/users.component';
 import { RolesComponent } from '../Security/roles/roles.component';
 import { CardModule } from 'primeng/card';
 import { TotalexpensesinfoComponent } from './totalexpensesinfo/totalexpensesinfo.component';
+import { ChartModule } from 'primeng/chart';
+import { TableModule } from 'primeng/table';
 
 
 @NgModule({
