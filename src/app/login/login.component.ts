@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
     this.login();
   }
 
-  
   login(){
     this.loginForm = this.fb.group({
       username: ['', [
