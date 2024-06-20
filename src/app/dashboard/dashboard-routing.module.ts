@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 import { SuperAdminComponent } from './super-admin/super-admin.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { TotalexpensesinfoComponent } from './totalexpensesinfo/totalexpensesinfo.component';
+import { ReportsComponent } from '../reports/reports.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'userDashboard', pathMatch: 'full' }, 
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'superadminDashboard', component: SuperAdminComponent },
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'totalexpensesinfo', component: TotalexpensesinfoComponent},
+  // {path:'reports',component:ReportsComponent},
   { path: 'user', component: UsersComponent },
   { path: 'roles', component: RolesComponent },
   
