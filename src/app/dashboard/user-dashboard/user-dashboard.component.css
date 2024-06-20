@@ -18,12 +18,28 @@
 }
 .titles{
     font-weight: 500;
+    text-align: center;
 }
 /* .icons{
     
 } */
-@media (min-width: 768px) {
-    .notificationcard {
-        width: auto;
-    }
+.small-card {
+    width: 415px; /* Adjust card width */
+    height: 350px; /* Adjust card height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 70px); /* Adjust height to account for card header */
+}
+
+.small-chart {
+    width: 90%; /* Adjust width of the chart */
+    height: 100%; /* Adjust height of the chart */
 }

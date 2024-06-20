@@ -55,7 +55,7 @@
 .message {
   cursor: pointer;
   display: flex;
-  justify-content:space-between;
+  justify-content:end;
 }
 
 .logo {
