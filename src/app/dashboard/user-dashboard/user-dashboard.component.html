@@ -28,13 +28,7 @@
                     <h3>$5,000</h3>
                 </div>
             </div>
-            <div class="card doughnutchart mt-4">
-                <div class="card-header titles">Chart by Categories</div>
-                <p-chart type="doughnut" class="pie small-chart" [data]="pieData" [options]="pieOptions"></p-chart>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card notificationcard">
+            <div class="card notificationcard mt-4">
                 <div class="card-header titles">
                     Notifications
                 </div>
@@ -43,6 +37,11 @@
                 </div>
             </div>
         </div>
-
+        <div class="col-md-4 mb-4">
+            <div class="card doughnutchart">
+                <div class="card-header titles">Chart by Categories</div>
+                <p-chart type="doughnut" class="pie small-chart" [data]="pieData" [options]="pieOptions"></p-chart>
+            </div>
+        </div>
     </div>
 </div>

@@ -43,3 +43,6 @@
     width: 90%; /* Adjust width of the chart */
     height: 100%; /* Adjust height of the chart */
 }
+.doughnutchart{
+    height: 100%;
+}
