@@ -8,7 +8,7 @@ import { SuperAdminComponent } from './super-admin/super-admin.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 
 const routes: Routes = [
-
+  { path: '', redirectTo: 'userDashboard', pathMatch: 'full' }, 
   { path: 'userDashboard', component: UserDashboardComponent },
   { path: 'superadminDashboard', component: SuperAdminComponent },
   { path: 'admin', component: AdminDashboardComponent },
