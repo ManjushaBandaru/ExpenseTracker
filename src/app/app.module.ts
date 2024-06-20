@@ -20,6 +20,8 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { CardModule } from 'primeng/card';
+import { TooltipModule } from 'primeng/tooltip';
+import { ChartModule } from 'primeng/chart';
 
 
 
@@ -45,6 +47,8 @@ import { CardModule } from 'primeng/card';
     InputNumberModule,
     ToastModule,
     CardModule,
+    TooltipModule,
+    ChartModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',}),
 
