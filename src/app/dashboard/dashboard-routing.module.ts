@@ -7,7 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 import { SuperAdminComponent } from './super-admin/super-admin.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { TotalexpensesinfoComponent } from './totalexpensesinfo/totalexpensesinfo.component';
-import { ReportsComponent } from '../reports/reports.component';
+import { ReportsComponent } from '../expense/reports/reports.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'userDashboard', pathMatch: 'full' }, 

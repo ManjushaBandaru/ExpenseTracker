@@ -22,7 +22,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
 import { ChartModule } from 'primeng/chart';
-import { ReportsComponent } from './reports/reports.component';
+import { ReportsComponent } from './expense/reports/reports.component';
 
 
 

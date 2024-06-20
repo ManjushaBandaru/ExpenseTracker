@@ -188,6 +188,7 @@
   .sidebar.open li a .link_name{
     opacity: 1;
     pointer-events: auto;
+    cursor: pointer;
   }
   
   .sidebar li i{
