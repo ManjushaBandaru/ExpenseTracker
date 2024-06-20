@@ -13,7 +13,7 @@ import { RolesComponent } from '../Security/roles/roles.component';
 import { CardModule } from 'primeng/card';
 import { ChartModule } from 'primeng/chart';
 import { TotalexpensesinfoComponent } from './totalexpensesinfo/totalexpensesinfo.component';
-
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ import { TotalexpensesinfoComponent } from './totalexpensesinfo/totalexpensesinf
     CommonModule,
     DashboardRoutingModule,
     CardModule,
-    ChartModule
+    ChartModule,
+    TableModule
   ]
 })
 export class DashboardModule { }
