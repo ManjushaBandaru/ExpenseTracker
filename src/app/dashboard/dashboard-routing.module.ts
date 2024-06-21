@@ -14,9 +14,9 @@ const routes: Routes = [
   { path: 'userDashboard', component: UserDashboardComponent },
   { path: 'superadminDashboard', component: SuperAdminComponent },
   { path: 'admin', component: AdminDashboardComponent },
-     {path:'reports',component:ReportsComponent},
+  {path:'reports',component:ReportsComponent},
 
-  { path: 'totalexpensesinfo', component: TotalexpensesinfoComponent},
+  { path: 'expenselist', component: TotalexpensesinfoComponent},
   { path: 'user', component: UsersComponent },
   { path: 'roles', component: RolesComponent },
   
