@@ -1,4 +1,18 @@
 <div class="container">
+    <!-- <div>
+        <button pButton type="button" label="Add User" icon="pi pi-user" (click)="showDialog()" [outlined]="true"
+            class="clearbtn"></button>
+        <p-dialog header="Header" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                id est laborum.
+            </p>
+        </p-dialog>
+    </div> -->
     <div class="row mb-4">
         <div class="col-md-4">
             <div class="card profile shadow-sm">
@@ -34,17 +48,19 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card expensecard shadow-sm">
                 <div class="card-header titles" (click)="OnClick()">
                     Total Expenses
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body text-center" (click)="OnClick()">
                     <h3>$5,000</h3>
                 </div>
             </div>
+            <!-- <div class="card flex justify-content-center">
+                <p-chart type="doughnut" [data]="data" [options]="options" />
+            </div> -->
         </div>
         <div class="col-md-4 mb-4">
             <div class="card expensecard shadow-sm">
@@ -65,14 +81,18 @@
                     <h3>$60,000</h3>
                 </div>
             </div>
-            <!-- <div class="card expensecard shadow-sm mt-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card expensecard shadow-sm mt-4">
                 <div class="card-header titles">
                     Notifications
                 </div>
                 <div class="card-body text-center">
-                    <h3>No Notifications Right Now.</h3>
+                    <strong>No Notifications Right Now.</strong>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>

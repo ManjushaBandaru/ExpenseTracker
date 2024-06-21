@@ -14,6 +14,8 @@ import { CardModule } from 'primeng/card';
 import { TotalexpensesinfoComponent } from './totalexpensesinfo/totalexpensesinfo.component';
 import { ChartModule } from 'primeng/chart';
 import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -22,16 +24,18 @@ import { TableModule } from 'primeng/table';
     UserDashboardComponent,
     SuperAdminComponent,
     AdminDashboardComponent,
-   UsersComponent,
-   RolesComponent,
-   TotalexpensesinfoComponent
+    UsersComponent,
+    RolesComponent,
+    TotalexpensesinfoComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     CardModule,
     ChartModule,
-    TableModule
+    TableModule,
+    DialogModule,
+    ButtonModule
   ]
 })
 export class DashboardModule { }
