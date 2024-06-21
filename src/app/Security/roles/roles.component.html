@@ -1,1 +1,98 @@
-<p>roles works!</p>
+<!-- <div class="col-12">
+    <div class="card">
+      <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+          <h4>Roles</h4>
+        </ng-template>
+        <ng-template pTemplate="right">
+          <button pButton pRipple label="New Role" icon="pi pi-plus" class="p-button-primary p-mr-2" id="Role_addRole"
+            ></button>
+        </ng-template>
+      </p-toolbar> -->
+     
+
+<p-table #myTab [paginator]="true" [rows]="5" [showCurrentPageReport]="true" [value]="roles"
+         [globalFilterFields]="['Name', 'City', 'PhoneNo', 'StartTime', 'CloseTime', 'BreakStartTime', 'BreakEndTime', 'Romms']"
+         [tableStyle]="{ 'width': 'max' }"
+         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+         [rowsPerPageOptions]="[5, 10, 25, 50]"
+         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+         paginatorLocale="en-US"
+         >
+    <ng-template pTemplate="caption">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <input type="text" pInputText size="50" placeholder="Global Filter"
+                   (input)="myTab.filterGlobal($any($event.target).value, 'contains')"
+                   style="width: 200px; border: 2px rgb(153, 153, 243) solid; border-radius: 20px; margin-right: auto;"/>
+                   <p-button label="Add" pRipple icon="pi pi-plus" (click)="onAdd()" ></p-button>            
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr class="header-row">
+            <th pSortableColumn="Name" style="width:10%">Name <p-sortIcon field="Name"></p-sortIcon></th>
+            <th pSortableColumn="employeerole" style="width:15%">employeerole<p-sortIcon field="employeerole"></p-sortIcon></th>
+            <th pSortableColumn="Isactive" style="width:10%">Isactive<p-sortIcon field="Isactive"></p-sortIcon></th>
+            <th pSortableColumn="CreatedDate" style="width:10%">CreatedDate <p-sortIcon field="CreatedDate"></p-sortIcon></th>
+            <th pSortableColumn="CReatedBy" style="width:10%">CReatedBy <p-sortIcon field="CReatedBy"></p-sortIcon></th>
+            <th pSortableColumn="UpdatedDate" style="width:10%">UpdatedDate<p-sortIcon field="UpdatedDate"></p-sortIcon></th>
+            <th pSortableColumn="UpdatedBy" style="width:10%">UpdatedBy<p-sortIcon field="UpdatedBy"></p-sortIcon></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-branch>
+        <tr>
+            <td>{{branch.Name}}</td>
+            <td>{{branch.employeerole}}</td>
+            <td>{{branch.Isactive }}</td>
+            <td>{{branch.CreatedDate}}</td>
+            <td>{{branch.CReatedBy}}</td>
+            <td>{{branch.UpdatedDate}}</td>
+            <td>{{branch.BreakEndTime}}</td>
+            <td>{{branch.UpdatedBy}}</td>
+           
+        </tr>
+    </ng-template>
+</p-table>
+<!-- <p-dialog header="Role" [(visible)]="dialog" [modal]="true" showEffect="fade"
+  [breakpoints]="{'960px': '70%', '640px': '80%'}" [style]="{width: '50%'}">
+  <div class="flex flex-column align-items-center justify-content-center">
+    <form class="row g-3" [formGroup]="registrationform" (ngSubmit)="submit()">
+      <div class="col-md-4">
+        <label for="UserName" class="form-label">User Name <span style="color: red;">*</span></label>
+        <input type="text" pInputText class="form-control user" id="UserName"
+               formControlName="UserName" maxlength="20" placeholder="Enter username"
+               [ngClass]="{'is-invalid ng-dirty': registrationform.controls['UserName'].touched && registrationform.controls['UserName'].errors}" />
+        <div *ngIf="registrationform.get('UserName')?.invalid && (registrationform.get('UserName')?.dirty || registrationform.get('UserName')?.touched)">
+          <small class="p-error" *ngIf="registrationform.get('UserName')?.errors?.['required']">* First Name is required.</small>
+          <small class="p-error" *ngIf="registrationform.get('UserName')?.errors?.['alphaOnly']">* Only alphabets allowed.</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="Password" class="form-label">Password <span style="color: red;">*</span></label>
+        <input type="password" pInputText class="form-control password" id="Password" formControlName="Password" maxlength="15"
+               placeholder="Enter password"
+               [ngClass]="{'is-invalid ng-dirty': registrationform.controls['Password'].touched && registrationform.controls['Password'].errors}" />
+        <div *ngIf="registrationform.get('Password')?.invalid && (registrationform.get('Password')?.dirty || registrationform.get('Password')?.touched)">
+          <small class="p-error" *ngIf="registrationform.get('Password')?.errors?.['required']">* Password is required.</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="Confirmpassword" class="form-label cnfpassword">Confirm Password<span style="color: red;">*</span></label>
+        <input type="password" pInputText class="form-control" id="Confirmpassword" formControlName="Confirmpassword" maxlength="15"
+               placeholder="Confirm Password"
+               [ngClass]="{'is-invalid ng-dirty': registrationform.controls['Confirmpassword'].touched && registrationform.controls['Confirmpassword'].errors}" />
+        <div *ngIf="registrationform.get('Confirmpassword')?.invalid && (registrationform.get('Confirmpassword')?.dirty || registrationform.get('Confirmpassword')?.touched)">
+          <small class="p-error" *ngIf="registrationform.get('Confirmpassword')?.errors?.['required']">* Confirm Password is required.</small>
+        </div>
+      </div>
+      
+      <div class="col-12 mt-5 text-center">
+        <button type="submit" class="btn btn-success submit-btn" [disabled]="registrationform.invalid">
+          <i class="fa fa-check fa-lg"></i> Submit
+        </button>
+      </div>        
+    </form>
+  </div>
+</p-dialog> -->
+
+

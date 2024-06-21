@@ -25,6 +25,12 @@ import { ChartModule } from 'primeng/chart';
 import { ReportsComponent } from './expense/reports/reports.component';
 import { CalendarModule } from 'primeng/calendar';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { DropdownModule } from 'primeng/dropdown';
+import { AccordionModule } from 'primeng/accordion';
+import { RippleModule } from 'primeng/ripple';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TableModule } from 'primeng/table';
 
 
 
@@ -37,9 +43,9 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     ReportsComponent,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    PasswordModule,
+    BrowserModule,InputSwitchModule,DropdownModule,
+    AppRoutingModule,AccordionModule,RippleModule,ToolbarModule,
+    PasswordModule,TableModule,
     CheckboxModule,
     CommonModule,
     ButtonModule,

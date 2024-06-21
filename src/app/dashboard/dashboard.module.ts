@@ -14,6 +14,7 @@ import { CardModule } from 'primeng/card';
 import { TotalexpensesinfoComponent } from './totalexpensesinfo/totalexpensesinfo.component';
 import { ChartModule } from 'primeng/chart';
 import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { TableModule } from 'primeng/table';
     DashboardRoutingModule,
     CardModule,
     ChartModule,
-    TableModule
+    TableModule,
+    ButtonModule
   ]
 })
 export class DashboardModule { }
