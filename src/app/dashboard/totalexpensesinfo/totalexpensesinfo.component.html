@@ -39,10 +39,16 @@
         </ng-template>
         <ng-template pTemplate="body" let-product>
             <tr>
-                <td>{{ product.code }}</td>
-                <td>{{ product.name }}</td>
                 <td>{{ product.category }}</td>
-                <td>{{ product.quantity }}</td>
+                <td>{{ product.expensedate }}</td>
+                <td>{{ product.expensetype }}</td>
+                <td>{{ product.amount }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.aprovalstatus }}</td>
+                <td>{{ product.paidamount }}</td>
+                <td>{{ product.dueamount }}</td>
+                <td>{{ product.approveddate }}</td>
+                <td>{{ product.uploaddocument }}</td>
             </tr>
         </ng-template>
     </p-table>
