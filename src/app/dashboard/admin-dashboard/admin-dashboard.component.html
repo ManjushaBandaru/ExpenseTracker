@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-4 mb-4">
+    <div class="row mb-4">
+        <div class="col-md-4">
             <div class="card profile shadow-sm">
                 <div class="card-header titles">
                     Admin Profile
@@ -17,20 +17,37 @@
                         <p><i class="pi pi-envelope"></i> john.doe@example.com</p>
                         <p><i class="pi pi-calendar-clock"></i> 12 dec 1990</p>
                         <p><i class="pi pi-mobile"></i> 1234567890</p>
+                        <p><i class="pi pi-map-marker"></i> Hyderabad</p>
+
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="card expensecard shadow-sm" (click)="OnClick()">
+        <div class="col-md-8">
+            <div class="card bar-graph shadow-sm">
                 <div class="card-header titles">
+                    Graphical Representation
+                </div>
+                <div class="card-body">
+                    <p-chart type="bar" [data]="data" [options]="options"></p-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles" (click)="OnClick()">
                     Total Expenses
                 </div>
                 <div class="card-body text-center">
                     <h3>$5,000</h3>
                 </div>
             </div>
-            <div class="card expensecard shadow-sm mt-4">
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card expensecard shadow-sm">
                 <div class="card-header titles">
                     Monthly Expenses
                 </div>
@@ -48,20 +65,14 @@
                     <h3>$60,000</h3>
                 </div>
             </div>
-            <div class="card expensecard shadow-sm mt-4">
+            <!-- <div class="card expensecard shadow-sm mt-4">
                 <div class="card-header titles">
                     Notifications
                 </div>
                 <div class="card-body text-center">
                     <h3>No Notifications Right Now.</h3>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
-
-    <div class="card bar-graph mb-4">
-        <div class="card-header titles">
-            Graphical Representation
-        </div>
-        <p-chart type="bar" [data]="data" [options]="options" />
-    </div>
+</div>

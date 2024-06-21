@@ -26,7 +26,7 @@ export class AdminDashboardComponent implements OnInit {
           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
           datasets: [
               {
-                  label: 'My First dataset',
+                  label: 'Month Wise Report',
                   backgroundColor: documentStyle.getPropertyValue('--blue-500'),
                   borderColor: documentStyle.getPropertyValue('--blue-500'),
                   data: [65, 59, 80, 81, 56, 55, 40, 55, 67, 71, 85, 75, 71]
