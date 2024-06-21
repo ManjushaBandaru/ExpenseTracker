@@ -39,10 +39,11 @@
   
   .sidebar .logo_details .logo_name{
     color:var(--color-white);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     opacity: 0;
     transition: all .5s ease;
+    /* margin-right: 10px; */
   }
   
   .sidebar.open .logo_details .icon,

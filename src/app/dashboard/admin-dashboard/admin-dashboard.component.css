@@ -24,7 +24,7 @@
 
 .profilelist i {
     margin-right: 5px;
-    color: lightblue; 
+    color:var(--color-default); 
 }
 
 .expensecard {
@@ -41,7 +41,11 @@
 }
 
 .card.profile {
-    height: 400px; 
+    height: 100%;
+}
+
+.card.bar-graph {
+    height: 100%;
 }
 
 .card:hover {
@@ -51,11 +55,17 @@
 
 .titles{
     font-weight: 500;
+    background-color: var(--color-default);
+    color: white;
 }
 
-.bar-graph{
+.bar-graph {
     display: flex;
     justify-content: center;
     text-align: center;
     width: 100%;
+}
+
+.card {
+    margin-bottom: 20px;
 }
