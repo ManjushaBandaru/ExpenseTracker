@@ -25,6 +25,7 @@ import { ChartModule } from 'primeng/chart';
 import { ReportsComponent } from './expense/reports/reports.component';
 import { CalendarModule } from 'primeng/calendar';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -35,7 +36,6 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     SidenavComponent,
     RegistrationComponent,
     ReportsComponent,
-    // UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +56,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     ChartModule,
     CalendarModule,
     FloatLabelModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',}),
 
