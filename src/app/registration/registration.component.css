@@ -1,9 +1,21 @@
 .submit-btn {
-    padding: 10px 20px;
+    padding: 6px 20px;
     font-size: 18px; /* Adjust as needed */
   }
 
   .register{
     background-color: #e6f2ff;
   }
-  
+/* .user{
+  width: 250px;
+}
+.password{
+  width: 250px;
+} */
+.cnfpassword{
+  width: 250px;
+}
+/* .formfield{
+  display: flex;
+  justify-content: center;
+} */

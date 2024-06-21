@@ -1,137 +1,13 @@
-<!-- <div class="card_body p-5">
-    <div class="card_body p-6">
-      <form class="row" [formGroup]="registrationform">
-        <div class="form-group col-6">
-          <label for="FirstName">FirstName:</label>
-          <input pInputText id="FirstName" aria-describedby="name-help" formControlName="FirstName" />
-        </div>
-        <div class="form-group col-6">
-          <label for="LastName">LastName:</label>
-          <input pInputText id="LastName" aria-describedby="name-help" formControlName="LastName" />
-        </div>
-        <div class="form-group col-md-6">
-            <label for="MobileNumber">MobileNumber:</label>
-          <input pInputText id="MobileNumber" aria-describedby="name-help" formControlName="MobileNumber" />
-        </div>
-        <div class="form-group col-md-6">
-            <label for="Email">Email:</label>
-          <input pInputText id="Email" aria-describedby="name-help" formControlName="Email" />
-        </div>
-        <div class="form-group col-6">
-          <label for="UserName">UserName:</label>
-          <input pInputText id="UserName" aria-describedby="name-help" formControlName="UserName" />
-        </div>
-        <div class="form-group col-6">
-          <label for="Password">Password:</label>
-          <input pInputText id="Password" aria-describedby="name-help" formControlName="Password" />
-        </div>
-        <div class="d-flex flex-row justify-content-between p-3">
-          <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
-          <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid" (click)="submit()">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <ng-template pTemplate="footer">
-    <div class="d-flex flex-row justify-content-between p-3">
-      <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
-      <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid" (click)="submit()">Submit</button>
-    </div>
-</ng-template> -->
-
-
-<!-- <div class="d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card_body p-5">
-    <form class="row g-3" [formGroup]="registrationform">
-      <div class="form-group col-md-6">
-        <label for="FirstName">FirstName:</label>
-        <input pInputText id="FirstName" aria-describedby="name-help" formControlName="FirstName" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="LastName">LastName:</label>
-        <input pInputText id="LastName" aria-describedby="name-help" formControlName="LastName" />
-      </div>
-
-      <div class="form-group col-md-6">
-        <label for="MobileNumber">MobileNumber:</label>
-        <input pInputText id="MobileNumber" aria-describedby="name-help" formControlName="MobileNumber" />
-      </div>
-
-      <div class="form-group col-md-6">
-        <label for="Email">Email:</label>
-        <input pInputText id="Email" aria-describedby="name-help" formControlName="Email" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="UserName">UserName:</label>
-        <input pInputText id="UserName" aria-describedby="name-help" formControlName="UserName" />
-      </div>
-      <div class="form-group col-6">
-        <label for="Password">Password:</label>
-        <input pInputText id="Password" aria-describedby="name-help" formControlName="Password" />
-      </div>
-      <div class="form-group col-12 d-flex justify-content-between">
-        <button type="submit" class="btn btn-success" [disabled]="registrationform.invalid"
-          (click)="submit()">Submit</button>
-        <button type="button" class="btn btn-secondary" (click)="closeForm()">Close</button>
-      </div>
-    </form>
-  </div>
-</div> -->
-
-
-
 <div class="d-flex justify-content-center align-items-center min-vh-100 register">
   <div class="p-4" style="width: 100%; max-width: 600px;">
     <div>
-      <header class="mb-4">
-        <strong>Registration Details :</strong>
+      <header class="mb-5">
+        <strong>Forget Password :</strong>
       </header>
       <form class="row g-3" [formGroup]="registrationform" (ngSubmit)="submit()">
-        <div class="col-md-6">
-          <label for="FirstName" class="form-label">First Name <span style="color: red;">*</span></label>
-          <input type="text" pInputText class="form-control" id="FirstName"
-                 formControlName="FirstName" maxlength="20" placeholder="Enter firstname"
-                 [ngClass]="{'is-invalid ng-dirty': registrationform.controls['FirstName'].touched && registrationform.controls['FirstName'].errors}" />
-          <div *ngIf="registrationform.get('FirstName')?.invalid && (registrationform.get('FirstName')?.dirty || registrationform.get('FirstName')?.touched)">
-            <small class="p-error" *ngIf="registrationform.get('FirstName')?.errors?.['required']">* First Name is required.</small>
-            <small class="p-error" *ngIf="registrationform.get('FirstName')?.errors?.['alphaOnly']">* Only alphabets allowed.</small>
-          </div>
-        </div>        
-        <div class="col-md-6">
-          <label for="LastName" class="form-label">Last Name <span style="color: red;">*</span></label>
-          <input type="text" pInputText class="form-control" id="LastName"
-                 formControlName="LastName" maxlength="20" placeholder="Enter lastname"
-                 [ngClass]="{'is-invalid ng-dirty': registrationform.controls['LastName'].touched && registrationform.controls['LastName'].errors}" />
-          <div *ngIf="registrationform.get('LastName')?.invalid && (registrationform.get('LastName')?.dirty || registrationform.get('LastName')?.touched)">
-            <small class="p-error" *ngIf="registrationform.get('LastName')?.errors?.['required']">* First Name is required.</small>
-            <small class="p-error" *ngIf="registrationform.get('LastName')?.errors?.['alphaOnly']">* Only alphabets allowed.</small>
-          </div>
-        </div>  
-        <div class="col-md-6">
-          <label for="MobileNumber" class="form-label">Mobile Number <span style="color: red;">*</span></label>
-          <input type="text" pInputText class="form-control" id="MobileNumber" maxlength="10"
-                 formControlName="MobileNumber" placeholder="Enter mobile number"
-                 [ngClass]="{'is-invalid ng-dirty': registrationform.controls['MobileNumber'].touched && registrationform.controls['MobileNumber'].errors}" />
-          <div *ngIf="registrationform.get('MobileNumber')?.invalid && (registrationform.get('MobileNumber')?.dirty || registrationform.get('MobileNumber')?.touched)">
-            <small class="p-error" *ngIf="registrationform.get('MobileNumber')?.errors?.['required']">* Mobile Number is required.</small>
-            <small class="p-error" *ngIf="registrationform.get('MobileNumber')?.errors?.['pattern']">* Mobile Number must be 10 digits.</small>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <label for="Email" class="form-label">Email <span style="color: red;">*</span></label>
-          <input type="email" pInputText class="form-control" id="Email"
-                 formControlName="Email" placeholder="Enter Email"
-                 [ngClass]="{'is-invalid ng-dirty': registrationform.controls['Email'].touched && registrationform.controls['Email'].errors}" />
-          <div *ngIf="registrationform.get('Email')?.invalid && (registrationform.get('Email')?.dirty || registrationform.get('Email')?.touched)">
-            <small class="p-error" *ngIf="registrationform.get('Email')?.errors?.['required']">* Email is required.</small>
-            <small class="p-error" *ngIf="registrationform.get('Email')?.errors?.['email']">* Invalid email format.</small>
-            <small class="p-error" *ngIf="registrationform.get('Email')?.errors?.['invalidEmail']">* Email must be @gmail.com.</small>
-          </div>
-        </div>        
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="UserName" class="form-label">User Name <span style="color: red;">*</span></label>
-          <input type="text" pInputText class="form-control" id="UserName"
+          <input type="text" pInputText class="form-control user" id="UserName"
                  formControlName="UserName" maxlength="20" placeholder="Enter username"
                  [ngClass]="{'is-invalid ng-dirty': registrationform.controls['UserName'].touched && registrationform.controls['UserName'].errors}" />
           <div *ngIf="registrationform.get('UserName')?.invalid && (registrationform.get('UserName')?.dirty || registrationform.get('UserName')?.touched)">
@@ -139,17 +15,26 @@
             <small class="p-error" *ngIf="registrationform.get('UserName')?.errors?.['alphaOnly']">* Only alphabets allowed.</small>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="Password" class="form-label">Password <span style="color: red;">*</span></label>
-          <input type="password" pInputText class="form-control" id="Password" formControlName="Password" maxlength="15"
+          <input type="password" pInputText class="form-control password" id="Password" formControlName="Password" maxlength="15"
                  placeholder="Enter password"
                  [ngClass]="{'is-invalid ng-dirty': registrationform.controls['Password'].touched && registrationform.controls['Password'].errors}" />
           <div *ngIf="registrationform.get('Password')?.invalid && (registrationform.get('Password')?.dirty || registrationform.get('Password')?.touched)">
             <small class="p-error" *ngIf="registrationform.get('Password')?.errors?.['required']">* Password is required.</small>
           </div>
         </div>
+        <div class="col-md-4">
+          <label for="Confirmpassword" class="form-label cnfpassword">Confirm Password<span style="color: red;">*</span></label>
+          <input type="password" pInputText class="form-control" id="Confirmpassword" formControlName="Confirmpassword" maxlength="15"
+                 placeholder="Confirm Password"
+                 [ngClass]="{'is-invalid ng-dirty': registrationform.controls['Confirmpassword'].touched && registrationform.controls['Confirmpassword'].errors}" />
+          <div *ngIf="registrationform.get('Confirmpassword')?.invalid && (registrationform.get('Confirmpassword')?.dirty || registrationform.get('Confirmpassword')?.touched)">
+            <small class="p-error" *ngIf="registrationform.get('Confirmpassword')?.errors?.['required']">* Confirm Password is required.</small>
+          </div>
+        </div>
         
-        <div class="col-12 mt-4 text-center">
+        <div class="col-12 mt-5 text-center">
           <button type="submit" class="btn btn-success submit-btn" [disabled]="registrationform.invalid">
             <i class="fa fa-check fa-lg"></i> Submit
           </button>
