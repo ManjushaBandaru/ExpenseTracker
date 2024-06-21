@@ -11,12 +11,21 @@ export class AdminDashboardComponent implements OnInit {
   
   barData: any;
   barOptions: any;
+  visible: boolean = false;
 
   data: any;
 
   options: any;
 
-  ngOnInit() {
+  ngOnInit(): void {
+      this.Barinit();
+  };
+
+  showDialog(){
+    this.visible = true;
+  };
+
+  Barinit() {
       const documentStyle = getComputedStyle(document.documentElement);
       const textColor = documentStyle.getPropertyValue('--text-color');
       const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
@@ -75,7 +84,8 @@ export class AdminDashboardComponent implements OnInit {
 
           }
       };
-  }
+      
+  };
 
   constructor(private route: Router) { }
 
@@ -90,5 +100,6 @@ export class AdminDashboardComponent implements OnInit {
 
   OnClick(){
     this.route.navigate(['/sidenav/dashboard/totalexpensesinfo']);
-  }
+  };
+
 }

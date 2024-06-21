@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -8,49 +10,66 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
   loginForm!: FormGroup;
+  UserName: string = '';
+  Password!: string;
+  grant_type!: string;
 
-  constructor(private route: Router, private fb: FormBuilder) { }
+  constructor(private route: Router,
+    private fb: FormBuilder,
+    private service: AuthenticationService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.login();
   }
 
-  login(){
+  login() {
     this.loginForm = this.fb.group({
-      username: ['', [
-        Validators.required,
-        // Validators.maxLength(20),
-        // Validators.pattern(/^.*@.*$/)  
-      ]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(20),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/)
-      ]]
+      UserName: ['', [Validators.required]],
+      Password: ['', [Validators.required]],
+      grant_type: ['password']
     });
   }
 
+  // onSignIn() {
+  //   if (this.loginForm.invalid) {
+  //     return;
+  //   }
+
+  //   const username = this.loginForm.controls['username'].value;
+  //   const password = this.loginForm.controls['password'].value;
+
+  //   if (username === 'calibrage') {
+  //     if (password === 'Calibrage@123') {
+  //       this.route.navigate(['/sidenav/dashboard/admin']);
+  //           } else {
+  //       window.alert('Incorrect Password');
+  //     }
+  //   } else {
+  //     window.alert('Incorrect Username');
+  //   }
+  // }
+
   onSignIn() {
-    if (this.loginForm.invalid) {
-      return;
-    }
+    const loginData = new HttpParams()
+      .set('UserName', this.loginForm.get('UserName')!.value)
+      .set('Password', this.loginForm.get('Password')!.value)
+      .set('grant_type', this.loginForm.get('grant_type')!.value);
 
-    const username = this.loginForm.controls['username'].value;
-    const password = this.loginForm.controls['password'].value;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
 
-    if (username === 'calibrage') {
-      if (password === 'Calibrage@123') {
+    this.service.tokenlogin(loginData.toString(), { headers }).subscribe(
+      (response: any) => {
+        console.log(response);
         this.route.navigate(['/sidenav/dashboard/admin']);
-            } else {
-        window.alert('Incorrect Password');
+      },
+      (error: any) => {
+        console.error("Login failed:", error);
       }
-    } else {
-      window.alert('Incorrect Username');
-    }
+    );
+    this.loginForm.reset();
   }
-
-
 }

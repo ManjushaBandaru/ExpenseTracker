@@ -23,9 +23,9 @@ import { ButtonModule } from 'primeng/button';
     UserDashboardComponent,
     SuperAdminComponent,
     AdminDashboardComponent,
-   UsersComponent,
-   RolesComponent,
-   TotalexpensesinfoComponent
+    UsersComponent,
+    RolesComponent,
+    TotalexpensesinfoComponent
   ],
   imports: [
     CommonModule,

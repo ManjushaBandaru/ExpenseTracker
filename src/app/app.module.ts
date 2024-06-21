@@ -31,6 +31,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { RippleModule } from 'primeng/ripple';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TableModule } from 'primeng/table';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -61,6 +62,7 @@ import { TableModule } from 'primeng/table';
     ChartModule,
     CalendarModule,
     FloatLabelModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',}),
 
