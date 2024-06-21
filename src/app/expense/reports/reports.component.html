@@ -1,1 +1,64 @@
-<p>reports works!</p>
+<div class="card flex flex-wrap gap-3 p-fluid">
+  <div class="flex-auto d-flex">
+    <div class="col-3 custom-col"> 
+      <div class="flex items-center"> 
+        <label for="buttondisplay" class="font-bold block mb-2"> FromDate: </label>
+        <p-calendar 
+          [(ngModel)]="date1" 
+          [showIcon]="true" 
+          inputId="buttondisplay" 
+          [showOnFocus]="false"
+          [inputStyleClass]="'custom-placeholder'"
+          placeholder="Select From Date"
+          class="custom-calendar">
+        </p-calendar>
+      </div>
+    </div>
+    <div class="col-3 custom-col"> 
+      <div class="flex items-center"> 
+        <label for="icondisplay" class="font-bold block mb-2"> ToDate: </label>
+        <p-calendar 
+          [(ngModel)]="date2" 
+          [showIcon]="true" 
+          inputId="icondisplay" 
+          [showOnFocus]="false"
+          [inputStyleClass]="'custom-placeholder'"
+          placeholder="Select To Date"
+          class="custom-calendar">
+        </p-calendar>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+ 
+  <div class="card bar-graph mb-4">
+    <div class="card-header titles">
+      <div class="monthly-title">
+        Monthly Data Overview
+      </div>
+      <div class="button-row">
+        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+        <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning" style="margin-left: 8px;" pTooltip="PDF" tooltipPosition="bottom"></button>
+      </div>
+    </div>
+    <div class="card-body">
+      <p-chart type="bar" [data]="data" [options]="options"></p-chart>
+    </div>
+  </div>
+  
+
+
+
+
+
+

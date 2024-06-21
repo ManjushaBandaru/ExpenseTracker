@@ -1,0 +1,47 @@
+.card {
+  padding: 20px;
+  margin: 20px;
+}
+
+.custom-calendar {
+  width: 300px; 
+  padding-right: 20px; 
+}
+
+.card.bar-graph {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px; /* Adjust as needed */
+}
+
+.card-header.titles {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 10px 15px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center; /* Center the text */
+  display: flex;
+  justify-content: space-between; /* Adjusted to space between */
+  align-items: center;
+  height: 50px; /* Adjust height as needed */
+}
+
+.monthly-title {
+  flex: 1; /* Take up remaining space */
+  margin-right: 20px; /* Adjust margin as needed */
+}
+
+.button-row {
+  display: flex;
+  align-items: center;
+}
+
+.button-row button {
+  margin-left: 8px; /* Adjust button spacing */
+}
+.custom-col {
+  margin-left: 20px; /* Adjust margin as needed */
+}
