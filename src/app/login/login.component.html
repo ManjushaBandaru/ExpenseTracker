@@ -28,31 +28,31 @@
 <div class="loginpage"> 
     <form [formGroup]="loginForm" class="login" (ngSubmit)="onSignIn()">
         <h2 class="logo">Login</h2>
-        <span class="sublogo">Welcome to Expenses Tracker</span>
+        <!-- <span class="sublogo">Welcome to Expenses Tracker</span> -->
         <div class="login__field">
-            <input type="text" class="user" pInputText formControlName="username" placeholder="Username" maxlength="20"
-                [ngClass]="{'is-invalid ng-dirty': loginForm.controls['username'].touched && loginForm.controls['username'].errors}" />
-            <div *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched"
+            <input type="text" class="user" pInputText formControlName="UserName" placeholder="Username" maxlength="20"
+                [ngClass]="{'is-invalid ng-dirty': loginForm.controls['UserName'].touched && loginForm.controls['UserName'].errors}" />
+            <div *ngIf="loginForm.controls['UserName'].invalid && loginForm.controls['UserName'].touched"
                 class="error-message">
-                <small *ngIf="loginForm.controls['username'].errors?.['required']">Username is required.</small>
-                <small *ngIf="loginForm.controls['username'].errors?.['maxlength']">Username cannot exceed 20
+                <small *ngIf="loginForm.controls['UserName'].errors?.['required']">Username is required.</small>
+                <small *ngIf="loginForm.controls['UserName'].errors?.['maxlength']">Username cannot exceed 20
                     characters.</small>
             </div>
         </div>
         <div class="login__field">
-            <p-password formControlName="password" [toggleMask]="true" [feedback]="false" placeholder="Password"
-                [ngClass]="{'is-invalid ng-dirty': loginForm.controls['password'].touched && loginForm.controls['password'].errors}"></p-password>
-            <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched"
+            <p-password formControlName="Password" [toggleMask]="true" [feedback]="false" placeholder="Password"
+                [ngClass]="{'is-invalid ng-dirty': loginForm.controls['Password'].touched && loginForm.controls['Password'].errors}"></p-password>
+            <div *ngIf="loginForm.controls['Password'].invalid && loginForm.controls['Password'].touched"
                 class="error-message">
-                <small *ngIf="loginForm.controls['password'].errors?.['required']">Password is required.</small>
-                <small *ngIf="loginForm.controls['password'].errors?.['minlength']">Password must be at least 8
+                <small *ngIf="loginForm.controls['Password'].errors?.['required']">Password is required.</small>
+                <!-- <small *ngIf="loginForm.controls['password'].errors?.['minlength']">Password must be at least 8
                     characters long.</small>
                 <small *ngIf="loginForm.controls['password'].errors?.['maxlength']">Password cannot exceed 20
                     characters.</small>
                 <small *ngIf="loginForm.controls['password'].errors?.['pattern']">
                     Password must contain at least one lowercase letter, one uppercase letter, one number, and
                     one special character.
-                </small>
+                </small> -->
             </div>
         </div>
 
