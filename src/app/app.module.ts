@@ -23,6 +23,8 @@ import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
 import { ChartModule } from 'primeng/chart';
 import { ReportsComponent } from './expense/reports/reports.component';
+import { CalendarModule } from 'primeng/calendar';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 
 
@@ -51,6 +53,8 @@ import { ReportsComponent } from './expense/reports/reports.component';
     CardModule,
     TooltipModule,
     ChartModule,
+    CalendarModule,
+    FloatLabelModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',}),
 
