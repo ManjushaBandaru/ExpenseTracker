@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
     if (username === 'calibrage') {
       if (password === 'Calibrage@123') {
-        this.route.navigate(['/sidenav/dashboard/userDashboard']);
+        this.route.navigate(['/sidenav/dashboard/admin']);
             } else {
         window.alert('Incorrect Password');
       }
@@ -52,8 +52,5 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSignup() {
-    this.route.navigateByUrl('/registration')
-  }
 
 }

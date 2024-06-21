@@ -19,12 +19,9 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.registrationform = this.fb.group({
-      FirstName: ['', [Validators.required, this.alphaOnlyValidator()]],
-      LastName: ['', [Validators.required, this.alphaOnlyValidator()]],
-      MobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      Email: ['', [Validators.required, Validators.email, this.gmailOnlyValidator()]],
       UserName: ['', Validators.required],
-      Password: ['', [Validators.required, this.passwordValidator()]]
+      Password: ['', [Validators.required, this.passwordValidator()]],
+      Confirmpassword: ['', [Validators.required, this.passwordValidator()]],
     });
   }
 
@@ -52,7 +49,7 @@ export class RegistrationComponent implements OnInit {
   submit(): void {
     if (this.registrationform.valid) {
       console.log('Form Submitted', this.registrationform.value);
-      this.toastr.success('Registration successful!', 'Success');
+      this.toastr.success('Password Changed Successfully!', 'Success');
       this.router.navigateByUrl('/login');
     } else {
       this.registrationform.markAllAsTouched();
