@@ -32,6 +32,9 @@ import { RippleModule } from 'primeng/ripple';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TableModule } from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { DialogModule } from 'primeng/dialog';
+
 
 
 
@@ -46,7 +49,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,InputSwitchModule,DropdownModule,
     AppRoutingModule,AccordionModule,RippleModule,ToolbarModule,
-    PasswordModule,TableModule,
+    PasswordModule,TableModule,DialogModule,
     CheckboxModule,
     CommonModule,
     ButtonModule,
@@ -54,7 +57,7 @@ import { HttpClientModule } from '@angular/common/http';
     InputTextModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    RouterModule,
+    RouterModule,MultiSelectModule,
     InputNumberModule,
     ToastModule,
     CardModule,

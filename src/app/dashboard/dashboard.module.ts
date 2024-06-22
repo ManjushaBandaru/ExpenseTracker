@@ -16,6 +16,14 @@ import { ChartModule } from 'primeng/chart';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
+import { CheckboxModule } from 'primeng/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { DialogModule } from 'primeng/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
+
 
 
 @NgModule({
@@ -33,8 +41,9 @@ import { ToolbarModule } from 'primeng/toolbar';
     DashboardRoutingModule,
     CardModule,
     ChartModule,
-    TableModule,
-    ButtonModule,ToolbarModule
+    TableModule,DialogModule,
+    ButtonModule,ToolbarModule,ReactiveFormsModule,
+    CheckboxModule,FormsModule,MultiSelectModule
   ]
 })
 export class DashboardModule { }
