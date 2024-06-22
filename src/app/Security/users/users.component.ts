@@ -18,7 +18,7 @@ export class UsersComponent {
   constructor(private SecurityService: SecurityService,  public fb: FormBuilder){}
   ngOnInit() {
     this.initfather();
-    this.UsersForm();
+    this.UsersForm(); 
     this.availableColumns = [
       { field: 'CreatedAt', header: 'Created At' },
       { field: 'UpdatedAt', header: 'Updated At' }
