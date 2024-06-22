@@ -23,7 +23,7 @@ export class UsersComponent {
 
 
   ngOnInit() {
-    this.UsersData();
+    this.initfather();
     this.UsersForm();
     this.availableColumns = [
       { field: 'CreatedAt', header: 'Created At' },
