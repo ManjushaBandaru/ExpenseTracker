@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../Services/authentication.service';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private route: Router,
     private fb: FormBuilder,
-    private service: AuthenticationService) { }
+    private service: AuthenticationService,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.login();
@@ -64,9 +66,11 @@ export class LoginComponent implements OnInit {
     this.service.tokenlogin(loginData.toString(), { headers }).subscribe(
       (response: any) => {
         console.log(response);
+        this.toastr.success('Login Successfull!', 'Success');
         this.route.navigate(['/sidenav/dashboard/admin']);
       },
       (error: any) => {
+        this.toastr.error('Login failed!', 'failed');
         console.error("Login failed:", error);
       }
     );

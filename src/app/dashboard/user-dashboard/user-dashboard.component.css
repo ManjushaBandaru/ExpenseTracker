@@ -1,4 +1,4 @@
-.profile{
+/* .profile{
     text-align: center;
 }
 .profile .card-body {
@@ -26,8 +26,8 @@
     color: var(--color-default);
 }
 .small-card {
-    width: 415px; /* Adjust card width */
-    height: 350px; /* Adjust card height */
+    width: 415px; 
+    height: 350px; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,13 +38,101 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: calc(100% - 70px); /* Adjust height to account for card header */
+    height: calc(100% - 70px); 
 }
 
 .small-chart {
-    width: 90%; /* Adjust width of the chart */
-    height: 100%; /* Adjust height of the chart */
+    width: 90%; 
+    height: 100%; 
 }
 .doughnutchart{
     height: 100%;
+} */
+
+
+
+
+.card-header {
+    text-align: center;
+}
+
+.profile .card-body {
+    text-align: center;
+}
+
+.profile .image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.profilelist {
+    text-align: left;
+}
+
+.profilelist p {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.profilelist i {
+    margin-right: 5px;
+    color:var(--color-default); 
+}
+
+.expensecard {
+    text-align: center;
+}
+
+.expensecard .card-body {
+    padding: 20px;
+}
+
+.expensecard h3 {
+    font-size: 24px; 
+    color: #333; 
+}
+
+.card.profile {
+    height: 100%;
+}
+
+.card.bar-graph {
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-5px); 
+    transition: all 0.3s ease; 
+}
+
+.titles{
+    font-weight: 500;
+    background-color: var(--color-default);
+    color: white;
+}
+
+.bar-graph {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+
+
+
+.vr {
+    border-left: 1px solid #000;
+    height: auto;
+    margin: 0 20px;
+}
+
+.card-body.d-flex>.flex-fill {
+    flex: 1;
 }
