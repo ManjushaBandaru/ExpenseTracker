@@ -1,18 +1,4 @@
-<div class="container">
-    <!-- <div>
-        <button pButton type="button" label="Add User" icon="pi pi-user" (click)="showDialog()" [outlined]="true"
-            class="clearbtn"></button>
-        <p-dialog header="Header" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                id est laborum.
-            </p>
-        </p-dialog>
-    </div> -->
+<!-- <div class="container">
     <div class="row mb-4">
         <div class="col-md-4">
             <div class="card profile shadow-sm">
@@ -58,9 +44,6 @@
                     <h3>$5,000</h3>
                 </div>
             </div>
-            <!-- <div class="card flex justify-content-center">
-                <p-chart type="doughnut" [data]="data" [options]="options" />
-            </div> -->
         </div>
         <div class="col-md-4 mb-4">
             <div class="card expensecard shadow-sm">
@@ -91,6 +74,131 @@
                 </div>
                 <div class="card-body text-center">
                     <strong>No Notifications Right Now.</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-4 mb-4">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Highest Category
+                </div>
+                <div class="card-body d-flex text-center">
+                    <div class="flex-fill">
+                        <h5>Monthly</h5>
+                        <h3>$5,000</h3>
+                    </div>
+                    <div class="vr"></div>
+                    <div class="flex-fill">
+                        <h5>Yearly</h5>
+                        <h3>$60,000</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Approvals Voucher Based On Year
+                </div>
+                <div class="card-body text-center">
+                    <h5>Total</h5>
+                    <h3>50</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Pendings Voucher Based On Year
+                </div>
+                <div class="card-body text-center">
+                    <h5>Pending</h5>
+                    <h3>45</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bar-graph shadow-sm">
+                <div class="card-header titles">
+                    Credit / Debit
+                    Based On
+                    (Daily/Monthly/Yearly)
+                </div>
+                <div class="card-body">
+                    <p-chart type="bar" [data]="basicData" [options]="basicOptions" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bar-graph shadow-sm">
+                <div class="card-header titles">
+                    Categories
+                    Based On
+                    (Daily/Monthly/Yearly)
+                </div>
+                <div class="card-body">
+                    <p-chart type="bar" [data]="basicData" [options]="basicOptions" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-4 mt-4">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Highest Category
+                </div>
+                <div class="card-body d-flex text-center">
+                    <div class="flex-fill">
+                        <h5>Carry Forward</h5>
+                        <h3>$5,000</h3>
+                    </div>
+                    <div class="vr"></div>
+                    <div class="flex-fill">
+                        <h5>Credit</h5>
+                        <h3>$60,000</h3>
+                    </div>
+                    <div class="vr"></div>
+                    <div class="flex-fill">
+                        <h5>Debit</h5>
+                        <h3>$60,000</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Notifications
+                </div>
+                <div class="card-body text-center">
+                    <strong>No Notifications Right Now.</strong>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Highest Category
+                </div>
+                <div class="card-body d-flex text-center">
+                    <div class="flex-fill">
+                        <h5>Credit</h5>
+                        <h3>$5,000</h3>
+                    </div>
+                    <div class="vr"></div>
+                    <div class="flex-fill">
+                        <h5>Debit</h5>
+                        <h3>$6,000</h3>
+                    </div>
                 </div>
             </div>
         </div>

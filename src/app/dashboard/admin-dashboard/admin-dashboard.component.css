@@ -69,3 +69,16 @@
 .card {
     margin-bottom: 20px;
 }
+
+
+
+
+.vr {
+    border-left: 1px solid #000;
+    height: auto;
+    margin: 0 20px;
+}
+
+.card-body.d-flex>.flex-fill {
+    flex: 1;
+}
