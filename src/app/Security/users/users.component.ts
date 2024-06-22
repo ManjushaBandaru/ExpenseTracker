@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Table } from 'jspdf-autotable';
 
 @Component({
   selector: 'app-users',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class UsersComponent {
 
+ 
+  users:any[]=[];
+
+  onAdd(){}
 }
