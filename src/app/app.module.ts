@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -11,7 +11,6 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
 import { RouterModule } from '@angular/router';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -32,7 +31,7 @@ import { RippleModule } from 'primeng/ripple';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TableModule } from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http';
-
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -53,11 +52,11 @@ import { HttpClientModule } from '@angular/common/http';
     PasswordModule,TableModule,
     CheckboxModule,
     CommonModule,
+    BrowserAnimationsModule,
     ButtonModule,
     FormsModule,
     InputTextModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     RouterModule,
     InputNumberModule,
     ToastModule,
@@ -67,6 +66,7 @@ import { HttpClientModule } from '@angular/common/http';
     CalendarModule,
     FloatLabelModule,
     HttpClientModule,
+    DialogModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',}),
 

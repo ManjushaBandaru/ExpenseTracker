@@ -13,7 +13,9 @@ import { TotalexpensesinfoComponent } from './totalexpensesinfo/totalexpensesinf
 import { ChartModule } from 'primeng/chart';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-
+import { DialogModule } from 'primeng/dialog';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,10 @@ import { ButtonModule } from 'primeng/button';
     CardModule,
     ChartModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    DialogModule,
+    ToolbarModule,
+    ReactiveFormsModule,
   ]
 })
 export class DashboardModule { }
