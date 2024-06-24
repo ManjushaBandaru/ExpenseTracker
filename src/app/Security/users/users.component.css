@@ -10,3 +10,6 @@
     display: flex;
     justify-content: center;
 }
+.checkbox-container {
+    margin-left: 10px; /* Adjust this value as needed */
+}

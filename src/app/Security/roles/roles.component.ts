@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Table } from 'jspdf-autotable';
+import { SecurityService } from 'src/app/Services/security.service';
+
 
 @Component({
   selector: 'app-roles',
@@ -31,12 +33,12 @@ export class RolesComponent implements OnInit {
 
   permission: any = { CanManageRoles: true };
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router,private SecurityService: SecurityService) {
   
   }
 
   ngOnInit() {
-  
+  this.RoleData();
     this.RoleForm();
     this.availableColumns = [
       { field: 'CreatedAt', header: 'Created At' },
@@ -61,6 +63,11 @@ export class RolesComponent implements OnInit {
       IsActive: [false]
     });
   }
+  RoleData(){
+    this.SecurityService.GetRoles().subscribe((a: any) => {
+      this.roles = a;
+      console.log(a);
+    })  }
 
   onAdd() {
     this.showform = true;

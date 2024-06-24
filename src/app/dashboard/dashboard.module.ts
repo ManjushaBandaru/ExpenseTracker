@@ -22,7 +22,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CalendarModule } from 'primeng/calendar';
-
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -49,7 +49,7 @@ import { CalendarModule } from 'primeng/calendar';
     FormsModule,
     MultiSelectModule,
     RadioButtonModule,
-    CalendarModule
+    CalendarModule,DropdownModule
   ]
 })
 export class DashboardModule { }
