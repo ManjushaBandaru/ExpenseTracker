@@ -79,7 +79,7 @@
 <ng-template pTemplate="body" let-roles>
   <tr>
     <td>{{ roles.Name }}</td>
-    <td>{{ roles.employeerole }}</td>
+    <!-- <td>{{ roles.employeerole }}</td> -->
     <td>{{ roles.Isactive }}</td>
     <td>{{ roles.CreatedDate }}</td>
     <td>{{ roles.CreatedBy }}</td>
@@ -118,7 +118,7 @@
                       alphabets allowed.</small>
               </div>
           </div>
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
               <label for="employeerole" class="form-label">employeerole <span style="color: red;">*</span></label>
               <input type="text" pInputText class="form-control user" id="employeerole" formControlName="employeerole"
                   maxlength="20" placeholder="Enter employeerole"
@@ -130,7 +130,7 @@
                   <small class="p-error" *ngIf="rolesForm.get('employeerole')?.errors?.['alphaOnly']">* Only
                       alphabets allowed.</small>
               </div>
-          </div>
+          </div> -->
           <div class="col-md-6" *ngIf="isColumnSelected('CreatedAt')">
               <label for="CreatedAt" class="form-label">Created At</label>
               <input type="text" pInputText class="form-control user" id="CreatedAt" formControlName="CreatedAt"

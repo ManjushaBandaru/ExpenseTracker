@@ -176,6 +176,20 @@
                 </div>
             </div>
           
+                
+            <div class="col-md-6">
+                <label for="Role Name" class="form-label">Role Name <span style="color: red;">*</span></label>
+                <p-dropdown [options]="roles" appendTo="body" [showClear]="true" placeholder="Select Role"
+                    optionLabel="roles" optionValue="Id" formControlName="Id"
+                    [ngClass]="{'is-invalid ng-dirty': userForm.controls['Id'].touched && userForm.controls['Id'].errors}">
+                </p-dropdown>
+                <div
+                    *ngIf="userForm.get('Id')?.invalid && (userForm.get('Id')?.dirty || userForm.get('Id')?.touched)">
+                    <small class="p-error" *ngIf="userForm.get('Id')?.errors?.['required']">* Role Name is required.</small>
+                </div>
+            </div>
+            
+        
             <div class="col-md-6">
                 <label for="EMail" class="form-label">Email <span style="color: red;">*</span></label>
                 <input type="email" pInputText class="form-control user" id="EMail" formControlName="EMail"
@@ -202,22 +216,12 @@
                         Invalid mobile number format.</small>
                 </div>
             </div>
-            <div class="col-md-6" *ngIf="isColumnSelected('CreatedAt')">
-                <label for="CreatedAt" class="form-label">Created At</label>
-                <input type="text" pInputText class="form-control user" id="CreatedAt" formControlName="CreatedAt"
-                    maxlength="50" placeholder="Enter Created At"
-                    [ngClass]="{'is-invalid ng-dirty': userForm.controls['CreatedAt'].touched && userForm.controls['CreatedAt'].errors}" />
-            </div>
-            <div class="col-md-6" *ngIf="isColumnSelected('UpdatedAt')">
-                <label for="UpdatedAt" class="form-label">Updated At</label>
-                <input type="text" pInputText class="form-control user" id="UpdatedAt" formControlName="UpdatedAt"
-                    maxlength="50" placeholder="Enter Updated At"
-                    [ngClass]="{'is-invalid ng-dirty': userForm.controls['UpdatedAt'].touched && userForm.controls['UpdatedAt'].errors}" />
-            </div>
+          
             <div class="col-md-6 d-flex align-items-center">
                 <label for="IsActive" class="form-label mb-0 mr-2">Is Active</label>
-                <p-checkbox formControlName="IsActive" binary="true"></p-checkbox>
+                <p-checkbox formControlName="IsActive" binary="true" class="checkbox-container"></p-checkbox>
             </div>
+            
             
            
         </form>
