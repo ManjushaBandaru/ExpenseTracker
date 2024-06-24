@@ -12,4 +12,9 @@ export class AdminService {
     return this.http.get(`https://localhost:44319/api/expenses/GetTotalExpensesByCategoryAndStatus?year=${year}&month=${month}`)
   }
 
+
+  GetMonthlyBudgetNotifications() {
+    return this.http.get<any[]>('https://localhost:44319/api/expenses/GetMonthlyBudgetNotification()');
+  }
+
 }

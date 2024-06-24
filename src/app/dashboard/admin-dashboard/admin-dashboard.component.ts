@@ -23,8 +23,8 @@ export class AdminDashboardComponent implements OnInit {
     selectedCity: City | undefined;
 
 
-    year:any;
-    month:any;
+    year: any;
+    month: any;
 
 
     basicOptions: any;
@@ -43,27 +43,25 @@ export class AdminDashboardComponent implements OnInit {
     categoryData: any;
     categoryOptions: any;
 
-    totalApprovals: number = 0;
+    totalApprovedApprovals: number = 0;
     totalPendingApprovals: number = 0;
     currentDate: any;
     currentYear: any;
     currentMonth: any;
+    notifications: any[]=[];
 
-    constructor(private route: Router ,private adminservice : AdminService) { 
+    constructor(private route: Router, private adminservice: AdminService) {
         this.currentDate = new Date();
         this.currentYear = this.currentDate.getFullYear();
         this.currentMonth = this.currentDate.getMonth() + 1;
     }
     ngOnInit() {
-        this.GetApprovedandPendingStatus()
-        this.cities = [
-            { name: 'New York', code: 'NY' },
-            { name: 'Rome', code: 'RM' },
-            { name: 'London', code: 'LDN' },
-            { name: 'Istanbul', code: 'IST' },
-            { name: 'Paris', code: 'PRS' }
-        ];
+        this.GetApprovedandPendingStatus();
+        this.GetBudgetNotification();
+        this.Intitbar();
+    }
 
+    Intitbar() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
@@ -104,12 +102,12 @@ export class AdminDashboardComponent implements OnInit {
                     }
                 },
                 x: {
-                    offset: true, 
-                    barPercentage: 1.0, 
-                    categoryPercentage: 1.0, 
+                    offset: true,
+                    barPercentage: 1.0,
+                    categoryPercentage: 1.0,
                     ticks: {
                         color: textColorSecondary,
-                        padding: -5 
+                        padding: -5
                     },
                     grid: {
                         color: surfaceBorder,
@@ -121,6 +119,7 @@ export class AdminDashboardComponent implements OnInit {
         };
     }
 
+
     OnClick() {
         this.route.navigate(['/sidenav/dashboard/totalexpensesinfo']);
     };
@@ -129,17 +128,34 @@ export class AdminDashboardComponent implements OnInit {
 
     }
 
-    updateCategoryChart(){
+    updateCategoryChart() {
 
     }
 
-    GetApprovedandPendingStatus(){
-        this.adminservice.GetApprovalsandPendingApprovals(this.currentYear,this.currentMonth)
-        .subscribe((data: any) => {
-            console.log(data);
-            
-          this.totalApprovals = data.totalApprovals; // Replace with actual property from API response
-          this.totalPendingApprovals = data.totalPendingApprovals; // Replace with actual property from API response
-        });
+    GetApprovedandPendingStatus() {
+        this.adminservice.GetApprovalsandPendingApprovals(this.currentYear, this.currentMonth)
+            .subscribe((data: any) => {
+                console.log(data);
+
+                const pendingApprovals = data.filter((d: { StatusName: string; }) => d.StatusName === 'Pending');
+                this.totalPendingApprovals = pendingApprovals.length;
+                console.log(this.totalPendingApprovals);
+
+                const ApprovedApprovals = data.filter((d: { StatusName: string; }) => d.StatusName === 'Approved');
+                this.totalApprovedApprovals = ApprovedApprovals.length;
+                console.log(this.totalApprovedApprovals);
+            });
+    }
+
+    GetBudgetNotification(){
+        this.adminservice.GetMonthlyBudgetNotifications().subscribe(
+            (data: any[]) => {
+              console.log(data); 
+              this.notifications = data; 
+            },
+            error => {
+              console.error('Error fetching notifications:', error);
+            }
+          );
     }
 }
