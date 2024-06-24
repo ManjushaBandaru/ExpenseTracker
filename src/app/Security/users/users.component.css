@@ -1,0 +1,12 @@
+.tablehead{
+    display: flex;
+    justify-content: space-between;
+}
+.table-head{
+    background-color: var(--color-default);
+    color: white;
+}
+.isactivecol{
+    display: flex;
+    justify-content: center;
+}

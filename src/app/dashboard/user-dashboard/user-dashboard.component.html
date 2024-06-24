@@ -1,7 +1,7 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row d-flex justify-content-around">
         <div class="col-md-4 mb-4">
-            <div class="card profile">
+            <div class="card profile shadow-sm">
                 <div class="card-header titles">
                     User Profile
                 </div>
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-md-4 mb-4">
-            <div class="card expensecard">
+            <div class="card expensecard shadow-sm">
                 <div class="card-header titles">
                     User Expenses
                 </div>
@@ -28,7 +28,7 @@
                     <h3>$5,000</h3>
                 </div>
             </div>
-            <div class="card notificationcard mt-4">
+            <div class="card notificationcard shadow-sm mt-4">
                 <div class="card-header titles">
                     Notifications
                 </div>
@@ -38,9 +38,130 @@
             </div>
         </div>
         <div class="col-md-4 mb-4">
-            <div class="card doughnutchart">
+            <div class="card doughnutchart shadow-sm">
                 <div class="card-header titles">Chart by Categories</div>
                 <p-chart type="doughnut" class="pie small-chart" [data]="pieData" [options]="pieOptions"></p-chart>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Highest Category
+                </div>
+                <div class="card-body d-flex text-center">
+                    <div class="flex-fill">
+                        <h5>Monthly</h5>
+                        <h3>$5,000</h3>
+                    </div>
+                    <div class="vr"></div>
+                    <div class="flex-fill">
+                        <h5>Yearly</h5>
+                        <h3>$60,000</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Approvals Based On Year
+                </div>
+                <div class="card-body text-center">
+                    <h3>$5,000</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 ">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Pendings Based On Year
+                </div>
+                <div class="card-body text-center">
+                    <h3>$60,000</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Credit / Debit
+                    Based on
+                    (Monthly / Yearly / Day)
+                </div>
+                <p-chart type="bar" [data]="basicData" [options]="basicOptions" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Categories
+                    Based on
+                    (Monthly / Yearly / Day)
+                </div>
+                <p-chart type="bar" [data]="basicData" [options]="basicOptions" />
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Highest Category
+                </div>
+                <div class="card-body d-flex text-center">
+                    <div class="flex-fill">
+                        <h5>Carry Forward</h5>
+                        <h3>$5,000</h3>
+                    </div>
+                    <div class="vr"></div>
+                    <div class="flex-fill">
+                        <h5>Credit</h5>
+                        <h3>$60,000</h3>
+                    </div>
+                    <div class="vr"></div>
+                    <div class="flex-fill">
+                        <h5>Debit</h5>
+                        <h3>$60,000</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card notificationcard shadow-sm">
+                <div class="card-header titles">
+                    Notifications
+                </div>
+                <div class="card-body">
+                    <p>No Notifications right now</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card expensecard shadow-sm">
+                <div class="card-header titles">
+                    Yearly
+                </div>
+                <div class="card-body d-flex text-center">
+                    <div class="flex-fill">
+                        <h5>Credit</h5>
+                        <h3>$5,000</h3>
+                    </div>
+                    <div class="vr"></div>
+                    <div class="flex-fill">
+                        <h5>Debit</h5>
+                        <h3>$60,000</h3>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
