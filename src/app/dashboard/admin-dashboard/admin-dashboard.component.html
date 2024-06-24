@@ -133,6 +133,34 @@
                     (Daily/Monthly/Yearly)
                 </div>
                 <div class="card-body">
+                    <div class="d-flex justify-content-center gap-3">
+                        <div>
+                            <p-radioButton name="date" value="Cheese" [(ngModel)]="ingredient" inputId="ingredient1" />
+                            <label for="date">
+                                Date
+                            </label>
+                        </div>
+                        <div>
+                            <p-radioButton name="month" value="Mushroom" [(ngModel)]="ingredient"
+                                inputId="ingredient2" />
+                            <label for="month">
+                                Month
+                            </label>
+                        </div>
+                        <div>
+                            <p-radioButton name="year" value="Pepper" [(ngModel)]="ingredient" inputId="ingredient3" />
+                            <label for="year">
+                                Year
+                            </label>
+                        </div>
+                        <div class="flex">
+                            <i class="pi pi-chevron-left" style="color: #004f83;position: relative;left:195px;"></i>
+                            <label for="buttondisplay" class="font-bold block mb-2"></label>
+                            <p-calendar [(ngModel)]="date1" [showIcon]="true" inputId="buttondisplay"
+                                [showOnFocus]="false" appendTo="body" />
+                            <i class="pi pi-chevron-right" style="color: #004f83;position: relative;"></i>
+                        </div>
+                    </div>
                     <p-chart type="bar" [data]="basicData" [options]="basicOptions" />
                 </div>
             </div>
@@ -145,6 +173,34 @@
                     (Daily/Monthly/Yearly)
                 </div>
                 <div class="card-body">
+                    <div class="d-flex justify-content-center gap-3">
+                        <div>
+                            <p-radioButton name="day" value="Cheese" [(ngModel)]="ingredient" inputId="ingredient1" />
+                            <label for="ingredient1">
+                                Date
+                            </label>
+                        </div>
+                        <div>
+                            <p-radioButton name="month" value="Mushroom" [(ngModel)]="ingredient"
+                                inputId="ingredient2" />
+                            <label for="ingredient2">
+                                Month
+                            </label>
+                        </div>
+                        <div>
+                            <p-radioButton name="year" value="Pepper" [(ngModel)]="ingredient" inputId="ingredient3" />
+                            <label for="ingredient3">
+                                Year
+                            </label>
+                        </div>
+                        <div class="flex">
+                            <i class="pi pi-chevron-left" style="color: #004f83;position: relative;left:195px;"></i>
+                            <label for="buttondisplay" class="font-bold block mb-2"></label>
+                            <p-calendar [(ngModel)]="date1" [showIcon]="true" inputId="buttondisplay"
+                                [showOnFocus]="false" appendTo="body" />
+                            <i class="pi pi-chevron-right" style="color: #004f83;position: relative;"></i>
+                        </div>
+                    </div>
                     <p-chart type="bar" [data]="basicData" [options]="basicOptions" />
                 </div>
             </div>

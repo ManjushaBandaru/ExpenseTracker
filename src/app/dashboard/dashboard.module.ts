@@ -20,7 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 // import { DialogModule } from 'primeng/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { CalendarModule } from 'primeng/calendar';
 
 
 
@@ -39,9 +40,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     DashboardRoutingModule,
     CardModule,
     ChartModule,
-    TableModule,DialogModule,
-    ButtonModule,ToolbarModule,ReactiveFormsModule,
-    CheckboxModule,FormsModule,MultiSelectModule
+    TableModule,
+    DialogModule,
+    ButtonModule,
+    ToolbarModule,
+    ReactiveFormsModule,
+    CheckboxModule,
+    FormsModule,
+    MultiSelectModule,
+    RadioButtonModule,
+    CalendarModule
   ]
 })
 export class DashboardModule { }
