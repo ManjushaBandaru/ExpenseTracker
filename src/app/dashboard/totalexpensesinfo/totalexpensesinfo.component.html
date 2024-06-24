@@ -1,38 +1,45 @@
 <div class="card">
-    <p-table [value]="products" [tableStyle]="{'min-width': '60rem'}">
+    <p-table #myTab [value]="products" [tableStyle]="{ 'width': '100%' }" [paginator]="true" [rows]="5"
+        [showCurrentPageReport]="true"
+        [globalFilterFields]="['category', 'description', 'expensedate', 'paidamount', 'paymentmode', 'aprovalstatus', 'uploaddocument']"
+        [tableStyle]="{ 'width': 'max' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[5, 10, 25, 50]"
+        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        paginatorLocale="en-US">
+        <ng-template pTemplate="caption">
+            <div class="tablehead">
+                <button pButton pRipple label="Clear" [outlined]="true" icon="pi pi-filter-slash" (click)="clear()"
+                    class="clearbtn">
+                </button>
+                <button pButton type="button" label="Add Expense" icon="pi pi-plus" (click)="onAdd()" [outlined]="true"
+                    class="clearbtn"></button>
+            </div>
+        </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="category" style="width:20%">
-                    Category <p-sortIcon field="code" />
+                <th class="table-head" pSortableColumn="category" style="width:10%">
+                    Category <p-sortIcon field="category"></p-sortIcon>
                 </th>
-                <th pSortableColumn="expensedate" style="width:22%">
-                    Expense Date <p-sortIcon field="name" />
+                <th class="table-head" pSortableColumn="description" style="width:15%">
+                    Description <p-sortIcon field="description"></p-sortIcon>
                 </th>
-                <th pSortableColumn="expensetype" style="width:20%">
-                    Expense Type <p-sortIcon field="category" />
+                <th class="table-head" pSortableColumn="expensedate" style="width:15%">
+                    Expense Date <p-sortIcon field="expensedate"></p-sortIcon>
                 </th>
-                <th pSortableColumn="amount" style="width:20%">
-                    Amount <p-sortIcon field="quantity" />
+                <th class="table-head" pSortableColumn="paidamount" style="width:15%">
+                    Paid Amount <p-sortIcon field="paidamount"></p-sortIcon>
                 </th>
-                <th pSortableColumn="description" style="width:20%">
-                    Description <p-sortIcon field="code" />
+                <th class="table-head" pSortableColumn="paymentmode" style="width:15%">
+                    Payment Mode <p-sortIcon field="paymentmode"></p-sortIcon>
                 </th>
-                <th pSortableColumn="aprovalstatus" style="width:20%">
-                    Approval Status <p-sortIcon field="code" />
+                <th class="table-head" pSortableColumn="aprovalstatus" style="width:15%">
+                    Approval Status <p-sortIcon field="aprovalstatus"></p-sortIcon>
                 </th>
-                <th pSortableColumn="paidamount" style="width:20%">
-                    Paid Amount <p-sortIcon field="code" />
+                <th class="table-head" pSortableColumn="uploaddocument" style="width:15%">
+                    Upload Document <p-sortIcon field="uploaddocument"></p-sortIcon>
                 </th>
-                <th pSortableColumn="dueamount" style="width:20%">
-                    Due Amount <p-sortIcon field="code" />
-                </th>
-                <th pSortableColumn="approveddate" style="width:20%">
-                    Approved Date <p-sortIcon field="code" />
-                </th>
-                <th pSortableColumn="uploaddocument" style="width:20%">
-                    Upload Document <p-sortIcon field="code" />
-                </th>
-                <th>
+                <th class="table-head">
                     Actions
                 </th>
             </tr>
@@ -40,16 +47,127 @@
         <ng-template pTemplate="body" let-product>
             <tr>
                 <td>{{ product.category }}</td>
-                <td>{{ product.expensedate }}</td>
-                <td>{{ product.expensetype }}</td>
-                <td>{{ product.amount }}</td>
                 <td>{{ product.description }}</td>
-                <td>{{ product.aprovalstatus }}</td>
+                <td>{{ product.expensedate }}</td>
                 <td>{{ product.paidamount }}</td>
-                <td>{{ product.dueamount }}</td>
-                <td>{{ product.approveddate }}</td>
+                <td>{{ product.paymentmode }}</td>
+                <td>{{ product.aprovalstatus }}</td>
                 <td>{{ product.uploaddocument }}</td>
+                <td>
+                    <div class="d-flex">
+                        <button class="btn" pTooltip="Edit" tooltipPosition="top" (click)="onEdit()">
+                            <i class="pi pi-pencil" style="font-size: 1.2rem; color: lightslategrey"></i>
+                        </button> |
+                        <button class="btn" pTooltip="Delete" tooltipPosition="top" (click)="onDelete()">
+                            <i class="pi pi-trash" style="font-size: 1.2rem; color: lightslategrey"></i>
+                        </button>
+                    </div>
+                </td>
             </tr>
         </ng-template>
     </p-table>
 </div>
+
+
+
+<p-dialog header="Expense Details" [(visible)]="showform" [style]="{width: '50vw'}">
+    <div class="card_body p-5">
+        <form class="row" [formGroup]="ExpenseForm">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="category" class="form-label">Category <span style="color: red;">*</span></label><br>
+                    <p-dropdown formControlName="category" [options]="category" optionLabel="name" appendTo="body"
+                        placeholder="Select a Category" />
+                    <div
+                        *ngIf="ExpenseForm.get('category')?.invalid && (ExpenseForm.get('category')?.dirty || ExpenseForm.get('category')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('category')?.errors?.['required']">* Category is
+                            required.</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="description" class="form-label">Description <span style="color: red;">*</span></label>
+                    <input type="text" pInputText class="form-control user" id="description"
+                        formControlName="description" maxlength="20" placeholder="Enter Description"
+                        [ngClass]="{'is-invalid ng-dirty': ExpenseForm.controls['description'].touched && ExpenseForm.controls['description'].errors}" />
+                    <div
+                        *ngIf="ExpenseForm.get('description')?.invalid && (ExpenseForm.get('description')?.dirty || ExpenseForm.get('description')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('description')?.errors?.['required']">*
+                            Description is required.</small>
+                        <small class="p-error" *ngIf="ExpenseForm.get('description')?.errors?.['pattern']">* Only
+                            alphabets allowed.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="expensedate" class="form-label">Expense Date <span style="color: red;">*</span></label>
+                    <p-calendar formControlName="expensedate" [showIcon]="true" [showOnFocus]="false"
+                        placeholder="Select Expense Date" inputId="buttondisplay" appendTo="body" />
+                    <div
+                        *ngIf="ExpenseForm.get('expensedate')?.invalid && (ExpenseForm.get('expensedate')?.dirty || ExpenseForm.get('expensedate')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('expensedate')?.errors?.['required']">* Expense
+                            Date is required.</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="paidamount" class="form-label">Paid Amount <span style="color: red;">*</span></label>
+                    <p-inputNumber inputId="integeronly" formControlName="paidamount" placeholder="Enter Paid Amount"
+                        [ngClass]="{'is-invalid ng-dirty': ExpenseForm.controls['paidamount'].touched && ExpenseForm.controls['paidamount'].errors}" />
+                    <div
+                        *ngIf="ExpenseForm.get('paidamount')?.invalid && (ExpenseForm.get('paidamount')?.dirty || ExpenseForm.get('paidamount')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('paidamount')?.errors?.['required']">* Paid Amount
+                            is required.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="paymentmode" class="form-label">Payment Mode <span
+                            style="color: red;">*</span></label><br>
+                    <p-dropdown formControlName="paymentmode" [options]="paymentmode" optionLabel="name" appendTo="body"
+                        placeholder="Select a Payment Mode" />
+                    <div
+                        *ngIf="ExpenseForm.get('paymentmode')?.invalid && (ExpenseForm.get('paymentmode')?.dirty || ExpenseForm.get('paymentmode')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('paymentmode')?.errors?.['required']">* Payment
+                            Mode is required.</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="aprovalstatus" class="form-label">Approval Status <span
+                            style="color: red;">*</span></label><br>
+                    <p-dropdown formControlName="aprovalstatus" [options]="aprovalstatus" optionLabel="name"
+                        appendTo="body" placeholder="Select an Approval Status" />
+                    <div
+                        *ngIf="ExpenseForm.get('aprovalstatus')?.invalid && (ExpenseForm.get('aprovalstatus')?.dirty || ExpenseForm.get('aprovalstatus')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('aprovalstatus')?.errors?.['required']">* Approval
+                            Status is required.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="uploaddocument" class="form-label">Upload Image <span
+                            style="color: red;">*</span></label>
+                    <p-toast></p-toast>
+                    <p-fileUpload mode="basic" chooseLabel="Choose" chooseIcon="pi pi-upload" name="demo[]"
+                        url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"
+                        (onUpload)="onBasicUploadAuto($event)" />
+                    <div
+                        *ngIf="ExpenseForm.get('uploaddocument')?.invalid && (ExpenseForm.get('uploaddocument')?.dirty || ExpenseForm.get('uploaddocument')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('uploaddocument')?.errors?.['required']">* Upload
+                            Image is required.</small>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="d-flex flex-row justify-content-between p-3">
+            <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+            <button type="submit" class="btn btn-success" (click)="onsubmit()">Submit</button>
+        </div>
+    </ng-template>
+</p-dialog>

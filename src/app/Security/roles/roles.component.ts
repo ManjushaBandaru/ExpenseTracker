@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Table } from 'jspdf-autotable';
+import { SecurityService } from 'src/app/Services/security.service';
 
 
 @Component({
@@ -9,45 +11,86 @@ import { Router } from '@angular/router';
   styleUrls: ['./roles.component.css']
 })
 export class RolesComponent implements OnInit {
-  
-  registrationform: FormGroup;
-  roles: any[] = [];
-  displayDialog: boolean = false;
+  @ViewChild('dt') dt!: Table;
 
-  headers: any[] = [
-    { header: 'Name', label: 'Name' },
-    { header: 'employeerole', label: 'Employee Role' },
-    { header: 'Isactive', label: 'Is Active' },
-    { header: 'CreatedDate', label: 'Created Date' },
-    { header: 'CreatedBy', label: 'Created By' },
-    { header: 'UpdatedDate', label: 'Updated Date' },
-    { header: 'UpdatedBy', label: 'Updated By' }
-  ];
+  rolesForm!: FormGroup;
+  roles: any[] = [];
+  showform: boolean = false;
+  availableColumns: any[] | undefined;
+  selectedColumns: any[] | undefined;
+  globalFilterValue: string = '';
+
+
+  // headers: any[] = [
+  //   { header: 'Name', label: 'Name' },
+  //   { header: 'employeerole', label: 'Employee Role' },
+  //   { header: 'Isactive', label: 'Is Active' },
+  //   { header: 'CreatedDate', label: 'Created Date' },
+  //   { header: 'CreatedBy', label: 'Created By' },
+  //   { header: 'UpdatedDate', label: 'Updated Date' },
+  //   { header: 'UpdatedBy', label: 'Updated By' }
+  // ];
 
   permission: any = { CanManageRoles: true };
 
-  constructor(private fb: FormBuilder, private route: Router) {
-    this.registrationform = this.fb.group({
-      FirstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
-      LastName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
-      MobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      Email: ['', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9._%+-]+@gmail.com')]]
+  constructor(private fb: FormBuilder, private router: Router,private SecurityService: SecurityService) {
+  
+  }
+
+  ngOnInit() {
+  this.RoleData();
+    this.RoleForm();
+    this.availableColumns = [
+      { field: 'CreatedAt', header: 'Created At' },
+      { field: 'UpdatedAt', header: 'Updated At' },
+      { field: 'CreatedByName', header: 'Created By Name' },
+      { field: 'UpdatedByName', header: 'Updated By Name' }
+    ];
+
+    this.selectedColumns = this.availableColumns;
+
+  }
+  isColumnSelected(field: string): boolean {
+    return this.selectedColumns?.some(col => col.field === field) ?? false;
+  }
+
+  RoleForm() {
+    this.rolesForm = this.fb.group({
+      Name: ['', Validators.required],
+      employeerole: ['', Validators.required],
+      CreatedAt: [''],
+      UpdatedAt: [''],
+      IsActive: [false]
     });
   }
+  RoleData(){
+    this.SecurityService.GetRoles().subscribe((a: any) => {
+      this.roles = a;
+      console.log(a);
+    })  }
 
-  ngOnInit(): void {}
-
-  initRole(role: any): void {}
-
-  showDialog() {
-    this.displayDialog = true;
+  onAdd() {
+    this.showform = true;
   }
 
-  hideDialog() {
-    this.displayDialog = false;
+  // clear() {
+  //   // Example usage of myTab if needed
+  //   if (this.myTab) {
+  //     this.myTab.clear(); // Example method call on myTab
+  //   }
+  // }
+  clear(table: any) {
+    table.clear();
+  }
+  onDelete() {
   }
 
-  onAdd() {}
+  submit() {
+  }
 
-  submit() {}
+  closeForm() {
+    this.showform = false;
+  }
+
+  onEdit(){}
 }

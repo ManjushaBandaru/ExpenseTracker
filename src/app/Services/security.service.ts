@@ -11,4 +11,7 @@ export class SecurityService {
   GetUsers(){
     return this.Http.get('https://localhost:44319/api/ExpenseTracker/GetUsers');
   }
+  GetRoles(){
+    return this.Http.get('https://localhost:44319/Help/Api/GET-GetRoles')
+  }
 }

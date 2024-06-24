@@ -13,6 +13,8 @@ export class UsersComponent {
   userForm!:FormGroup;
   showform:boolean=false;
   users:any[]=[];
+  roles: any[] = [];
+  
   availableColumns: any[] | undefined;
   selectedColumns: any[] | undefined;
   globalFilterValue: string = '';
@@ -52,7 +54,8 @@ export class UsersComponent {
     UpdatedAt: [''],
     IsActive: [false],
     CreatedByName: ['', []],
-    UpdatedByName: ['', []]
+    UpdatedByName: ['', []],
+    Id: ['', Validators.required]
 });
    }
 
@@ -66,7 +69,7 @@ export class UsersComponent {
 
   }
 
-  closeform(){
+  closeForm(){
     this.showform = false;
   }
 
@@ -82,7 +85,7 @@ export class UsersComponent {
   }
 
   onEdit(){
-
+this.showform=true;
   }
 
   onDelete(){

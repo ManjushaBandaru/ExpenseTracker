@@ -23,6 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToastModule } from 'primeng/toast';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 
 
@@ -51,7 +54,10 @@ import { DropdownModule } from 'primeng/dropdown';
     MultiSelectModule,
     RadioButtonModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,
+    FileUploadModule,
+    ToastModule,
+    InputNumberModule
   ]
 })
 export class DashboardModule { }
