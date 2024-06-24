@@ -66,7 +66,7 @@ export class UsersComponent {
 
   }
 
-  closeform(){
+  closeForm(){
     this.showform = false;
   }
 
@@ -82,7 +82,7 @@ export class UsersComponent {
   }
 
   onEdit(){
-
+this.showform=true;
   }
 
   onDelete(){
