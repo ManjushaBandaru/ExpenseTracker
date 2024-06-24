@@ -8,10 +8,10 @@
   <!-- Caption Template -->
   <ng-template pTemplate="caption">
     <div class="tablehead">
-      <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt)"></button>
+      <button pButton label="Clear" class="p-button-outlined clearbtn" icon="pi pi-filter-slash" (click)="clear(myTab)"></button>
 
-      <p-multiSelect [options]="availableColumns" formControlName="selectedColumns" defaultLabel="Choose Columns"
-                     optionLabel="header" styleClass="p-column-filter"></p-multiSelect>
+      <!-- <p-multiSelect [options]="availableColumns" formControlName="selectedColumns" defaultLabel="Choose Columns"
+                     optionLabel="header" styleClass="p-column-filter"></p-multiSelect> -->
       <button pButton type="button" label="Add User" icon="pi pi-plus" (click)="onAdd()" [outlined]="true"
               class="clearbtn"></button>
     </div>

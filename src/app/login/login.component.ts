@@ -55,8 +55,8 @@ export class LoginComponent implements OnInit {
 
   onSignIn() {
     const loginData = new HttpParams()
-      .set('UserName', this.loginForm.get('UserName')!.value)
-      .set('Password', this.loginForm.get('Password')!.value)
+      .set('userName', this.loginForm.get('UserName')!.value)
+      .set('password', this.loginForm.get('Password')!.value)
       .set('grant_type', this.loginForm.get('grant_type')!.value);
 
     const headers = new HttpHeaders({

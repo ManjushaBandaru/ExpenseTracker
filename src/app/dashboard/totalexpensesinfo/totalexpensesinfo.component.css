@@ -1,0 +1,16 @@
+.clearbtn{
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.header{
+    display: flex;
+    justify-content: end;
+}
+.table-head{
+    background-color: var(--color-default);
+    color: white;
+}
+.tablehead{
+    display: flex;
+    justify-content: space-between;
+}
