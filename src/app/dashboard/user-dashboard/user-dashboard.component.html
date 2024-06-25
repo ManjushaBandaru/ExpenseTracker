@@ -1,54 +1,3 @@
-<!-- <div class="container">
-    <div class="row d-flex justify-content-around">
-        <div class="col-md-4 mb-4">
-            <div class="card profile shadow-sm">
-                <div class="card-header titles">
-                    User Profile
-                </div>
-                <div class="card-body">
-                    <img src="/assets/download (2).png" alt="" class="image mb-3"><br>
-                    <strong>Tony Starc</strong><br>
-                    <strong>User</strong><br><br>
-                    <div class="profilelist">
-                        <p><i class="pi pi-briefcase icons"></i>    EMP1023</p>
-                        <p><i class="pi pi-mars icons"></i> Male</p>
-                        <p><i class="pi pi-envelope icons"></i> tony.starc@gmail.com</p>
-                        <p><i class="pi pi-calendar-clock icons"></i>   19 June 2024</p>
-                        <p><i class="pi pi-mobile icons"></i>   6302810271</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card expensecard shadow-sm">
-                <div class="card-header titles">
-                    User Expenses
-                </div>
-                <div class="card-body">
-                    <h3>$5,000</h3>
-                </div>
-            </div>
-            <div class="card notificationcard shadow-sm mt-4">
-                <div class="card-header titles">
-                    Notifications
-                </div>
-                <div class="card-body">
-                    <p>No Notifications right now</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card doughnutchart shadow-sm">
-                <div class="card-header titles">Chart by Categories</div>
-                <p-chart type="doughnut" class="pie small-chart" [data]="pieData" [options]="pieOptions"></p-chart>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
-
-
 <div class="container">
     <div class="row mb-4">
         <div class="col-md-4">
@@ -72,7 +21,8 @@
         <div class="col-md-4 mb-4">
             <div class="card expensecard shadow-sm">
                 <div class="card-header titles">
-                    Approvals Based On Year
+                    Approvals Based On Month
+                    <i class="pi pi-eye icon" style="font-size: 1.5rem" (click)="viewDetails()"></i>
                 </div>
                 <div class="card-body text-center">
                     <h3>$5,000</h3>
@@ -82,7 +32,8 @@
         <div class="col-md-4 ">
             <div class="card expensecard shadow-sm">
                 <div class="card-header titles">
-                    Pendings Based On Year
+                    Pendings Based On Month
+                    <i class="pi pi-eye icon" style="font-size: 1.5rem" (click)="viewpendingDetails()"></i>
                 </div>
                 <div class="card-body text-center">
                     <h3>$60,000</h3>
@@ -166,3 +117,45 @@
         </div>
     </div>
 </div>
+
+
+
+<p-dialog header="Approval Details" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+    <p-table #myTab [paginator]="true" [rows]="5" [showCurrentPageReport]="true" [value]="ApprovalData"
+        [globalFilterFields]="['CategoryName', 'TotalAmount','StatusName']"
+        [tableStyle]="{ 'width': '100%' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[5, 10, 25, 50]"
+        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        paginatorLocale="en-US">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="table-head" style="min-width: 17rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Category Name
+                    </div>
+                </th>
+                <th class="table-head"  style="min-width: 14rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Total Amount
+                    </div>
+                </th>
+                <th class="table-head" style="min-width: 14rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Status Name
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-ApprovalData>
+            <tr>
+                <td>{{ ApprovalData.CategoryName }}</td>
+                <td>{{ ApprovalData.TotalAmount }}</td>
+                <td>{{ ApprovalData.StatusName }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-dialog>

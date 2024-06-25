@@ -18,27 +18,27 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th class="table-head" pSortableColumn="category" style="width:10%">
-                    Category <p-sortIcon field="category"></p-sortIcon>
+                <th class="table-head" pSortableColumn="CategoryName" style="width:10%">
+                    Category <p-sortIcon field="CategoryName"></p-sortIcon>
                 </th>
-                <th class="table-head" pSortableColumn="description" style="width:15%">
-                    Description <p-sortIcon field="description"></p-sortIcon>
+                <th class="table-head" pSortableColumn="Description" style="width:15%">
+                    Description <p-sortIcon field="Description"></p-sortIcon>
                 </th>
-                <th class="table-head" pSortableColumn="expensedate" style="width:15%">
-                    Expense Date <p-sortIcon field="expensedate"></p-sortIcon>
+                <th class="table-head" pSortableColumn="ExpenseDate" style="width:15%">
+                    Expense Date <p-sortIcon field="ExpenseDate"></p-sortIcon>
                 </th>
-                <th class="table-head" pSortableColumn="paidamount" style="width:15%">
-                    Paid Amount <p-sortIcon field="paidamount"></p-sortIcon>
+                <th class="table-head" pSortableColumn="Amount" style="width:15%">
+                    Paid Amount <p-sortIcon field="Amount"></p-sortIcon>
                 </th>
-                <th class="table-head" pSortableColumn="paymentmode" style="width:15%">
-                    Payment Mode <p-sortIcon field="paymentmode"></p-sortIcon>
+                <th class="table-head" pSortableColumn="PaymentMethodName" style="width:15%">
+                    Payment Mode <p-sortIcon field="PaymentMethodName"></p-sortIcon>
                 </th>
-                <th class="table-head" pSortableColumn="aprovalstatus" style="width:15%">
-                    Approval Status <p-sortIcon field="aprovalstatus"></p-sortIcon>
+                <th class="table-head" pSortableColumn="StatusName" style="width:15%">
+                    Approval Status <p-sortIcon field="StatusName"></p-sortIcon>
                 </th>
-                <th class="table-head" pSortableColumn="uploaddocument" style="width:15%">
-                    Upload Document <p-sortIcon field="uploaddocument"></p-sortIcon>
-                </th>
+                <!-- <th class="table-head" pSortableColumn="uploaddocument" style="width:15%">
+                    Bill Image <p-sortIcon field="uploaddocument"></p-sortIcon>
+                </th> -->
                 <th class="table-head">
                     Actions
                 </th>
@@ -46,13 +46,13 @@
         </ng-template>
         <ng-template pTemplate="body" let-product>
             <tr>
-                <td>{{ product.category }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.expensedate }}</td>
-                <td>{{ product.paidamount }}</td>
-                <td>{{ product.paymentmode }}</td>
-                <td>{{ product.aprovalstatus }}</td>
-                <td>{{ product.uploaddocument }}</td>
+                <td>{{ product.CategoryName }}</td>
+                <td>{{ product.Description }}</td>
+                <td>{{ product.ExpenseDate | date:'dd-MM-yyyy'}}</td>
+                <td>{{ product.Amount }}</td>
+                <td>{{ product.PaymentMethodName }}</td>
+                <td>{{ product.StatusName }}</td>
+                <!-- <td>{{ product.uploaddocument }}</td> -->
                 <td>
                     <div class="d-flex">
                         <button class="btn" pTooltip="Edit" tooltipPosition="top" (click)="onEdit()">
@@ -75,25 +75,25 @@
         <form class="row" [formGroup]="ExpenseForm">
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="category" class="form-label">Category <span style="color: red;">*</span></label><br>
-                    <p-dropdown formControlName="category" [options]="category" optionLabel="name" appendTo="body"
+                    <label for="CategoryName" class="form-label">Category <span style="color: red;">*</span></label><br>
+                    <p-dropdown formControlName="CategoryName" [options]="category" optionLabel="name" optionValue="CategoryId" appendTo="body"
                         placeholder="Select a Category" />
                     <div
-                        *ngIf="ExpenseForm.get('category')?.invalid && (ExpenseForm.get('category')?.dirty || ExpenseForm.get('category')?.touched)">
-                        <small class="p-error" *ngIf="ExpenseForm.get('category')?.errors?.['required']">* Category is
+                        *ngIf="ExpenseForm.get('CategoryName')?.invalid && (ExpenseForm.get('CategoryName')?.dirty || ExpenseForm.get('CategoryName')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('CategoryName')?.errors?.['required']">* Category is
                             required.</small>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label for="description" class="form-label">Description <span style="color: red;">*</span></label>
-                    <input type="text" pInputText class="form-control user" id="description"
-                        formControlName="description" maxlength="20" placeholder="Enter Description"
-                        [ngClass]="{'is-invalid ng-dirty': ExpenseForm.controls['description'].touched && ExpenseForm.controls['description'].errors}" />
+                    <label for="Description" class="form-label">Description <span style="color: red;">*</span></label>
+                    <input type="text" pInputText class="form-control user" id="Description"
+                        formControlName="Description" maxlength="20" placeholder="Enter Description"
+                        [ngClass]="{'is-invalid ng-dirty': ExpenseForm.controls['Description'].touched && ExpenseForm.controls['Description'].errors}" />
                     <div
-                        *ngIf="ExpenseForm.get('description')?.invalid && (ExpenseForm.get('description')?.dirty || ExpenseForm.get('description')?.touched)">
-                        <small class="p-error" *ngIf="ExpenseForm.get('description')?.errors?.['required']">*
+                        *ngIf="ExpenseForm.get('Description')?.invalid && (ExpenseForm.get('Description')?.dirty || ExpenseForm.get('Description')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('Description')?.errors?.['required']">*
                             Description is required.</small>
-                        <small class="p-error" *ngIf="ExpenseForm.get('description')?.errors?.['pattern']">* Only
+                        <small class="p-error" *ngIf="ExpenseForm.get('Description')?.errors?.['pattern']">* Only
                             alphabets allowed.</small>
                     </div>
                 </div>
@@ -101,22 +101,22 @@
 
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="expensedate" class="form-label">Expense Date <span style="color: red;">*</span></label>
-                    <p-calendar formControlName="expensedate" [showIcon]="true" [showOnFocus]="false"
+                    <label for="ExpenseDate" class="form-label">Expense Date <span style="color: red;">*</span></label>
+                    <p-calendar formControlName="ExpenseDate" [showIcon]="true" [showOnFocus]="false"
                         placeholder="Select Expense Date" inputId="buttondisplay" appendTo="body" />
                     <div
-                        *ngIf="ExpenseForm.get('expensedate')?.invalid && (ExpenseForm.get('expensedate')?.dirty || ExpenseForm.get('expensedate')?.touched)">
-                        <small class="p-error" *ngIf="ExpenseForm.get('expensedate')?.errors?.['required']">* Expense
+                        *ngIf="ExpenseForm.get('ExpenseDate')?.invalid && (ExpenseForm.get('ExpenseDate')?.dirty || ExpenseForm.get('ExpenseDate')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('ExpenseDate')?.errors?.['required']">* Expense
                             Date is required.</small>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label for="paidamount" class="form-label">Paid Amount <span style="color: red;">*</span></label>
-                    <p-inputNumber inputId="integeronly" formControlName="paidamount" placeholder="Enter Paid Amount"
-                        [ngClass]="{'is-invalid ng-dirty': ExpenseForm.controls['paidamount'].touched && ExpenseForm.controls['paidamount'].errors}" />
+                    <label for="Amount" class="form-label">Paid Amount <span style="color: red;">*</span></label>
+                    <p-inputNumber inputId="integeronly" formControlName="Amount" placeholder="Enter Paid Amount"
+                        [ngClass]="{'is-invalid ng-dirty': ExpenseForm.controls['Amount'].touched && ExpenseForm.controls['Amount'].errors}" />
                     <div
-                        *ngIf="ExpenseForm.get('paidamount')?.invalid && (ExpenseForm.get('paidamount')?.dirty || ExpenseForm.get('paidamount')?.touched)">
-                        <small class="p-error" *ngIf="ExpenseForm.get('paidamount')?.errors?.['required']">* Paid Amount
+                        *ngIf="ExpenseForm.get('Amount')?.invalid && (ExpenseForm.get('Amount')?.dirty || ExpenseForm.get('Amount')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('Amount')?.errors?.['required']">* Paid Amount
                             is required.</small>
                     </div>
                 </div>
@@ -124,24 +124,24 @@
 
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="paymentmode" class="form-label">Payment Mode <span
+                    <label for="PaymentMethodName" class="form-label">Payment Mode <span
                             style="color: red;">*</span></label><br>
-                    <p-dropdown formControlName="paymentmode" [options]="paymentmode" optionLabel="name" appendTo="body"
+                    <p-dropdown formControlName="PaymentMethodName" [options]="PaymentMethodName" optionLabel="PaymentMethodName" optionValue="PaymentMethodId" appendTo="body"
                         placeholder="Select a Payment Mode" />
                     <div
-                        *ngIf="ExpenseForm.get('paymentmode')?.invalid && (ExpenseForm.get('paymentmode')?.dirty || ExpenseForm.get('paymentmode')?.touched)">
-                        <small class="p-error" *ngIf="ExpenseForm.get('paymentmode')?.errors?.['required']">* Payment
+                        *ngIf="ExpenseForm.get('PaymentMethodName')?.invalid && (ExpenseForm.get('PaymentMethodName')?.dirty || ExpenseForm.get('PaymentMethodName')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('PaymentMethodName')?.errors?.['required']">* Payment
                             Mode is required.</small>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label for="aprovalstatus" class="form-label">Approval Status <span
+                    <label for="StatusName" class="form-label">Approval Status <span
                             style="color: red;">*</span></label><br>
-                    <p-dropdown formControlName="aprovalstatus" [options]="aprovalstatus" optionLabel="name"
+                    <p-dropdown formControlName="StatusName" [options]="StatusName" optionLabel="name"
                         appendTo="body" placeholder="Select an Approval Status" />
                     <div
-                        *ngIf="ExpenseForm.get('aprovalstatus')?.invalid && (ExpenseForm.get('aprovalstatus')?.dirty || ExpenseForm.get('aprovalstatus')?.touched)">
-                        <small class="p-error" *ngIf="ExpenseForm.get('aprovalstatus')?.errors?.['required']">* Approval
+                        *ngIf="ExpenseForm.get('StatusName')?.invalid && (ExpenseForm.get('StatusName')?.dirty || ExpenseForm.get('StatusName')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('StatusName')?.errors?.['required']">* Approval
                             Status is required.</small>
                     </div>
                 </div>

@@ -7,6 +7,7 @@ import { SuperAdminComponent } from './dashboard/super-admin/super-admin.compone
 import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashboard.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { UsersComponent } from './Security/users/users.component';
+import { LookupsComponent } from './lookups/lookups.component';
 
 
 const routes: Routes = [

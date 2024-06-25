@@ -27,25 +27,25 @@
           <p-columnFilter type="text" field="Name" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th>
-      <th class="table-head" pSortableColumn="employeerole" style="min-width: 14rem">
+      <!-- <th class="table-head" pSortableColumn="employeerole" style="min-width: 14rem">
         <div class="flex justify-content-between align-items-center">
           employeerole
           <p-sortIcon field="employeerole"></p-sortIcon>
           <p-columnFilter type="text" field="employeerole" display="menu" class="ml-auto"></p-columnFilter>
         </div>
-      </th>
-      <th class="table-head" pSortableColumn="Isactive" style="min-width: 14rem">
+      </th> -->
+      <th class="table-head" pSortableColumn="IsActive" style="min-width: 14rem">
         <div class="flex justify-content-between align-items-center">
           Is active
-          <p-sortIcon field="Isactive"></p-sortIcon>
-          <p-columnFilter type="text" field="Isactive" display="menu" class="ml-auto"></p-columnFilter>
+          <p-sortIcon field="IsActive"></p-sortIcon>
+          <p-columnFilter type="text" field="IsActive" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th>
-      <th class="table-head" pSortableColumn="CreatedDate" style="min-width: 14rem">
+      <th class="table-head" pSortableColumn="CreatedAt" style="min-width: 14rem">
         <div class="flex justify-content-between align-items-center">
           Created Date
-          <p-sortIcon field="CreatedDate"></p-sortIcon>
-          <p-columnFilter type="text" field="CreatedDate" display="menu" class="ml-auto"></p-columnFilter>
+          <p-sortIcon field="CreatedAt"></p-sortIcon>
+          <p-columnFilter type="text" field="CreatedAt" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th>
       <th class="table-head" pSortableColumn="CreatedBy" style="min-width: 14rem">
@@ -55,11 +55,11 @@
           <p-columnFilter type="text" field="CreatedBy" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th>
-      <th class="table-head" pSortableColumn="UpdatedDate" style="min-width: 14rem">
+      <th class="table-head" pSortableColumn="UpdatedAt" style="min-width: 14rem">
         <div class="flex justify-content-between align-items-center">
           Updated Date
-          <p-sortIcon field="UpdatedDate"></p-sortIcon>
-          <p-columnFilter type="text" field="UpdatedDate" display="menu" class="ml-auto"></p-columnFilter>
+          <p-sortIcon field="UpdatedAt"></p-sortIcon>
+          <p-columnFilter type="text" field="UpdatedAt" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th>
       <th class="table-head" pSortableColumn="UpdatedBy" style="min-width: 14rem">
@@ -80,20 +80,22 @@
   <tr>
     <td>{{ roles.Name }}</td>
     <!-- <td>{{ roles.employeerole }}</td> -->
-    <td>{{ roles.Isactive }}</td>
-    <td>{{ roles.CreatedDate }}</td>
+    <td>
+      <p-checkbox [binary]="true" class="isactivecol" [(ngModel)]="roles.IsActive"></p-checkbox>
+  </td>    <td>{{ roles.CreatedAt }}</td>
     <td>{{ roles.CreatedBy }}</td>
-    <td>{{ roles.UpdatedDate }}</td>
+    <td>{{ roles.UpdatedAt }}</td>
     <td>{{ roles.UpdatedBy }}</td>
+   
     <td>
       <div class="d-flex">
-        <button pButton type="button" pTooltip="Edit" tooltipPosition="top" (click)="onEdit()">
-          <i class="pi pi-pencil" style="font-size: 1.2rem; color: lightslategrey"></i>
+        <button class="btn" pTooltip="Edit" tooltipPosition="top" (click)="onEdit()">
+            <i class="pi pi-pencil" style="font-size: 1.2rem; color: lightslategrey"></i>
+        </button> |
+        <button class="btn" pTooltip="Delete" tooltipPosition="top" (click)="onDelete()">
+            <i class="pi pi-trash" style="font-size: 1.2rem; color: lightslategrey"></i>
         </button>
-        <button pButton type="button" pTooltip="Delete" tooltipPosition="top" (click)="onDelete()">
-          <i class="pi pi-trash" style="font-size: 1.2rem; color: lightslategrey"></i>
-        </button>
-      </div>
+    </div>
     </td>
   </tr>
 </ng-template>
