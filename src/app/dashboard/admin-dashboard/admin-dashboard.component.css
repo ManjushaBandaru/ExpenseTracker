@@ -1,5 +1,5 @@
 .card-header {
-    text-align: center;
+    text-align: center !important;
 }
 
 .profile .card-body {
@@ -24,7 +24,7 @@
 
 .profilelist i {
     margin-right: 5px;
-    color:var(--color-default); 
+    color: var(--color-default);
 }
 
 .expensecard {
@@ -36,8 +36,8 @@
 }
 
 .expensecard h3 {
-    font-size: 24px; 
-    color: #333; 
+    font-size: 24px;
+    color: #333;
 }
 
 .card.profile {
@@ -49,11 +49,11 @@
 }
 
 .card:hover {
-    transform: translateY(-5px); 
-    transition: all 0.3s ease; 
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
 }
 
-.titles{
+.titles {
     font-weight: 500;
     background-color: var(--color-default);
     color: white;
@@ -82,7 +82,8 @@
 .card-body.d-flex>.flex-fill {
     flex: 1;
 }
-::ng-deep #buttondisplay{
+
+::ng-deep #buttondisplay {
     opacity: 0 !important;
 }
 
@@ -92,7 +93,7 @@
 
 .iconleft {
     cursor: pointer !important;
-    z-index: 1; 
+    z-index: 1;
 }
 
 p-calendar input {
@@ -102,8 +103,8 @@ p-calendar input {
 .p-calendar .p-datepicker-trigger {
     display: inline-block;
     cursor: pointer;
-    font-size: 1.5rem; 
-    color: #004f83;   
+    font-size: 1.5rem;
+    color: #004f83;
 }
 
 .calendar-icon-container {
@@ -111,16 +112,135 @@ p-calendar input {
     vertical-align: middle;
 }
 
-::ng-deep #buttondisplay{
-    opacity: 0 !important;
+::ng-deep .charts_date_picker .p-inputtext {
+    display: none !important;
 }
 
-.icon{
+::ng-deep .charts_date_picker .p-datepicker {
+    top: 30px !important;
+    left: -150px !important;
+}
+
+::ng-deep .charts_date_picker .p-datepicker-trigger {
+    height: 24px !important;
+    width: 24px !important;
+    font-size: 12px !important;
+}
+
+/* Adjust the calendar popup size */
+::ng-deep .charts_date_picker .p-datepicker {
+    font-size: 15px !important;
+}
+
+/* Adjust the calendar header */
+::ng-deep .charts_date_picker .p-datepicker-header {
+    padding: 5px !important;
+    height: 30px !important;
+}
+
+/* Adjust the calendar table */
+::ng-deep .charts_date_picker .p-datepicker table {
+    font-size: 15px !important;
+}
+
+::ng-deep .charts_date_picker .p-datepicker td,
+::ng-deep .charts_date_picker .p-datepicker th {
+    padding: 1px !important;
+    /* Adjust padding for cells */
+    height: -5px !important;
+    /* Adjust cell height */
+}
+
+::ng-deep .charts_month_picker .p-inputtext {
+    display: none !important;
+}
+
+::ng-deep .charts_month_picker .p-datepicker {
+    top: 30px !important;
+    left: -45px !important;
+}
+
+::ng-deep .charts_month_picker .p-datepicker-trigger {
+    height: 24px !important;
+    /* Adjust height */
+    width: 24px !important;
+    /* Adjust width */
+    font-size: 12px !important;
+    /* Adjust icon size */
+}
+
+/* Adjust the calendar popup size */
+::ng-deep .charts_month_picker .p-datepicker {
+    font-size: 15px !important;
+    /* Smaller font size for the calendar */
+}
+
+/* Adjust the calendar header */
+::ng-deep .charts_month_picker .p-datepicker-header {
+    padding: 5px !important;
+    /* Adjust padding */
+    height: 30px !important;
+    /* Adjust height */
+}
+
+/* Adjust the calendar table */
+::ng-deep .charts_month_picker .p-datepicker table {
+    font-size: 15px !important;
+    /* Smaller font size */
+}
+
+::ng-deep .charts_month_picker .p-datepicker td,
+::ng-deep .charts_month_picker .p-datepicker th {
+    padding: 1px !important;
+    /* Adjust padding for cells */
+    height: -5px !important;
+    /* Adjust cell height */
+}
+
+::ng-deep .charts_year_picker .p-inputtext {
+    display: none !important;
+}
+
+::ng-deep .charts_year_picker .p-datepicker {
+    top: 30px !important;
+    left: -45px !important;
+}
+
+::ng-deep .charts_year_picker .p-datepicker-trigger {
+    height: 24px !important;
+    width: 24px !important;
+    font-size: 12px !important;
+}
+
+/* Adjust the calendar popup size */
+::ng-deep .charts_year_picker .p-datepicker {
+    font-size: 15px !important;
+}
+
+/* Adjust the calendar header */
+::ng-deep .charts_year_picker .p-datepicker-header {
+    padding: 5px !important;
+    height: 55px !important;
+}
+
+/* Adjust the calendar table */
+::ng-deep .charts_year_picker .p-datepicker table {
+    font-size: 15px !important;
+}
+
+::ng-deep .charts_year_picker .p-datepicker td,
+::ng-deep .charts_year_picker .p-datepicker th {
+    padding: 1px !important;
+    height: -5px !important;
+}
+
+.icon {
     display: flex;
     justify-content: flex-end;
     cursor: pointer;
 }
-.table-head{
+
+.table-head {
     background-color: var(--color-default);
     color: white;
 }
