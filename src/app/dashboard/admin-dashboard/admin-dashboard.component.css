@@ -114,3 +114,13 @@ p-calendar input {
 ::ng-deep #buttondisplay{
     opacity: 0 !important;
 }
+
+.icon{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+.table-head{
+    background-color: var(--color-default);
+    color: white;
+}

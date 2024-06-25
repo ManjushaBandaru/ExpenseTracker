@@ -22,6 +22,7 @@
             <div class="card expensecard shadow-sm">
                 <div class="card-header titles">
                     Approvals Based On Month
+                    <i class="pi pi-eye icon" style="font-size: 1.5rem" (click)="viewapprovalDetails()"></i>
                 </div>
                 <div class="card-body text-center">
                     <strong>{{ totalApprovedApprovals }}</strong>
@@ -178,15 +179,55 @@
                 <div class="card-body d-flex text-center">
                     <div class="flex-fill">
                         <strong>Credit</strong>
-                        <p>$5,000</p>
+                        <p>{{ credit }}</p>
                     </div>
                     <div class="vr"></div>
                     <div class="flex-fill">
                         <strong>Debit</strong>
-                        <p>$3,000</p>
+                        <p>{{ debit }}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<p-dialog header="Approval Details" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+    <p-table #myTab [paginator]="true" [rows]="5" [showCurrentPageReport]="true" [value]="ApprovalData"
+        [globalFilterFields]="['CategoryName', 'TotalAmount','StatusName']"
+        [tableStyle]="{ 'width': '100%' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[5, 10, 25, 50]"
+        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        paginatorLocale="en-US">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="table-head" style="min-width: 17rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Category Name
+                    </div>
+                </th>
+                <th class="table-head"  style="min-width: 14rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Total Amount
+                    </div>
+                </th>
+                <th class="table-head" style="min-width: 14rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Status Name
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-ApprovalData>
+            <tr>
+                <td>{{ ApprovalData.CategoryName }}</td>
+                <td>{{ ApprovalData.TotalAmount }}</td>
+                <td>{{ ApprovalData.StatusName }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-dialog>
