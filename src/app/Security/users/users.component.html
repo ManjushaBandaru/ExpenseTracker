@@ -1,6 +1,6 @@
 
 <div class="card" id="main-card">
-    <p-table #myTab [paginator]="true" [rows]="5" [showCurrentPageReport]="true" [value]="users"
+    <p-table #myTab [paginator]="true" [rows]="5" [showCurrentPageReport]="true" [value]="users"[columns]="selectedColumns"
         [globalFilterFields]="['FirstName', 'LastName','UserName','EMail','MobileNumber', 'CreatedAt', 'UpdatedAt', 'CreatedByName', 'UpdatedByName']"
         [tableStyle]="{ 'width': '100%' }"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -26,7 +26,7 @@
                     <div class="flex justify-content-between align-items-center">
                         First Name
                         <p-sortIcon field="FirstName"></p-sortIcon>
-                        <p-columnFilter type="text" field="FirstName" display="menu" class="ml-auto"></p-columnFilter>
+                        <p-columnFilter type="text" field="FirstName"   display="menu" class="ml-auto" ></p-columnFilter>
                     </div>
                 </th>
                 <th class="table-head" pSortableColumn="LastName" style="min-width: 14rem">
@@ -54,7 +54,7 @@
                     <div class="flex justify-content-between align-items-center">
                         Mobile Number
                         <p-sortIcon field="MobileNumber"></p-sortIcon>
-                        <p-columnFilter type="text" field="MobileNumber" display="menu"
+                        <p-columnFilter type="text" field="MobileNumber"  display="menu"
                             class="ml-auto"></p-columnFilter>
                     </div>
                 </th>
@@ -119,7 +119,7 @@
                 </td>
                 <td>
                     <div class="d-flex">
-                        <button class="btn" pTooltip="Edit" tooltipPosition="top" (click)="onEdit()">
+                        <button class="btn" pTooltip="Edit" tooltipPosition="top" (click)="onEdit(users)">
                             <i class="pi pi-pencil" style="font-size: 1.2rem; color: lightslategrey"></i>
                         </button> |
                         <button class="btn" pTooltip="Delete" tooltipPosition="top" (click)="onDelete()">
@@ -205,8 +205,8 @@
             </div>
             <div class="col-md-6">
                 <label for="MobileNumber" class="form-label">Mobile Number <span style="color: red;">*</span></label>
-                <input type="text" pInputText class="form-control user" id="MobileNumber" formControlName="MobileNumber"
-                    maxlength="10" placeholder="Enter Mobile Number"
+                <input type="text" pInputText class="form-control user" id="MobileNumber" formControlName="MobileNumber" pInputText maxlength="10"
+                     placeholder="Enter Mobile Number"
                     [ngClass]="{'is-invalid ng-dirty': userForm.controls['MobileNumber'].touched && userForm.controls['MobileNumber'].errors}" />
                 <div
                     *ngIf="userForm.get('MobileNumber')?.invalid && (userForm.get('MobileNumber')?.dirty || userForm.get('MobileNumber')?.touched)">

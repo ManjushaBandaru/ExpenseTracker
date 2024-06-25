@@ -64,6 +64,7 @@ export class RolesComponent implements OnInit {
     });
   }
   RoleData(){
+    
     this.SecurityService.GetRoles().subscribe((a: any) => {
       this.roles = a;
       console.log(a);
