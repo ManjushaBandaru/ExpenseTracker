@@ -23,6 +23,12 @@ export class SecurityService {
     return this.Http.put('https://localhost:44319/api/ExpenseTracker/CreateUser',userForm);
   }
   GetRoles(){
-    return this.Http.get('https://localhost:44319/GetRoles')
+    return this.Http.get('https://localhost:44319/GetAllRolesSP')
+  }
+  Deleteuser(id:any){
+    return this.Http.delete('https://localhost:44319/api/ExpenseTracker/Deleteuser?id='+id);
+  }
+  GetDropdownRoles(){
+    return this.Http.get('https://localhost:44319/DropdownRoles')
   }
 }

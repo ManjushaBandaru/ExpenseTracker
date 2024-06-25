@@ -34,9 +34,9 @@
           <p-columnFilter type="text" field="employeerole" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th> -->
-      <th class="table-head" pSortableColumn="IsActive" style="min-width: 14rem">
+      <th class="table-head" pSortableColumn="IsActive" style="min-width: 12rem">
         <div class="flex justify-content-between align-items-center">
-          Is active
+          Is Active
           <p-sortIcon field="IsActive"></p-sortIcon>
           <p-columnFilter type="text" field="IsActive" display="menu" class="ml-auto"></p-columnFilter>
         </div>
@@ -48,11 +48,11 @@
           <p-columnFilter type="text" field="CreatedAt" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th>
-      <th class="table-head" pSortableColumn="CreatedBy" style="min-width: 14rem">
+      <th class="table-head" pSortableColumn="CreatedByName" style="min-width: 14rem">
         <div class="flex justify-content-between align-items-center">
           Created By
-          <p-sortIcon field="CreatedBy"></p-sortIcon>
-          <p-columnFilter type="text" field="CreatedBy" display="menu" class="ml-auto"></p-columnFilter>
+          <p-sortIcon field="CreatedByName"></p-sortIcon>
+          <p-columnFilter type="text" field="CreatedByName" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th>
       <th class="table-head" pSortableColumn="UpdatedAt" style="min-width: 14rem">
@@ -62,11 +62,11 @@
           <p-columnFilter type="text" field="UpdatedAt" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th>
-      <th class="table-head" pSortableColumn="UpdatedBy" style="min-width: 14rem">
+      <th class="table-head" pSortableColumn="UpdatedByName" style="min-width: 14rem">
         <div class="flex justify-content-between align-items-center">
           Updated By
-          <p-sortIcon field="UpdatedBy"></p-sortIcon>
-          <p-columnFilter type="text" field="UpdatedBy" display="menu" class="ml-auto"></p-columnFilter>
+          <p-sortIcon field="UpdatedByName"></p-sortIcon>
+          <p-columnFilter type="text" field="UpdatedByName" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th>
       <th class="table-head">Actions</th>
@@ -83,9 +83,9 @@
     <td>
       <p-checkbox [binary]="true" class="isactivecol" [(ngModel)]="roles.IsActive"></p-checkbox>
   </td>    <td>{{ roles.CreatedAt }}</td>
-    <td>{{ roles.CreatedBy }}</td>
+    <td>{{ roles.CreatedByName }}</td>
     <td>{{ roles.UpdatedAt }}</td>
-    <td>{{ roles.UpdatedBy }}</td>
+    <td>{{ roles.UpdatedByName }}</td>
    
     <td>
       <div class="d-flex">
