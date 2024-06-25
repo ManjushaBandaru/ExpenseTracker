@@ -11,5 +11,6 @@ export interface lookups {
   Id: number;
   Name: string;
   IsActive: boolean;
-  LookUpDetails: LookUpDetails[];
+  LookupDetails: string;
+  expandLookupDetails?: LookUpDetails[];
 }

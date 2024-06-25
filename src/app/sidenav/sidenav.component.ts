@@ -28,7 +28,6 @@ export class SidenavComponent {
     }
   }
 
-  
     items = [
         {
             label: 'Admin',
