@@ -36,6 +36,9 @@ import { DialogModule } from 'primeng/dialog';
 import { LookupsComponent } from './lookups/lookups.component';
 import { DepositComponent } from './deposit/deposit.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MenuModule } from 'primeng/menu';
+import { AvatarModule } from 'primeng/avatar';
+
 
 
 
@@ -55,10 +58,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     BrowserModule,InputSwitchModule,DropdownModule,
     AppRoutingModule,AccordionModule,RippleModule,ToolbarModule,
     PasswordModule,TableModule,DialogModule,
-    CheckboxModule,
+    CheckboxModule,MenuModule,
     CommonModule,
     BrowserAnimationsModule,
-    ButtonModule,
+    ButtonModule,AvatarModule,
     FormsModule,
     InputTextModule,
     ReactiveFormsModule,

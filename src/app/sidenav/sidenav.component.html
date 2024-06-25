@@ -1,4 +1,9 @@
 <div class="sidebar">
+  <!-- <div class="card">
+    <p-toolbar>
+   
+    </p-toolbar>
+    </div> -->
   <div class="logo_details">
     <div class="logo_name">Expenses Tracker</div>
     <i class="pi pi-bars" id="btn" (click)="toggleSidebar()"></i>
@@ -26,15 +31,15 @@
         <span class="link_name">Expense List</span>
       </a>
       <a routerLink="/sidenav/dashboard/deposits">
-        <i class="pi pi-wallet"></i> 
+        <i class="pi pi-wallet"></i>
         <span class="link_name">Deposits</span>
       </a>
       <a routerLink="/sidenav/dashboard/lookups">
-        <i class="pi pi-circle-off"></i> 
+        <i class="pi pi-circle-off"></i>
         <span class="link_name">Lookups</span>
       </a>
       <a routerLink="/sidenav/dashboard/reports">
-        <i class="pi pi-cloud-download"></i> 
+        <i class="pi pi-cloud-download"></i>
         <span class="link_name">Reports</span>
       </a>
     </li>
@@ -59,7 +64,21 @@
     </li>
   </ul>
 </div>
-<section class="home-section">
-  <div class="text"></div>
-  <router-outlet></router-outlet>
-</section>
+<div class="main-content">
+  <p-toolbar styleclass="p-1 sticky-top">
+    <!-- Toolbar content outside the sidebar -->
+    <div class="p-toolbar-group-start">
+      <!-- <button pButton type="button" icon="pi pi-search" label="Search"></button> -->
+    </div>
+    <div class="p-toolbar-group-center">
+      <h2>Expenses Tracker</h2>
+    </div>
+    <div class="p-toolbar-group-end">
+        <i class="pi pi-user" style="cursor: pointer;" (click)="menu.toggle($event)"></i>
+      <p-menu #menu [model]="items" [popup]="true" /> 
+    </div>
+  </p-toolbar>
+  <section class="home-section">
+    <div class="text"></div>
+    <router-outlet></router-outlet>
+  </section>

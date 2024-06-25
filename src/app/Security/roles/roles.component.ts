@@ -16,20 +16,11 @@ export class RolesComponent implements OnInit {
   rolesForm!: FormGroup;
   roles: any[] = [];
   showform: boolean = false;
-  availableColumns: any[] | undefined;
-  selectedColumns: any[] | undefined;
+ 
   globalFilterValue: string = '';
 
 
-  // headers: any[] = [
-  //   { header: 'Name', label: 'Name' },
-  //   { header: 'employeerole', label: 'Employee Role' },
-  //   { header: 'Isactive', label: 'Is Active' },
-  //   { header: 'CreatedDate', label: 'Created Date' },
-  //   { header: 'CreatedBy', label: 'Created By' },
-  //   { header: 'UpdatedDate', label: 'Updated Date' },
-  //   { header: 'UpdatedBy', label: 'Updated By' }
-  // ];
+
 
   permission: any = { CanManageRoles: true };
 
@@ -40,19 +31,10 @@ export class RolesComponent implements OnInit {
   ngOnInit() {
   this.RoleData();
     this.RoleForm();
-    this.availableColumns = [
-      { field: 'CreatedAt', header: 'Created At' },
-      { field: 'UpdatedAt', header: 'Updated At' },
-      { field: 'CreatedByName', header: 'Created By Name' },
-      { field: 'UpdatedByName', header: 'Updated By Name' }
-    ];
-
-    this.selectedColumns = this.availableColumns;
+   
 
   }
-  isColumnSelected(field: string): boolean {
-    return this.selectedColumns?.some(col => col.field === field) ?? false;
-  }
+ 
 
   RoleForm() {
     this.rolesForm = this.fb.group({

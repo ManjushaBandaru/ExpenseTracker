@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-sidenav',
@@ -27,7 +28,29 @@ export class SidenavComponent {
     }
   }
 
+  
+    items = [
+        {
+            label: 'Admin',
+            items: [
+                {
+                    label: 'Profile',   
+                },
+            ]
+        },
+        {
+            items: [
+                {
+                    label: 'Logout',
+                    icon: 'pi pi-sign-out',
+                }
+            ]
+        },
+    ];
+
   logout(): void {
     this.route.navigate(['/login']);
   }
+ 
+  
 }
