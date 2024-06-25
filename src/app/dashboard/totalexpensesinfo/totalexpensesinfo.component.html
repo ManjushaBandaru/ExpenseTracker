@@ -36,9 +36,6 @@
                 <th class="table-head" pSortableColumn="StatusName" style="width:15%">
                     Approval Status <p-sortIcon field="StatusName"></p-sortIcon>
                 </th>
-                <!-- <th class="table-head" pSortableColumn="uploaddocument" style="width:15%">
-                    Bill Image <p-sortIcon field="uploaddocument"></p-sortIcon>
-                </th> -->
                 <th class="table-head">
                     Actions
                 </th>
@@ -52,7 +49,6 @@
                 <td>{{ product.Amount }}</td>
                 <td>{{ product.PaymentMethodName }}</td>
                 <td>{{ product.StatusName }}</td>
-                <!-- <td>{{ product.uploaddocument }}</td> -->
                 <td>
                     <div class="d-flex">
                         <button class="btn" pTooltip="Edit" tooltipPosition="top" (click)="onEdit()">
@@ -67,6 +63,8 @@
         </ng-template>
     </p-table>
 </div>
+
+
 
 
 

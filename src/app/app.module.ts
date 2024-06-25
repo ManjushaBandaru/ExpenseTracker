@@ -35,6 +35,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { DialogModule } from 'primeng/dialog';
 import { LookupsComponent } from './lookups/lookups.component';
 import { DepositComponent } from './deposit/deposit.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 
 
 
@@ -71,6 +73,7 @@ import { DepositComponent } from './deposit/deposit.component';
     FloatLabelModule,
     HttpClientModule,
     DialogModule,
+    MatSlideToggleModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',}),
 

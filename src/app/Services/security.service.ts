@@ -38,6 +38,10 @@ export class SecurityService {
   }
 
   GetDepositData(){
-    return this.Http.get('https://localhost:44319/api/expenses/GetAllDeposits()');
+    return this.Http.get('https://localhost:44319/api/expenses/GetDeposits()');
+  }
+
+  GetLookupsData(IsActive:any){
+    return this.Http.get('https://localhost:44319/api/expenses/GetLookUpDetails?pIsActive='+ IsActive);
   }
 }

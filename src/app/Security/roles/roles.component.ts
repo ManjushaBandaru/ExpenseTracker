@@ -71,7 +71,7 @@ export class RolesComponent implements OnInit {
     })  }
 
   onAdd() {
-    this.showform = true;
+    // this.showform = true;
   }
 
   // clear() {
@@ -82,6 +82,7 @@ export class RolesComponent implements OnInit {
   // }
   clear(table: any) {
     table.clear();
+    this.RoleData();
   }
   onDelete() {
   }

@@ -14,3 +14,27 @@
     display: flex;
     justify-content: space-between;
 }
+
+/* Add styles for table grid lines */
+p-table table {
+    border-collapse: collapse; /* Ensures borders are not doubled */
+    width: 100%;
+}
+
+p-table th, p-table td {
+    border: 1px solid #ddd; /* Adds border to table headers and cells */
+    padding: 8px; /* Adds padding for better readability */
+    text-align: center; /* Centers text in table headers and cells */
+}
+
+/* Optional: Add hover effect on table rows */
+p-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Optional: Add styling to header cells */
+p-table th {
+    background-color: var(--color-default); /* Adjust as necessary */
+    color: white;
+    text-align: center; /* Ensure header text is centered */
+}

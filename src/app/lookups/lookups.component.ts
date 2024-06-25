@@ -3,11 +3,12 @@ import { Table } from 'primeng/table';
 import { Router } from '@angular/router';
 import { lookups } from '../Models/lookups';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SecurityService } from '../Services/security.service';
 
 
-interface expandedRows {
-  [key: string]: boolean;
-}
+// interface expandedRows {
+//   [key: string]: boolean;
+// }
 @Component({
   selector: 'app-lookups',
   templateUrl: './lookups.component.html',
@@ -18,14 +19,15 @@ export class LookupsComponent implements OnInit{
   // @ViewChild('filter') filter!: ElementRef;
   isExpanded: boolean = false;
   showform: boolean = false;
-  expandedRows: expandedRows = {};
+  // expandedRows: expandedRows = {};
   lookupForm!: FormGroup;
-  IsActive: boolean = false;
+  IsActive: boolean = true;
 
-  constructor (private fb: FormBuilder) {}
+  constructor (private fb: FormBuilder, private service: SecurityService) {}
 
   ngOnInit(): void {
     this.lookupsForm();
+    this.RowExpandData();
   }
 
   lookupsForm() {
@@ -33,6 +35,15 @@ export class LookupsComponent implements OnInit{
       Name: ['', [Validators.required]],
       Description: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       IsActive: ['', [Validators.required]]
+    });
+  }
+
+  RowExpandData() {
+    this.service.GetLookupsData(this.IsActive).subscribe((data: any) => {
+      this.lookups = data.data; // Assuming 'data' has a 'data' property with array of lookups
+      console.log(this.lookups);
+    }, error => {
+      console.error('Error fetching data:', error);
     });
   }
 
