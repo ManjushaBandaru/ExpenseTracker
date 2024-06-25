@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChartModule } from 'primeng/chart';
+import { AdminService } from 'src/app/Services/admin.service';
+
+interface City {
+    name: string;
+    code: string;
+}
+
 
 @Component({
     selector: 'app-admin-dashboard',
@@ -9,13 +16,16 @@ import { ChartModule } from 'primeng/chart';
 })
 export class AdminDashboardComponent implements OnInit {
 
+    date: Date[] | undefined;
     basicData: any;
+    cities: City[] | undefined;
 
-    ingredient!: string;
+    selectedCity: City | undefined;
 
-    data: any;
 
-    options: any;
+    year: any;
+    month: any;
+
 
     basicOptions: any;
 
@@ -23,21 +33,50 @@ export class AdminDashboardComponent implements OnInit {
 
     date1: Date | undefined;
 
+    creditDebitTimeframe: string | undefined;
+    categoryTimeframe: string | undefined;
+    creditDebitDate: Date | undefined;
+    categoryDate: Date | undefined;
+
+    creditDebitData: any;
+    creditDebitOptions: any;
+    categoryData: any;
+    categoryOptions: any;
+
+    totalApprovedApprovals: number = 0;
+    totalPendingApprovals: number = 0;
+    currentDate: any;
+    currentYear: any;
+    currentMonth: any;
+    notifications: any[]=[];
+
+    constructor(private route: Router, private adminservice: AdminService) {
+        this.currentDate = new Date();
+        this.currentYear = this.currentDate.getFullYear();
+        this.currentMonth = this.currentDate.getMonth() + 1;
+    }
     ngOnInit() {
+        this.GetApprovedandPendingStatus();
+        this.GetBudgetNotification();
+        this.Intitbar();
+    }
+
+    Intitbar() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
         this.basicData = {
-            labels: ['Q1'],
+            labels: ['Daily Report'],
             datasets: [
                 {
                     label: '',
                     data: [540],
                     backgroundColor: ['rgba(255, 159, 64, 0.2)'],
                     borderColor: ['rgb(255, 159, 64)'],
-                    borderWidth: 1
+                    borderWidth: 1,
+                    barThickness: 30
                 }
             ]
         };
@@ -63,22 +102,60 @@ export class AdminDashboardComponent implements OnInit {
                     }
                 },
                 x: {
+                    offset: true,
+                    barPercentage: 1.0,
+                    categoryPercentage: 1.0,
                     ticks: {
-                        color: textColorSecondary
+                        color: textColorSecondary,
+                        padding: -5
                     },
                     grid: {
                         color: surfaceBorder,
-                        drawBorder: false
+                        drawBorder: false,
+                        offset: true
                     }
                 }
             }
         };
     }
 
-    constructor(private route: Router) { }
 
     OnClick() {
         this.route.navigate(['/sidenav/dashboard/totalexpensesinfo']);
     };
 
+    updateCreditDebitChart() {
+
+    }
+
+    updateCategoryChart() {
+
+    }
+
+    GetApprovedandPendingStatus() {
+        this.adminservice.GetApprovalsandPendingApprovals(this.currentYear, this.currentMonth)
+            .subscribe((data: any) => {
+                console.log(data);
+
+                const pendingApprovals = data.filter((d: { StatusName: string; }) => d.StatusName === 'Pending');
+                this.totalPendingApprovals = pendingApprovals.length;
+                console.log(this.totalPendingApprovals);
+
+                const ApprovedApprovals = data.filter((d: { StatusName: string; }) => d.StatusName === 'Approved');
+                this.totalApprovedApprovals = ApprovedApprovals.length;
+                console.log(this.totalApprovedApprovals);
+            });
+    }
+
+    GetBudgetNotification(){
+        this.adminservice.GetMonthlyBudgetNotifications().subscribe(
+            (data: any[]) => {
+              console.log(data); 
+              this.notifications = data; 
+            },
+            error => {
+              console.error('Error fetching notifications:', error);
+            }
+          );
+    }
 }
