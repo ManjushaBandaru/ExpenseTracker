@@ -1,0 +1,16 @@
+.clearbtn{
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.tablehead{
+    background-color: var(--color-default);
+    color: white;
+}
+.table-head{
+    background-color: var(--color-default);
+    color: white;
+}
+.AddlookupDetails{
+    border-radius: 5px;
+    margin-bottom: 10px;
+}

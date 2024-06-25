@@ -30,7 +30,7 @@ export class SecurityService {
   }
   GetDropdownRoles(){
     return this.Http.get('https://localhost:44319/DropdownRoles')
-    return this.Http.get('https://localhost:44319/Help/Api/GET-GetRoles');
+    // return this.Http.get('https://localhost:44319/Help/Api/GET-GetRoles');
   }
 
   GetExpensesData(){
