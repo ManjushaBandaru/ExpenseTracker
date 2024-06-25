@@ -111,6 +111,8 @@
     font-weight: 500;
     background-color: var(--color-default);
     color: white;
+    /* display: flex;
+    justify-content: space-around; */
 }
 
 .bar-graph {
@@ -135,4 +137,13 @@
 
 .card-body.d-flex>.flex-fill {
     flex: 1;
+}
+.icon{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+.table-head{
+    background-color: var(--color-default);
+    color: white;
 }

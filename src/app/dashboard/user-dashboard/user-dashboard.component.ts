@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/Services/admin.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -7,12 +8,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDashboardComponent implements OnInit {
   basicData: any;
-
+  visible: boolean = false;
   basicOptions: any;
+  ApprovalData: any[] = [];
+  currentDate: any;
+  currentYear: any;
+  currentMonth: any;
+  totalApprovedApprovals: number = 0;
+  totalPendingApprovals: number = 0;
 
+  constructor(private service: AdminService) {
+    this.currentDate = new Date();
+    this.currentYear = this.currentDate.getFullYear();
+    this.currentMonth = this.currentDate.getMonth() + 1;
+  }
 
   ngOnInit() {
     this.initCharts();
+    this.ApprovalListData();
+  }
+
+
+  ApprovalListData() {
+    this.service.GetApprovalsandPendingApprovals(this.currentYear, this.currentMonth)
+      .subscribe((data: any) => {
+        // Filter data to include only approved approvals
+        this.ApprovalData = data.filter((d: { StatusName: string }) => d.StatusName === 'Approved');
+        console.log(this.ApprovalData);
+
+        const pendingApprovals = data.filter((d: { StatusName: string }) => d.StatusName === 'Pending');
+        this.totalPendingApprovals = pendingApprovals.length;
+        console.log(this.totalPendingApprovals);
+
+        const ApprovedApprovals = data.filter((d: { StatusName: string }) => d.StatusName === 'Approved');
+        this.totalApprovedApprovals = ApprovedApprovals.length;
+        console.log(this.totalApprovedApprovals);
+      });
   }
 
   initCharts() {
@@ -66,39 +97,16 @@ export class UserDashboardComponent implements OnInit {
     };
   }
 
-  // initCharts() {
-  //   const documentStyle = getComputedStyle(document.documentElement);
-  //   const textColor = documentStyle.getPropertyValue('--text-color');
-  //   const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-  //   const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+  viewDetails() {
+    this.visible = true;
+  }
 
-  //   this.pieData = {
-  //     labels: ['Variable Expenses', 'Discretionary Expenses', 'Fixed Expenses'],
-  //     datasets: [
-  //         {
-  //             data: [540, 325, 702],
-  //             backgroundColor: [
-  //                 documentStyle.getPropertyValue('--blue-200'),       // For Variable Expenses
-  //                 documentStyle.getPropertyValue('--blue-300'),       // For Discretionary Expenses
-  //                 documentStyle.getPropertyValue('--blue-500')        // For Fixed Expenses
-  //             ],
-  //             hoverBackgroundColor: [
-  //                 documentStyle.getPropertyValue('--blue-100'),       // For Variable Expenses
-  //                 documentStyle.getPropertyValue('--blue-200'),       // For Discretionary Expenses
-  //                 documentStyle.getPropertyValue('--blue-500')        // For Fixed Expenses
-  //             ]
-  //         }]
-  // };
+  viewpendingDetails(){
+    this.visible = true;
+  }
 
-  //   this.pieOptions = {
-  //       plugins: {
-  //           legend: {
-  //               labels: {
-  //                   usePointStyle: true,
-  //                   color: textColor
-  //               }
-  //           }
-  //       }
-  //   };
-  // }
+  closeForm() {
+
+  }
+
 }

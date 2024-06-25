@@ -3,14 +3,15 @@ import { Table } from 'primeng/table';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { FileUploadEvent } from 'primeng/fileupload';
+import { SecurityService } from 'src/app/Services/security.service';
 
 interface category {
   name: string;
 }
-interface paymentmode {
+interface PaymentMethodName {
   name: string;
 }
-interface aprovalstatus {
+interface StatusName {
   name: string;
 }
 
@@ -22,65 +23,73 @@ interface aprovalstatus {
 })
 export class TotalexpensesinfoComponent implements OnInit {
 
-  products: any;
+  products: any[]=[];
   globalFilterValue: string = '';
   @ViewChild('myTab') myTab!: Table;
   ExpenseForm!: FormGroup;
   showform: boolean = false;
   category: category[] | undefined;
-  paymentmode: paymentmode[] | undefined;
-  aprovalstatus: aprovalstatus[] | undefined;
+  PaymentMethodName: PaymentMethodName[] | undefined;
+  StatusName: StatusName[] | undefined;
 
 
 
-  constructor(private fb: FormBuilder, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService, private service:SecurityService) { }
 
   ngOnInit(): void {
     this.expensesForm();
-    this.categorylist();
-    this.approvalstatuslist();
-    this.paymentmodelist();
+    // this.categorylist();
+    // this.approvalstatuslist();
+    // this.paymentmodelist();
+    this.ExpensesListdata();
   }
 
   expensesForm() {
     this.ExpenseForm = this.fb.group({
-      category: ['', [Validators.required]],
-      description: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
-      expensedate: ['', [Validators.required]],
-      paidamount: ['', [Validators.required]],
-      paymentmode: ['', [Validators.required]],
-      aprovalstatus: ['', [Validators.required]],
+      CategoryName: ['', [Validators.required]],
+      Description: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      ExpenseDate: ['', [Validators.required]],
+      Amount: ['', [Validators.required]],
+      PaymentMethodName: ['', [Validators.required]],
+      StatusName: ['', [Validators.required]],
       uploaddocument: ['', [Validators.required]]
     });
   }
 
-  categorylist() {
-    this.category = [
-      { name: 'New York' },
-      { name: 'Rome' },
-      { name: 'London' },
-      { name: 'Istanbul' },
-      { name: 'Paris' }
-    ];
+  ExpensesListdata(){
+    this.service.GetExpensesData().subscribe((Response:any)=>{
+      this.products = Response;
+      console.log(Response);
+    })
   }
-  paymentmodelist() {
-    this.paymentmode = [
-      { name: 'New York' },
-      { name: 'Rome' },
-      { name: 'London' },
-      { name: 'Istanbul' },
-      { name: 'Paris' }
-    ];
-  }
-  approvalstatuslist() {
-    this.aprovalstatus = [
-      { name: 'New York' },
-      { name: 'Rome' },
-      { name: 'London' },
-      { name: 'Istanbul' },
-      { name: 'Paris' }
-    ];
-  }
+
+  // categorylist() {
+  //   this.category = [
+  //     { name: 'New York' },
+  //     { name: 'Rome' },
+  //     { name: 'London' },
+  //     { name: 'Istanbul' },
+  //     { name: 'Paris' }
+  //   ];
+  // }
+  // paymentmodelist() {
+  //   this.PaymentMethodName = [
+  //     { name: 'New York' },
+  //     { name: 'Rome' },
+  //     { name: 'London' },
+  //     { name: 'Istanbul' },
+  //     { name: 'Paris' }
+  //   ];
+  // }
+  // approvalstatuslist() {
+  //   this.StatusName = [
+  //     { name: 'New York' },
+  //     { name: 'Rome' },
+  //     { name: 'London' },
+  //     { name: 'Istanbul' },
+  //     { name: 'Paris' }
+  //   ];
+  // }
 
 
   onBasicUploadAuto(event: FileUploadEvent) {  // Updated method signature
@@ -94,6 +103,7 @@ export class TotalexpensesinfoComponent implements OnInit {
   clear() {
     this.globalFilterValue = '';
     this.myTab.clear();
+    this.ExpensesListdata();
   }
 
   closeForm() {
@@ -106,6 +116,7 @@ export class TotalexpensesinfoComponent implements OnInit {
       console.log(this.ExpenseForm.value);
       
     }
+    this.showform = false;
   }
 
   onEdit(){
