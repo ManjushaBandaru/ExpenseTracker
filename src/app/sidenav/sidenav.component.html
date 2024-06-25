@@ -1,6 +1,5 @@
 <div class="sidebar">
   <div class="logo_details">
-    <!-- <i class="pi pi-palette icon"></i>  -->
     <div class="logo_name">Expenses Tracker</div>
     <i class="pi pi-bars" id="btn" (click)="toggleSidebar()"></i>
   </div>
@@ -11,11 +10,32 @@
       </div>
       <a routerLink="/sidenav/dashboard/admin">
         <i class="pi pi-user"></i>
-        <span class="link_name">Admin</span>
+        <span class="link_name">Super Admin</span>
       </a>
       <a routerLink="/sidenav/dashboard/userDashboard">
         <i class="pi pi-users"></i>
-        <span class="link_name">User</span>
+        <span class="link_name">Admin</span>
+      </a>
+    </li>
+    <li>
+      <div class="logo_details">
+        <div class="logo_name">Expenditures</div>
+      </div>
+      <a routerLink="/sidenav/dashboard/expenselist">
+        <i class="pi pi-list-check"></i>
+        <span class="link_name">Expense List</span>
+      </a>
+      <a routerLink="/sidenav/dashboard/deposits">
+        <i class="pi pi-wallet"></i> 
+        <span class="link_name">Deposits</span>
+      </a>
+      <a routerLink="/sidenav/dashboard/lookups">
+        <i class="pi pi-circle-off"></i> 
+        <span class="link_name">Lookups</span>
+      </a>
+      <a routerLink="/sidenav/dashboard/reports">
+        <i class="pi pi-cloud-download"></i> 
+        <span class="link_name">Reports</span>
       </a>
     </li>
     <li>
@@ -27,21 +47,8 @@
         <span class="link_name">Users</span>
       </a>
       <a routerLink="/sidenav/dashboard/roles">
-        <i class="pi pi-users"></i>
+        <i class="pi pi-sitemap"></i>
         <span class="link_name">Roles</span>
-      </a>
-    </li>
-    <li>
-      <div class="logo_details">
-        <div class="logo_name">Expenses</div>
-      </div>
-      <a routerLink="/sidenav/dashboard/expenselist">
-        <i class="pi pi-list"></i>
-        <span class="link_name">Expense List</span>
-      </a>
-      <a routerLink="/sidenav/dashboard/reports">
-        <i class="pi pi-money-bill"></i> 
-        <span class="link_name">Reports</span>
       </a>
     </li>
     <li class="profile">

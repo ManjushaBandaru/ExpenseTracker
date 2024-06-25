@@ -33,6 +33,8 @@ import { TableModule } from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DialogModule } from 'primeng/dialog';
+import { LookupsComponent } from './lookups/lookups.component';
+import { DepositComponent } from './deposit/deposit.component';
 
 
 
@@ -44,6 +46,8 @@ import { DialogModule } from 'primeng/dialog';
     SidenavComponent,
     RegistrationComponent,
     ReportsComponent,
+    LookupsComponent,
+    DepositComponent,
   ],
   imports: [
     BrowserModule,InputSwitchModule,DropdownModule,

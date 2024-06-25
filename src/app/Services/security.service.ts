@@ -30,5 +30,14 @@ export class SecurityService {
   }
   GetDropdownRoles(){
     return this.Http.get('https://localhost:44319/DropdownRoles')
+    return this.Http.get('https://localhost:44319/Help/Api/GET-GetRoles');
+  }
+
+  GetExpensesData(){
+    return this.Http.get('https://localhost:44319/api/expenses/GetAllExpenses()');
+  }
+
+  GetDepositData(){
+    return this.Http.get('https://localhost:44319/api/expenses/GetAllDeposits()');
   }
 }

@@ -8,6 +8,8 @@ import { SuperAdminComponent } from './super-admin/super-admin.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { TotalexpensesinfoComponent } from './totalexpensesinfo/totalexpensesinfo.component';
 import { ReportsComponent } from '../expense/reports/reports.component';
+import { LookupsComponent } from '../lookups/lookups.component';
+import { DepositComponent } from '../deposit/deposit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'userDashboard', pathMatch: 'full' }, 
@@ -19,7 +21,8 @@ const routes: Routes = [
   { path: 'expenselist', component: TotalexpensesinfoComponent},
   { path: 'user', component: UsersComponent },
   { path: 'roles', component: RolesComponent },
-  
+  { path: 'lookups', component: LookupsComponent },
+  { path: 'deposits', component: DepositComponent },
 ];
 
 

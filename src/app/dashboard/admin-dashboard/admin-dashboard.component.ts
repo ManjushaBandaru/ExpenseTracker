@@ -22,11 +22,15 @@ export class AdminDashboardComponent implements OnInit {
 
     selectedCity: City | undefined;
 
+    credit: number = 0; 
+    debit: number = 0; 
 
     year: any;
     month: any;
 
+    ApprovalData:any[]=[];
 
+    
     basicOptions: any;
 
     selectedCategory: any = null;
@@ -49,6 +53,7 @@ export class AdminDashboardComponent implements OnInit {
     currentYear: any;
     currentMonth: any;
     notifications: any[]=[];
+    visible: boolean = false;
 
     constructor(private route: Router, private adminservice: AdminService) {
         this.currentDate = new Date();
@@ -59,6 +64,10 @@ export class AdminDashboardComponent implements OnInit {
         this.GetApprovedandPendingStatus();
         this.GetBudgetNotification();
         this.Intitbar();
+        const year = 2024; 
+        const month = 'null'; 
+        this.GetYearBudget(year, month);
+        this.ApprovalListData();
     }
 
     Intitbar() {
@@ -147,6 +156,23 @@ export class AdminDashboardComponent implements OnInit {
             });
     }
 
+    ApprovalListData() {
+        this.adminservice.GetApprovalsandPendingApprovals(this.currentYear, this.currentMonth)
+          .subscribe((data: any) => {
+            // Filter data to include only approved approvals
+            this.ApprovalData = data.filter((d: { StatusName: string }) => d.StatusName === 'Approved');
+            console.log(this.ApprovalData);
+    
+            const pendingApprovals = data.filter((d: { StatusName: string }) => d.StatusName === 'Pending');
+            this.totalPendingApprovals = pendingApprovals.length;
+            console.log(this.totalPendingApprovals);
+    
+            const ApprovedApprovals = data.filter((d: { StatusName: string }) => d.StatusName === 'Approved');
+            this.totalApprovedApprovals = ApprovedApprovals.length;
+            console.log(this.totalApprovedApprovals);
+          });
+      }
+
     GetBudgetNotification(){
         this.adminservice.GetMonthlyBudgetNotifications().subscribe(
             (data: any[]) => {
@@ -158,4 +184,32 @@ export class AdminDashboardComponent implements OnInit {
             }
           );
     }
+
+    GetYearBudget(year: number, month: string){
+        this.adminservice.GetyearlyBudget(this.currentYear,this.currentMonth).subscribe(
+            (data: any) => {
+              console.log(data); 
+      
+              const credits = data.filter((d: { type: string; }) => d.type === 'credit');
+              this.credit = credits.reduce((sum: number, item: { amount: number; }) => sum + item.amount, 0);
+              console.log('Total Credit:', this.credit);
+
+              const debits = data.filter((d: { type: string; }) => d.type === 'debit');
+              this.debit = debits.reduce((sum: number, item: { amount: number; }) => sum + item.amount, 0);
+              console.log('Total Debit:', this.debit);
+            }
+          );
+    }
+
+    GetCategoryBasedonDatemonthandyear(){
+        this.adminservice.GetCategoriesBasedOnDateMonthYear(this.date,this.month,this.year).subscribe((data:any)=>{
+            this.GetCategoryBasedonDatemonthandyear = data
+            console.log(data);
+            
+        })
+    }
+
+    viewapprovalDetails(){
+        this.visible = true;
+      }
 }
