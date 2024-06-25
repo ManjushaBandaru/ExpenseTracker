@@ -44,4 +44,7 @@ export class SecurityService {
   GetLookupsData(IsActive:any){
     return this.Http.get('https://localhost:44319/api/expenses/GetLookUpDetails?pIsActive='+ IsActive);
   }
+  AddExpenses(ExpenseForm:any){
+    return this.Http.post('https://localhost:44319/api/expenses/AddupdateExpenses',ExpenseForm);
+  }
 }

@@ -118,7 +118,12 @@ export class TotalexpensesinfoComponent implements OnInit {
     }
     this.showform = false;
   }
-
+// AddExpenses(){
+//   this.service.AddExpenses(this.ExpenseForm.value).subscribe((a:any)=>{
+//     this.products=a;
+//     console.log(a);
+//   })
+// }
   onEdit(){
 
   }

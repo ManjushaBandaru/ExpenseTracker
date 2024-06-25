@@ -58,11 +58,6 @@ export class UsersComponent {
       UpdatedByName: [null], 
       CreatedAt: [new Date()], 
       UpdatedAt: [new Date()], 
-      // UserRolesReq: this.fb.array([
-      //   this.fb.group({
-      //     RoleId: ['', Validators.required]
-      //   })
-      // ])
     });
     this.userForm.get('CreatedByName')?.setValue(this.currentuser.Id);
     this.userForm.get('UpdatedByName')?.setValue(this.currentuser.Id);
@@ -93,8 +88,9 @@ export class UsersComponent {
       // Handle validation errors
       return;
     }
-
-    this.securityService.AddUser(this.userForm.value).subscribe(
+    var UserRolesReq =[];
+    UserRolesReq.push(this.userForm.value);
+    this.securityService.AddUser(UserRolesReq).subscribe(
       () => {
         // Handle success
         this.closeForm();
@@ -179,6 +175,7 @@ export class UsersComponent {
 
   submit() {
     if (this.userForm.invalid) {
+      console.log
       return;
     }
 

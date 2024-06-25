@@ -76,5 +76,7 @@ export class RolesComponent implements OnInit {
     this.showform = false;
   }
 
-  onEdit(){}
+  onEdit(){
+    this.showform = true;
+  }
 }
