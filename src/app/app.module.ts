@@ -35,6 +35,10 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { DialogModule } from 'primeng/dialog';
 import { LookupsComponent } from './lookups/lookups.component';
 import { DepositComponent } from './deposit/deposit.component';
+import { MenuModule } from 'primeng/menu';
+import { AvatarModule } from 'primeng/avatar';
+
+
 
 
 
@@ -53,10 +57,10 @@ import { DepositComponent } from './deposit/deposit.component';
     BrowserModule,InputSwitchModule,DropdownModule,
     AppRoutingModule,AccordionModule,RippleModule,ToolbarModule,
     PasswordModule,TableModule,DialogModule,
-    CheckboxModule,
+    CheckboxModule,MenuModule,
     CommonModule,
     BrowserAnimationsModule,
-    ButtonModule,
+    ButtonModule,AvatarModule,
     FormsModule,
     InputTextModule,
     ReactiveFormsModule,

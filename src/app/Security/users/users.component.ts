@@ -23,9 +23,14 @@ export class UsersComponent {
   ]; 
   globalFilterValue: string = '';
   @ViewChild('myTab') myTab!: Table;
-  toastr: any;
+  currentuser:any;
 
-  constructor(private SecurityService: SecurityService, public fb: FormBuilder) {}
+  constructor(private securityService: SecurityService, public fb: FormBuilder) {
+    var userString = localStorage.getItem('CURRENTUSER');
+    if (userString) {
+      this.currentuser = JSON.parse(userString);
+    }
+  }
 
   ngOnInit() {
     this.UsersData();
@@ -38,38 +43,44 @@ export class UsersComponent {
     return this.selectedColumns?.some(col => col.field === field) ?? false;
   }
 
-    UsersForm() {
-      this.userForm = this.fb.group({
-        Id: [''], // Initialize with empty string for new user
-        FirstName: ['', Validators.required],
-        LastName: ['', Validators.required],
-        UserName: ['', Validators.required],
-        Password: ['', Validators.required],
-        RoleId: ['', Validators.required],
-        EMail: ['', [Validators.required, Validators.email]],
-        MobileNumber: ['', [Validators.required, Validators.pattern('[0-9]*')]],
-        IsActive: [true, Validators.required],
-        CreatedByName: [''], // Initialize with empty string or null
-        UpdatedByName: [''], // Initialize with empty string or null
-        CreatedAt: [new Date()], // Initialize with current date or null
-        UpdatedAt: [new Date()] // Initialize with current date or null
-      });
-  
-     
-    
-    }
+  UsersForm() {
+    this.userForm = this.fb.group({
+      Id: [''], 
+      FirstName: ['', Validators.required],
+      LastName: ['', Validators.required],
+      UserName: ['', Validators.required],
+      Password: ['', Validators.required],
+      RoleId: ['', Validators.required],
+      EMail: ['', [Validators.required, Validators.email]],
+      MobileNumber: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+      IsActive: [true, Validators.required],
+      CreatedByName: [null], 
+      UpdatedByName: [null], 
+      CreatedAt: [new Date()], 
+      UpdatedAt: [new Date()], 
+      // UserRolesReq: this.fb.array([
+      //   this.fb.group({
+      //     RoleId: ['', Validators.required]
+      //   })
+      // ])
+    });
+    this.userForm.get('CreatedByName')?.setValue(this.currentuser.Id);
+    this.userForm.get('UpdatedByName')?.setValue(this.currentuser.Id);
+    this.userForm.get('CreatedAt')?.patchValue(new Date());
+    this.userForm.get('UpdatedAt')?.patchValue(new Date());
+  }
 
   UsersData() {
-    this.SecurityService.GetUsers().subscribe((a: any) => {
-      this.users = a;
-      console.log(a);
+    this.securityService.GetUsers().subscribe((data: any) => {
+      this.users = data;
+      console.log(data);
     });
   }
 
   Getrolesdropdown() {
-    this.SecurityService.GetDropdownRoles().subscribe((a: any) => {
-      this.Name = a;
-      console.log(a);
+    this.securityService.GetDropdownRoles().subscribe((data: any) => {
+      this.Name = data;
+      console.log(data);
     });
   }
 
@@ -78,16 +89,21 @@ export class UsersComponent {
   }
 
   Adduser() {
-    debugger;
-    this.SecurityService.AddUser(this.userForm.value).subscribe(
+    if (this.userForm.invalid) {
+      // Handle validation errors
+      return;
+    }
+
+    this.securityService.AddUser(this.userForm.value).subscribe(
       () => {
-        this.toastr.success('User added successfully', 'Success');
-        this.showform = false;
-        this.UsersData();
+        // Handle success
+        this.closeForm();
+        this.UsersData(); // Refresh user list after adding
+        this.userForm.reset(); // Optionally reset the form
       },
       (error) => {
-        console.error('Error while adding data:', error);
-        this.toastr.error('Failed to add user', 'Error');
+        // Handle error
+        console.error('Error while adding user:', error);
       }
     );
   }
@@ -95,7 +111,6 @@ export class UsersComponent {
   onAdd() {
     this.showform = true;
     this.userForm.reset();
-    // this.userForm.patchValue({ Id: 0 });  // Ensure Id is 0 for new user
   }
 
   clear(table: Table) {
@@ -116,30 +131,42 @@ export class UsersComponent {
       MobileNumber: user.MobileNumber,
       IsActive: user.IsActive,
       CreatedByName: user.CreatedByName,
-      UpdatedByName: user.UpdatedByName,
+      UpdatedByName: this.currentuser.UpdatedByName,
       CreatedAt: new Date(user.CreatedAt), // Convert string to Date object if necessary
-      UpdatedAt: new Date(user.UpdatedAt) // Convert string to Date object if necessary
+      UpdatedAt: new Date(),
+      UserRolesReq: user.UserRoles 
     });
 
     this.showform = true; // Display the form dialog for editing
   }
-  
 
   updateUser() {
-    this.SecurityService.UpdateUser(this.userForm.value).subscribe((a: any) => {
-      console.log(a);     
-      this.UsersData();
-    });
+    if (this.userForm.invalid) {
+      // Handle validation errors
+      return;
+    }
+
+    this.securityService.UpdateUser(this.userForm.value).subscribe(
+      () => {
+        // Handle success
+        this.closeForm();
+        this.UsersData(); // Refresh user list after updating
+      },
+      (error) => {
+        // Handle error
+        console.error('Error while updating user:', error);
+      }
+    );
   }
 
   onDelete(id: any) {
     if (id) {
       console.log('Deleting user with ID:', id);
-      this.SecurityService.Deleteuser(id).subscribe(
+      this.securityService.Deleteuser(id).subscribe(
         () => {
           console.log('User deleted successfully with ID:', id);
           // Remove the user from the array
-          this.users = this.users.filter((users: any) => users.Id !== id);
+          this.users = this.users.filter((user: any) => user.Id !== id);
         },
         (error) => {
           console.error('Error deleting user with ID:', id, error);
@@ -155,16 +182,35 @@ export class UsersComponent {
       return;
     }
 
-    this.SecurityService.AddUser(this.userForm.value).subscribe(
-      (response) => {
-        console.log('User created successfully:', response);
-        this.showform = false; // Close the form/dialog on successful submission
-        this.userForm.reset(); // Optionally reset the form
-      },
-      (error) => {
-        console.error('Error creating user:', error);
-        // Handle error: show error message, etc.
-      }
-    );
+    const formData = this.userForm.value;
+
+    // Determine if it's an add or update operation based on Id presence
+    if (formData.Id) {
+      // Update user
+      this.securityService.UpdateUser(formData).subscribe(
+        () => {
+          // Handle success
+          this.closeForm();
+          this.UsersData(); // Refresh user list after update
+        },
+        (error) => {
+          // Handle error
+          console.error('Error updating user:', error);
+        }
+      );
+    } else {
+      // Add new user
+      this.securityService.AddUser(formData).subscribe(
+        () => {
+          // Handle success
+          this.closeForm();
+          this.UsersData(); // Refresh user list after add
+        },
+        (error) => {
+          // Handle error
+          console.error('Error adding user:', error);
+        }
+      );
+    }
   }
 }

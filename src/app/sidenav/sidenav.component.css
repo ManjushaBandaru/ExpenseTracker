@@ -285,3 +285,9 @@
   .image{
     color: white;
   }
+  .main-content {
+    background-color: var(--color-default);
+  }
+  
+
+  
