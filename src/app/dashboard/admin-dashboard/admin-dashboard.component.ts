@@ -65,7 +65,7 @@ export class AdminDashboardComponent implements OnInit {
         const month = 'null';
         this.GetYearBudget();
         this.ApprovalListData();
-        this.viewpendingDetails();
+        // this.viewpendingDetails();
         this.GetCreditDebitGraphBasedOnMonthYear();
     }
 

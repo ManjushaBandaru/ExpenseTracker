@@ -32,7 +32,7 @@
         <div class="col-md-4 mb-4">
             <div class="card expensecard shadow-sm">
                 <div class="card-header titles">
-                    Pendings Approvals Based On Month
+                    Pending Approvals Based On Month
                     <i class="pi pi-eye icon" style="font-size: 1.5rem" (click)="viewpendingDetails()"></i>
                 </div>
                 <div class="card-body text-center">
@@ -256,12 +256,12 @@
                         <div class="col-12 d-flex">
                             <div class="col-6">
                                 <strong>Credit</strong>
-                                <p>{{ budget.TotalBudget}}</p>
+                                <p>{{ budget.TotalBudget | currency: 'INR' : 'symbol'}}</p>
                             </div>
                             <div class="vr"></div>
                             <div class="col-6" style="margin-left: -18px;">
                                 <strong>Debit</strong>
-                                <p>{{ budget.TotalExpenses}}</p>
+                                <p>{{ budget.TotalExpenses | currency: 'INR' : 'symbol'}}</p>
                             </div>
                         </div>
                         <!-- <div class="flex-fill">
