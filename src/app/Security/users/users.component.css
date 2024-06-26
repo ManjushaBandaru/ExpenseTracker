@@ -1,26 +1,4 @@
-/* .tablehead{
-    display: flex;
-    justify-content: space-between;
-}
-.table-head{
-    background-color: var(--color-default);
-    color: white;
-}
-.isactivecol{
-    display: flex;
-    justify-content: center;
-}
-.checkbox-container {
-    margin-left: 10px; 
-}
-.clearbtn{
-    border-radius: 5px;
-    margin-bottom: 10px;
-} */
-
-
-/* Add borders to create grid lines */
-p-table table {
+/* p-table table {
     border-collapse: collapse;
     width: 100%;
 }
@@ -29,14 +7,14 @@ p-table table, p-table th, p-table td {
     border: 1px solid #ddd;
 }
 
-/* Center-align the content within the table cells */
+
 p-table th, p-table td {
     text-align: center;
     vertical-align: middle;
-    padding: 8px; /* Add padding for better spacing */
+    padding: 8px; 
 }
 
-/* Additional styles to enhance the table appearance */
+
 p-table th {
     background-color: var(--color-default);
     color: white;
@@ -59,7 +37,58 @@ p-table td {
 }
 
 .checkbox-container {
-    margin-left: 10px; /* Adjust this value as needed */
+    margin-left: 10px; 
+}
+
+.clearbtn {
+    border-radius: 5px;
+    margin-bottom: 10px;
+} */
+
+
+p-table {
+    width: 100%;
+    border-collapse: collapse; /* Ensure borders are collapsed */
+}
+
+p-table table, p-table th, p-table td {
+    border: 1px solid #ddd; /* Grid lines */
+    text-align: center; /* Center align text horizontally */
+    vertical-align: middle; /* Center align text vertically */
+    padding: 8px; /* Padding for better spacing */
+}
+
+p-table th {
+    background-color: var(--color-default); /* Apply background color to headers */
+    color: white;
+    font-weight: bold;
+}
+
+p-table td {
+    background-color: white;
+}
+
+p-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Optional: Zebra striping for rows */
+}
+
+p-table tr:hover {
+    background-color: #ddd; /* Optional: Highlight rows on hover */
+}
+
+.tablehead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.isactivecol {
+    display: flex;
+    justify-content: center;
+}
+
+.checkbox-container {
+    margin-left: 10px;
 }
 
 .clearbtn {

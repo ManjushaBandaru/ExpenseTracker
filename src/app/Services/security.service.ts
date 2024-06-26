@@ -37,6 +37,10 @@ export class SecurityService {
     return this.Http.get('https://localhost:44319/api/expenses/GetAllExpenses()');
   }
 
+  GetExpensesDropdowns(data:any){
+    return this.Http.get('https://localhost:44319/api/expenses/GetLookUpDropdown?name='+ data);
+  }
+
   GetDepositData(){
     return this.Http.get('https://localhost:44319/api/expenses/GetDeposits()');
   }

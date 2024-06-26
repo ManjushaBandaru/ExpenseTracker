@@ -65,20 +65,17 @@
 </div>
 
 
-
-
-
 <p-dialog header="Expense Details" [(visible)]="showform" [style]="{width: '50vw'}">
     <div class="card_body p-5">
         <form class="row" [formGroup]="ExpenseForm">
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="CategoryName" class="form-label">Category <span style="color: red;">*</span></label><br>
-                    <p-dropdown formControlName="CategoryName" [options]="category" optionLabel="name" optionValue="CategoryId" appendTo="body"
+                    <label for="CategoryId" class="form-label">Category <span style="color: red;">*</span></label><br>
+                    <p-dropdown formControlName="CategoryId" [options]="uniqueCategories" optionLabel="CategoryName" optionValue="CategoryId" appendTo="body"
                         placeholder="Select a Category" />
                     <div
-                        *ngIf="ExpenseForm.get('CategoryName')?.invalid && (ExpenseForm.get('CategoryName')?.dirty || ExpenseForm.get('CategoryName')?.touched)">
-                        <small class="p-error" *ngIf="ExpenseForm.get('CategoryName')?.errors?.['required']">* Category is
+                        *ngIf="ExpenseForm.get('CategoryId')?.invalid && (ExpenseForm.get('CategoryId')?.dirty || ExpenseForm.get('CategoryId')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('CategoryId')?.errors?.['required']">* Category is
                             required.</small>
                     </div>
                 </div>
@@ -122,24 +119,24 @@
 
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="PaymentMethodName" class="form-label">Payment Mode <span
+                    <label for="PaymentMethodId" class="form-label">Payment Mode <span
                             style="color: red;">*</span></label><br>
-                    <p-dropdown formControlName="PaymentMethodName" [options]="PaymentMethodName" optionLabel="PaymentMethodName" optionValue="PaymentMethodId" appendTo="body"
+                    <p-dropdown formControlName="PaymentMethodId" [options]="uniquePaymentMethods" optionLabel="PaymentMethodName" optionValue="PaymentMethodId" appendTo="body"
                         placeholder="Select a Payment Mode" />
                     <div
-                        *ngIf="ExpenseForm.get('PaymentMethodName')?.invalid && (ExpenseForm.get('PaymentMethodName')?.dirty || ExpenseForm.get('PaymentMethodName')?.touched)">
-                        <small class="p-error" *ngIf="ExpenseForm.get('PaymentMethodName')?.errors?.['required']">* Payment
+                        *ngIf="ExpenseForm.get('PaymentMethodId')?.invalid && (ExpenseForm.get('PaymentMethodId')?.dirty || ExpenseForm.get('PaymentMethodId')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('PaymentMethodId')?.errors?.['required']">* Payment
                             Mode is required.</small>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label for="StatusName" class="form-label">Approval Status <span
+                    <label for="StatusId" class="form-label">Approval Status <span
                             style="color: red;">*</span></label><br>
-                    <p-dropdown formControlName="StatusName" [options]="StatusName" optionLabel="name"
+                    <p-dropdown formControlName="StatusId" [options]="uniqueStatuses" optionLabel="StatusName" optionValue="StatusId"
                         appendTo="body" placeholder="Select an Approval Status" />
                     <div
-                        *ngIf="ExpenseForm.get('StatusName')?.invalid && (ExpenseForm.get('StatusName')?.dirty || ExpenseForm.get('StatusName')?.touched)">
-                        <small class="p-error" *ngIf="ExpenseForm.get('StatusName')?.errors?.['required']">* Approval
+                        *ngIf="ExpenseForm.get('StatusId')?.invalid && (ExpenseForm.get('StatusId')?.dirty || ExpenseForm.get('StatusId')?.touched)">
+                        <small class="p-error" *ngIf="ExpenseForm.get('StatusId')?.errors?.['required']">* Approval
                             Status is required.</small>
                     </div>
                 </div>

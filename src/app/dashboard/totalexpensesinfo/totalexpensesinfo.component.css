@@ -1,4 +1,4 @@
-.clearbtn{
+/* .clearbtn{
     border-radius: 5px;
     margin-bottom: 10px;
 }
@@ -15,24 +15,74 @@
     justify-content: space-between;
 }
 
-/* Add styles for table grid lines */
+
 p-table table {
-    border-collapse: collapse; /* Ensures borders are not doubled */
+    border-collapse: collapse; 
     width: 100%;
 }
 
 p-table th, p-table td {
-    border: 1px solid #ddd; /* Adds border to table headers and cells */
-    padding: 8px; /* Adds padding for better readability */
-    text-align: center; /* Centers text in table headers and cells */
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: center; 
 }
 
-/* Optional: Add hover effect on table rows */
+
 p-table tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Optional: Add styling to header cells */
+
+p-table th {
+    background-color: var(--color-default); 
+    color: white;
+    text-align: center; 
+} */
+
+
+.clearbtn {
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: end;
+}
+
+.table-head {
+    background-color: var(--color-default);
+    color: white;
+}
+
+.tablehead {
+    display: flex;
+    justify-content: space-between;
+}
+
+p-table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures borders are not doubled */
+}
+
+p-table th, p-table td {
+    border: 1px solid #ddd; /* Adds border to table headers and cells */
+    text-align: center; /* Centers text in table headers and cells */
+    vertical-align: middle; /* Centers text vertically */
+    padding: 8px; /* Adds padding for better readability */
+}
+
+/* Optional: Zebra striping for rows */
+p-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Optional: Hover effect on table rows */
+p-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Styling for header cells */
 p-table th {
     background-color: var(--color-default); /* Adjust as necessary */
     color: white;
