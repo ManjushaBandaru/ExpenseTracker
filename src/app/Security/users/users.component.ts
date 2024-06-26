@@ -88,9 +88,9 @@ export class UsersComponent {
       // Handle validation errors
       return;
     }
-    var UserRolesReq =[];
-    UserRolesReq.push(this.userForm.value);
-    this.securityService.AddUser(UserRolesReq).subscribe(
+    // var UserRolesReq =[];
+    // UserRolesReq.push(this.userForm.value);
+    this.securityService.AddUser(this.userForm.value).subscribe(
       () => {
         // Handle success
         this.closeForm();
