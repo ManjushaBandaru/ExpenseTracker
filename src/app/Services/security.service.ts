@@ -47,4 +47,7 @@ export class SecurityService {
   AddExpenses(ExpenseForm:any){
     return this.Http.post('https://localhost:44319/api/expenses/AddupdateExpenses',ExpenseForm);
   }
+  AddDeposits(depositForm:any){
+    return this.Http.post('https://localhost:44319/api/expenses/AddupdateDeposite',depositForm)
+  }
 }
