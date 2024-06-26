@@ -64,21 +64,20 @@
     </li>
   </ul>
 </div>
-<div class="main-content">
   <p-toolbar styleclass="p-1 sticky-top">
     <!-- Toolbar content outside the sidebar -->
     <div class="p-toolbar-group-start">
       <!-- <button pButton type="button" icon="pi pi-search" label="Search"></button> -->
     </div>
     <div class="p-toolbar-group-center">
-      <h2>Expenses Tracker</h2>
+      <h2 style="color: white;">Expenses Tracker</h2>
     </div>
     <div class="p-toolbar-group-end">
-        <i class="pi pi-user" style="cursor: pointer;" (click)="menu.toggle($event)"></i>
-      <p-menu #menu [model]="items" [popup]="true" /> 
+      <i class="pi pi-user" style="cursor: pointer;font-size: 1.5rem;color: white;" (click)="menu.toggle($event)"></i>
+      <p-menu #menu [model]="items" [popup]="true" />
     </div>
   </p-toolbar>
-  <section class="home-section">
-    <div class="text"></div>
-    <router-outlet></router-outlet>
-  </section>
+<section class="home-section">
+  <div class="text"></div>
+  <router-outlet></router-outlet>
+</section>

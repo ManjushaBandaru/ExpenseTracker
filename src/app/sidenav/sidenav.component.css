@@ -285,9 +285,11 @@
   .image{
     color: white;
   }
-  .main-content {
-    background-color: var(--color-default);
-  }
-  
+ 
+ ::ng-deep.p-toolbar {
+  background-color: var(--color-default) !important;
+ }
 
-  
+ ::ng-deep.p-ripple.p-element.p-menuitem-link.ng-star-inserted {
+  text-decoration: none !important;
+ }

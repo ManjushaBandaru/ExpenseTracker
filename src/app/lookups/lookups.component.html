@@ -9,9 +9,6 @@
                 <button pButton pRipple label="Clear" [outlined]="true" icon="pi pi-filter-slash"
                     (click)="clear(Rowtable)" class="clearbtn">
                 </button>
-                <!-- <mat-slide-toggle (click)="onslidetoggle()" (change)="onSlideToggleChange($event)"[checked]="isActiveToggle" class="accent-text"  checked>
-                    <span>IsActive Records</span>
-                  </mat-slide-toggle> -->
                 <button pButton label="Add lookups" icon="pi pi-plus" (click)="onAdd()" [outlined]="true"
                     class="clearbtn"></button>
             </div>
@@ -22,28 +19,19 @@
                 <th class="tablehead" pSortableColumn="Name">Name <p-sortIcon field="ID"></p-sortIcon></th>
                 <th class="tablehead" pSortableColumn="IsActive">IsActive <p-sortIcon field="IsAcitve"></p-sortIcon>
                 </th>
-                <!-- <th class="tablehead" pSortableColumn="CreatedBy">Created By <p-sortIcon field="CreatedBy"></p-sortIcon>
-                </th>
-                <th class="tablehead" pSortableColumn="UpdatedBy">Updated By <p-sortIcon field="UpdatedBy"></p-sortIcon>
-                </th>
-                <th class="tablehead" pSortableColumn="CreatedAt">Created At <p-sortIcon field="CreatedAt"></p-sortIcon>
-                </th>
-                <th class="tablehead" pSortableColumn="UpdatedAt">Updated At <p-sortIcon field="UpdatedAt"></p-sortIcon>
-                </th> -->
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-lookup>
+        <ng-template pTemplate="body" let-lookup let-expanded="expanded">
             <tr>
                 <td>
-                    <button type="button" pButton pRipple [pRowToggler]="lookup"
-                        class="p-button-text p-button-rounded p-button-plain"></button>
+                    <!-- <button type="button" pButton pRipple [pRowToggler]="lookup"
+                        class="p-button-text p-button-rounded p-button-plain"></button> -->
+                        <button type="button" pButton pRipple [pRowToggler]="lookup"
+                        class="p-button-text p-button-rounded p-button-plain"
+                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                 </td>
                 <td style="min-width: 12rem;">{{lookup.Name}}</td>
                 <td style="min-width: 12rem;">{{lookup.IsActive}}</td>
-                <!-- <td style="min-width: 12rem;">{{lookup.CreatedBy}}</td>
-                <td style="min-width: 12rem;">{{lookup.UpdatedBy}}</td>
-                <td style="min-width: 12rem;">{{lookup.CreatedAt | date:'dd-MM-yyyy'}}</td>
-                <td style="min-width: 12rem;">{{lookup.UpdatedAt | date:'dd-MM-yyyy'}}</td> -->
 
             </tr>
         </ng-template>
@@ -51,30 +39,26 @@
             <tr>
                 <td colspan="7">
                     <div class="p-3">
-                        <p-table [value]="lookup.LookUpDetails" dataKey="ID" responsiveLayout="scroll">
+                        <p-table [value]="lookup.expandLookupDetails" dataKey="ID" responsiveLayout="scroll">
                             <ng-template pTemplate="header">
             <tr>
                 <th class="tablehead" pSortableColumn="Name">Name <p-sortIcon field="Name"></p-sortIcon></th>
                 <th class="tablehead" pSortableColumn="Description">Description <p-sortIcon
                         field="Description"></p-sortIcon>
                 </th>
-                <th class="tablehead" pSortableColumn="IsAcitve">IsAcitve <p-sortIcon field="IsAcitve"></p-sortIcon>
-                <!-- <th class="tablehead" pSortableColumn="CreatedBy">Created By <p-sortIcon field="CreatedBy"></p-sortIcon>
-                <th class="tablehead" pSortableColumn="UpdatedBy">Updated By <p-sortIcon field="UpdatedBy"></p-sortIcon> -->
+                <th class="tablehead" pSortableColumn="IsAcitve">IsActive <p-sortIcon field="IsAcitve"></p-sortIcon>
                 <th class="tablehead" pSortableColumn="CreatedAt">Created At <p-sortIcon field="CreatedAt"></p-sortIcon>
                 <th class="tablehead" pSortableColumn="UpdatedAt">Updated At <p-sortIcon field="UpdatedAt"></p-sortIcon>
                 </th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-LookUpDetail>
+        <ng-template pTemplate="body" let-lookUpDetail>
             <tr>
-                <td>{{LookUpDetail.Name}}</td>
-                <td>{{LookUpDetail.Description}}</td>
-                <td>{{LookUpDetail.IsAcitve}}</td>
-                <!-- <td>{{LookUpDetail.CreatedBy}}</td>
-                <td>{{LookUpDetail.UpdatedBy}}</td> -->
-                <td>{{LookUpDetail.CreatedAt | date:'dd-MM-yyyy'}}</td>
-                <td>{{LookUpDetail.UpdatedAt | date:'dd-MM-yyyy'}}</td>
+                <td>{{lookUpDetail.name}}</td>
+                <td>{{lookUpDetail.description}}</td>
+                <td>{{lookUpDetail.isActive}}</td>
+                <td>{{lookUpDetail.createdAt | date:'dd-MM-yyyy'}}</td>
+                <td>{{lookUpDetail.updatedAt | date:'dd-MM-yyyy'}}</td>
             </tr>
         </ng-template>
     </p-table>

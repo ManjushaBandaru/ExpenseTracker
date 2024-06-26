@@ -32,7 +32,8 @@
         <div class="col-md-4 mb-4">
             <div class="card expensecard shadow-sm">
                 <div class="card-header titles">
-                    Pendings Approvals Based On Month
+                    Pending Approvals Based On Month
+                    <i class="pi pi-eye icon" style="font-size: 1.5rem" (click)="viewpendingDetails()"></i>
                 </div>
                 <div class="card-body text-center">
                     <strong>{{ totalPendingApprovals }}</strong>
@@ -49,81 +50,155 @@
                     (Daily/Monthly/Yearly)
                 </div>
                 <div class="card-body">
-                    <div class="d-flex justify-content-center gap-3">
-                        <div>
-                            <p-radioButton name="creditDebitTimeframe" value="date" [(ngModel)]="creditDebitTimeframe"
-                                inputId="creditDebitDate" (onClick)="updateCreditDebitChart()" />
-                            <label for="creditDebitDate">
-                                Date
-                            </label>
+                    <div class="col-12 d-flex">
+                        <div class="col-6 gap-3">
+                            <span>
+                                <p-radioButton value="date" [(ngModel)]="creditDebitTimeframe" inputId="categoryDate"
+                                    (click)="GetCreditDebitGraphBasedOnMonthYear()" />
+                                <span style="margin-right: 3px;"></span>
+                                <label for="categoryDate">Date</label>
+                                <span style="margin-right: 10px;"></span>
+                            </span>
+                            <span>
+                                <p-radioButton value="month" [(ngModel)]="creditDebitTimeframe" inputId="categoryMonth"
+                                    (click)="GetCreditDebitGraphBasedOnMonthYear()" />
+                                <span style="margin-right: 3px;"></span>
+                                <label for="categoryMonth">Month</label>
+                                <span style="margin-right: 10px;"></span>
+                            </span>
+                            <span>
+                                <p-radioButton value="year" [(ngModel)]="creditDebitTimeframe" inputId="categoryYear"
+                                    (click)="GetCreditDebitGraphBasedOnMonthYear()" />
+                                <span style="margin-right: 3px;"></span>
+                                <label for="categoryYear">Year</label>
+                            </span>
                         </div>
-                        <div>
-                            <p-radioButton name="creditDebitTimeframe" value="month" [(ngModel)]="creditDebitTimeframe"
-                                inputId="creditDebitMonth" (onClick)="updateCreditDebitChart()" />
-                            <label for="creditDebitMonth">
-                                Month
-                            </label>
-                        </div>
-                        <div>
-                            <p-radioButton name="creditDebitTimeframe" value="year" [(ngModel)]="creditDebitTimeframe"
-                                inputId="creditDebitYear" (onClick)="updateCreditDebitChart()" />
-                            <label for="creditDebitYear">
-                                Year
-                            </label>
-                        </div>
-                        <div class="flex">
-                            <i class="pi pi-chevron-left iconleft"
-                                style="color: #004f83;position: relative;left:195px;"></i>
+                        <div class="col-6">
+                            <span *ngIf="creditDebitTimeframe === 'date'; else monthContent">
+                                <i class="pi pi-chevron-left iconleft " style="color: #004f83;"></i>
+                                <p-calendar class="charts_date_picker" [(ngModel)]="date1" [showIcon]="true"
+                                    [yearNavigator]="true" />
+                                <i class="pi pi-chevron-right iconright" style="color: #004f83;"></i>
+                                <!-- <p class="text-xs">{{ this.selectedDate}}</p> -->
+                            </span>
+                            <ng-template #monthContent>
+                                <span *ngIf="creditDebitTimeframe === 'month'; else yearContent">
+                                    <i class="pi pi-chevron-left iconleft " style="color: #004f83;"></i>
+                                    <p-calendar class="charts_month_picker" [(ngModel)]="month" view="month"
+                                        [showIcon]="true" dateFormat="mm/yy" [yearNavigator]="true" />
+                                    <i class="pi pi-chevron-right iconright" style="color: #004f83;"></i>
+                                    <!-- <p class="text-xs">{{formatMonth(this.month)}}/{{this.year}}</p> -->
+                                </span>
+                                <ng-template #yearContent>
+                                    <i class="pi pi-chevron-left iconleft " style="color: #004f83;"></i>
+                                    <p-calendar class="charts_year_picker" [(ngModel)]="year" view="year"
+                                        dateFormat="yy" [showIcon]="true" [yearNavigator]="true" />
+                                    <i class="pi pi-chevron-right iconright" style="color: #004f83;"></i>
+                                    <!-- <p class="text-xs">{{this.year}}</p> -->
+                                </ng-template>
+                            </ng-template>
+                            <!-- <i class="pi pi-chevron-left iconleft " style="color: #004f83;"></i>
                             <label for="buttondisplay" class="font-bold block mb-2"></label>
-                            <p-calendar [(ngModel)]="date1" [showIcon]="true" inputId="buttondisplay"
-                                [showOnFocus]="false" appendTo="body" />
-                            <i class="pi pi-chevron-right iconright" style="color: #004f83;position: relative;"></i>
+                            <div *ngIf="creditDebitTimeframe === 'date'">
+                                <p-calendar class="charts_date_picker" [(ngModel)]="date1" [showIcon]="true"
+                                    inputId="buttondisplay" [yearNavigator]="true" />
+                            </div>
+                            <div *ngIf="creditDebitTimeframe === 'month'">
+                                <p-calendar class="charts_date_picker" [(ngModel)]="month" view="month"
+                                    [showIcon]="true" dateFormat="mm/yy" inputId="buttondisplay"
+                                    [yearNavigator]="true" />
+                            </div>
+                            <div *ngIf="creditDebitTimeframe === 'year'">
+                                <p-calendar class="charts_date_picker" [(ngModel)]="year" view="year" dateFormat="yy"
+                                    [showIcon]="true" [yearNavigator]="true" />
+                            </div>
+                            <i class="pi pi-chevron-right iconright" style="color: #004f83;"></i> -->
                         </div>
                     </div>
-                    <p-chart type="bar" [data]="creditDebitData" [options]="creditDebitOptions" />
+                    <br>
+                    <div class="col-12">
+                        <p-chart type="bar" [data]="categoryData" [options]="categoryOptions" />
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="card bar-graph shadow-sm">
                 <div class="card-header titles">
-                    Categories
+                    Expenditure
                     Based On
-                    (Daily/Monthly/Yearly)
+                    Category
                 </div>
                 <div class="card-body">
-                    <div class="d-flex justify-content-center gap-3">
-                        <div>
-                            <p-radioButton name="categoryTimeframe" value="date" [(ngModel)]="categoryTimeframe"
-                                inputId="categoryDate" (onClick)="updateCategoryChart()" />
-                            <label for="categoryDate">
-                                Date
-                            </label>
+                    <div class="col-12 d-flex">
+                        <div class="col-6 gap-3">
+                            <span>
+                                <p-radioButton value="date" [(ngModel)]="categoryTimeframe" inputId="categoryDate"
+                                    (click)="GetCategorygraphBasedonDatemonthandyear()" />
+                                <span style="margin-right: 3px;"></span>
+                                <label for="categoryDate">Date</label>
+                                <span style="margin-right: 10px;"></span>
+                            </span>
+                            <span>
+                                <p-radioButton value="month" [(ngModel)]="categoryTimeframe" inputId="categoryMonth"
+                                    (click)="GetCategorygraphBasedonDatemonthandyear()" />
+                                <span style="margin-right: 3px;"></span>
+                                <label for="categoryMonth">Month</label>
+                                <span style="margin-right: 10px;"></span>
+                            </span>
+                            <span>
+                                <p-radioButton value="year" [(ngModel)]="categoryTimeframe" inputId="categoryYear"
+                                    (click)="GetCategorygraphBasedonDatemonthandyear()" />
+                                <span style="margin-right: 3px;"></span>
+                                <label for="categoryYear">Year</label>
+                            </span>
                         </div>
-                        <div>
-                            <p-radioButton name="categoryTimeframe" value="month" [(ngModel)]="categoryTimeframe"
-                                inputId="categoryMonth" (onClick)="updateCategoryChart()" />
-                            <label for="categoryMonth">
-                                Month
-                            </label>
-                        </div>
-                        <div>
-                            <p-radioButton name="categoryTimeframe" value="year" [(ngModel)]="categoryTimeframe"
-                                inputId="categoryYear" (onClick)="updateCategoryChart()" />
-                            <label for="categoryYear">
-                                Year
-                            </label>
-                        </div>
-                        <div class="flex">
-                            <i class="pi pi-chevron-left iconleft "
-                                style="color: #004f83;position: relative;left:195px;"></i>
+                        <div class="col-6">
+                            <span *ngIf="categoryTimeframe === 'date'; else monthContent">
+                                <i class="pi pi-chevron-left iconleft " style="color: #004f83;"></i>
+                                <p-calendar class="charts_date_picker" [(ngModel)]="date1" [showIcon]="true"
+                                    [yearNavigator]="true" />
+                                <i class="pi pi-chevron-right iconright" style="color: #004f83;"></i>
+                                <!-- <p class="text-xs">{{ this.selectedDate}}</p> -->
+                            </span>
+                            <ng-template #monthContent>
+                                <span *ngIf="categoryTimeframe === 'month'; else yearContent">
+                                    <i class="pi pi-chevron-left iconleft " style="color: #004f83;"></i>
+                                    <p-calendar class="charts_month_picker" [(ngModel)]="month" view="month"
+                                        [showIcon]="true" dateFormat="mm/yy" [yearNavigator]="true" />
+                                    <i class="pi pi-chevron-right iconright" style="color: #004f83;"></i>
+                                    <!-- <p class="text-xs">{{formatMonth(this.month)}}/{{this.year}}</p> -->
+                                </span>
+                                <ng-template #yearContent>
+                                    <i class="pi pi-chevron-left iconleft " style="color: #004f83;"></i>
+                                    <p-calendar class="charts_year_picker" [(ngModel)]="year" view="year"
+                                        dateFormat="yy" [showIcon]="true" [yearNavigator]="true" />
+                                    <i class="pi pi-chevron-right iconright" style="color: #004f83;"></i>
+                                    <!-- <p class="text-xs">{{this.year}}</p> -->
+                                </ng-template>
+                            </ng-template>
+                            <!-- <i class="pi pi-chevron-left iconleft " style="color: #004f83;"></i>
                             <label for="buttondisplay" class="font-bold block mb-2"></label>
-                            <p-calendar [(ngModel)]="date1" [showIcon]="true" inputId="buttondisplay"
-                                [showOnFocus]="false" appendTo="body" />
-                            <i class="pi pi-chevron-right iconright" style="color: #004f83;position: relative;"></i>
+                            <div *ngIf="categoryTimeframe === 'date'">
+                                <p-calendar class="charts_date_picker" [(ngModel)]="date1" [showIcon]="true"
+                                    inputId="buttondisplay" [yearNavigator]="true" />
+                            </div>
+                            <div *ngIf="categoryTimeframe === 'month'">
+                                <p-calendar class="charts_date_picker" [(ngModel)]="month" view="month"
+                                    [showIcon]="true" dateFormat="mm/yy" inputId="buttondisplay"
+                                    [yearNavigator]="true" />
+                            </div>
+                            <div *ngIf="categoryTimeframe === 'year'">
+                                <p-calendar class="charts_date_picker" [(ngModel)]="year" view="year" dateFormat="yy"
+                                    [showIcon]="true" [yearNavigator]="true" />
+                            </div>
+                            <i class="pi pi-chevron-right iconright" style="color: #004f83;"></i> -->
                         </div>
                     </div>
-                    <p-chart type="bar" [data]="categoryData" [options]="categoryOptions" />
+                    <br>
+                    <div class="col-12">
+                        <p-chart type="bar" [data]="categoryData" [options]="categoryOptions" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -176,15 +251,28 @@
                 <div class="card-header titles">
                     Investment And Expenditure Yearly
                 </div>
-                <div class="card-body d-flex text-center">
-                    <div class="flex-fill">
+                <div class="card-body flex text-center">
+                    <div *ngFor="let budget of yearlyBudget">
+                        <div class="col-12 d-flex">
+                            <div class="col-6">
+                                <strong>Credit</strong>
+                                <p>{{ budget.TotalBudget | currency: 'INR' : 'symbol'}}</p>
+                            </div>
+                            <div class="vr"></div>
+                            <div class="col-6" style="margin-left: -18px;">
+                                <strong>Debit</strong>
+                                <p>{{ budget.TotalExpenses | currency: 'INR' : 'symbol'}}</p>
+                            </div>
+                        </div>
+                        <!-- <div class="flex-fill">
                         <strong>Credit</strong>
-                        <p>{{ credit }}</p>
-                    </div>
-                    <div class="vr"></div>
-                    <div class="flex-fill">
+                        <p>{{ budget.TotalBudget}}</p>
+                    </div> -->
+                        <!-- <div class="vr"></div> -->
+                        <!-- <div class="flex-fill">
                         <strong>Debit</strong>
-                        <p>{{ debit }}</p>
+                        <p>{{ budget.TotalExpenses}}</p>
+                    </div> -->
                     </div>
                 </div>
             </div>
@@ -195,8 +283,7 @@
 <p-dialog header="Approval Details" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }"
     [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
     <p-table #myTab [paginator]="true" [rows]="5" [showCurrentPageReport]="true" [value]="ApprovalData"
-        [globalFilterFields]="['CategoryName', 'TotalAmount','StatusName']"
-        [tableStyle]="{ 'width': '100%' }"
+        [globalFilterFields]="['CategoryName', 'TotalAmount','StatusName']" [tableStyle]="{ 'width': '100%' }"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [rowsPerPageOptions]="[5, 10, 25, 50]"
         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -209,7 +296,7 @@
                         Category Name
                     </div>
                 </th>
-                <th class="table-head"  style="min-width: 14rem">
+                <th class="table-head" style="min-width: 14rem">
                     <div class="flex justify-content-between align-items-center">
                         Total Amount
                     </div>
@@ -227,6 +314,46 @@
                 <td>{{ ApprovalData.CategoryName }}</td>
                 <td>{{ ApprovalData.TotalAmount }}</td>
                 <td>{{ ApprovalData.StatusName }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-dialog>
+
+
+<p-dialog header="Pending Approval Details" [modal]="true" [(visible)]="pendingVisible" [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+    <p-table #myTab [paginator]="true" [rows]="5" [showCurrentPageReport]="true" [value]="PendingApprovalData"
+        [globalFilterFields]="['CategoryName', 'TotalAmount','StatusName']" [tableStyle]="{ 'width': '100%' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[5, 10, 25, 50]"
+        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        paginatorLocale="en-US">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="table-head" style="min-width: 17rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Category Name
+                    </div>
+                </th>
+                <th class="table-head" style="min-width: 14rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Total Amount
+                    </div>
+                </th>
+                <th class="table-head" style="min-width: 14rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Status Name
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-PendingApprovalData>
+            <tr>
+                <td>{{ PendingApprovalData.CategoryName }}</td>
+                <td>{{ PendingApprovalData.TotalAmount }}</td>
+                <td>{{ PendingApprovalData.StatusName }}</td>
             </tr>
         </ng-template>
     </p-table>
