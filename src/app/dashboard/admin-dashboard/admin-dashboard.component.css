@@ -49,8 +49,11 @@
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    transition: all 0.3s ease;
+    box-shadow: 0 6px 10px 0 ;
+    transition: 0.3s;
+}
+.card:hover.hover-color{
+    color:white;
 }
 
 .titles {
@@ -212,18 +215,15 @@ p-calendar input {
     font-size: 12px !important;
 }
 
-/* Adjust the calendar popup size */
 ::ng-deep .charts_year_picker .p-datepicker {
     font-size: 15px !important;
 }
 
-/* Adjust the calendar header */
 ::ng-deep .charts_year_picker .p-datepicker-header {
     padding: 5px !important;
     height: 55px !important;
 }
 
-/* Adjust the calendar table */
 ::ng-deep .charts_year_picker .p-datepicker table {
     font-size: 15px !important;
 }
