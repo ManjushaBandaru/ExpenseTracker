@@ -23,6 +23,7 @@ export class TotalexpensesinfoComponent implements OnInit {
   uniqueCategories: any[] = [];
   uniquePaymentMethods: any[] = [];
   uniqueStatuses: any[] = [];
+  maxDate: Date = new Date();
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private service:SecurityService) { }
 
@@ -33,22 +34,18 @@ export class TotalexpensesinfoComponent implements OnInit {
 
   expensesForm() {
     this.ExpenseForm = this.fb.group({
+      Id: [''],
       CategoryId: ['', [Validators.required]],
       Description: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       ExpenseDate: ['', [Validators.required]],
       Amount: ['', [Validators.required]],
       PaymentMethodId: ['', [Validators.required]],
       StatusId: ['', [Validators.required]],
-      uploaddocument: ['', [Validators.required]]
+      // uploaddocument: ['', [Validators.required]]
     });
   }
 
-  // ExpensesListdata(){
-  //   this.service.GetExpensesData().subscribe((Response:any)=>{
-  //     this.products = Response;
-  //     console.log(Response);
-  //   })
-  // }
+
   ExpensesListdata() {
     this.service.GetExpensesData().subscribe((response: any) => {
       // Store the full dataset for the table
@@ -74,12 +71,14 @@ export class TotalexpensesinfoComponent implements OnInit {
   }
   
 
-  onBasicUploadAuto(event: FileUploadEvent) {  // Updated method signature
+  onBasicUploadAuto(event: FileUploadEvent) {  
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
   }
 
   onAdd() {
     this.showform = true;
+    console.log(this.ExpenseForm.value);
+    
   }
 
   clear() {
@@ -95,20 +94,48 @@ export class TotalexpensesinfoComponent implements OnInit {
 
   onsubmit() {
     if(this.ExpenseForm.valid){
-      console.log(this.ExpenseForm.value);
-      
+      this.service.AddExpensesData(this.ExpenseForm.value).subscribe(resp =>{
+        console.log(this.ExpenseForm.value);
+        this.ExpensesListdata();
+      }, (error) => {
+        console.error,('Form is not valid unable to add Expense');
+      });
+    } else {
+      this.service.UpdateExpensesData(this.ExpenseForm.value).subscribe(Response =>{
+        console.log(this.ExpenseForm.value);
+        this.ExpensesListdata();
+      },(error)=>{
+        console.error,('Form is not valid unable to update Expense');
+      });
     }
     this.showform = false;
   }
-// AddExpenses(){
-//   this.service.AddExpenses(this.ExpenseForm.value).subscribe((a:any)=>{
-//     this.products=a;
-//     console.log(a);
-//   })
-// }
-  onEdit(){
 
+  onEdit(product: any) {
+    this.showform = true;
+  
+    // Ensure ExpenseDate is in the dd-MM-yyyy format
+    let expenseDate: string | null = null;
+    if (product.ExpenseDate) {
+      const date = new Date(product.ExpenseDate);
+      const day = ("0" + date.getDate()).slice(-2);
+      const month = ("0" + (date.getMonth() + 1)).slice(-2);
+      const year = date.getFullYear();
+      expenseDate = `${day}-${month}-${year}`;
+    }
+  
+    this.ExpenseForm.patchValue({
+      Id: product.Id,
+      CategoryId: product.CategoryId,
+      Description: product.Description,
+      ExpenseDate: expenseDate, // Use the formatted date
+      Amount: product.Amount,
+      PaymentMethodId: product.PaymentMethodId,
+      StatusId: product.StatusId
+    });
   }
+  
+  
 
   onDelete(){
     

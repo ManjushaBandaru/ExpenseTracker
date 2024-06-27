@@ -39,7 +39,6 @@ export class RolesComponent implements OnInit {
   RoleForm() {
     this.rolesForm = this.fb.group({
       Name: ['', Validators.required],
-      employeerole: ['', Validators.required],
       CreatedAt: [''],
       UpdatedAt: [''],
       IsActive: [false]
@@ -53,15 +52,20 @@ export class RolesComponent implements OnInit {
     })  }
 
   onAdd() {
-    // this.showform = true;
+    this.showform = true;
+    this.rolesForm.reset();
   }
 
-  // clear() {
-  //   // Example usage of myTab if needed
-  //   if (this.myTab) {
-  //     this.myTab.clear(); // Example method call on myTab
-  //   }
-  // }
+  onEdit(roles:any){
+    this.showform = true;
+    this.rolesForm.patchValue({
+      Name: roles.Name,
+      CreatedAt: roles.CreatedAt,
+      UpdatedAt: roles.UpdatedAt,
+      IsActive: roles.IsActive
+    })
+  }
+
   clear(table: any) {
     table.clear();
     this.RoleData();
@@ -76,7 +80,5 @@ export class RolesComponent implements OnInit {
     this.showform = false;
   }
 
-  onEdit(){
-    this.showform = true;
-  }
+ 
 }

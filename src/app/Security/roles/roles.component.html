@@ -6,7 +6,7 @@
     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
     paginatorLocale="en-US">
 
-    <!-- Caption Template -->
+    
     <ng-template pTemplate="caption">
       <div class="tablehead">
         <button pButton label="Clear" class="p-button-outlined clearbtn" icon="pi pi-filter-slash"
@@ -16,45 +16,45 @@
       </div>
     </ng-template>
 
-    <!-- Header Template -->
+    
     <ng-template pTemplate="header">
       <tr class="header-row">
-        <th class="table-head" pSortableColumn="Name" style="min-width: 14rem">
+        <th class="table-head" pSortableColumn="Name" style="width:15%">
           <div class="flex justify-content-between align-items-center">
             Name
             <p-sortIcon field="Name"></p-sortIcon>
             <p-columnFilter type="text" field="Name" display="menu" class="ml-auto"></p-columnFilter>
           </div>
         </th>
-        <th class="table-head" pSortableColumn="IsActive" style="min-width: 12rem">
+        <th class="table-head" pSortableColumn="IsActive" style="width:15%">
           <div class="flex justify-content-between align-items-center">
             Is Active
             <p-sortIcon field="IsActive"></p-sortIcon>
             <p-columnFilter type="text" field="IsActive" display="menu" class="ml-auto"></p-columnFilter>
           </div>
         </th>
-        <th class="table-head" pSortableColumn="CreatedAt" style="min-width: 14rem">
+        <th class="table-head" pSortableColumn="CreatedAt" style="width:15%">
           <div class="flex justify-content-between align-items-center">
-            Created Date
+            Created At
             <p-sortIcon field="CreatedAt"></p-sortIcon>
             <p-columnFilter type="text" field="CreatedAt" display="menu" class="ml-auto"></p-columnFilter>
           </div>
         </th>
-        <th class="table-head" pSortableColumn="CreatedByName" style="min-width: 14rem">
+        <th class="table-head" pSortableColumn="CreatedByName" style="width:15%">
           <div class="flex justify-content-between align-items-center">
             Created By
             <p-sortIcon field="CreatedByName"></p-sortIcon>
             <p-columnFilter type="text" field="CreatedByName" display="menu" class="ml-auto"></p-columnFilter>
           </div>
         </th>
-        <th class="table-head" pSortableColumn="UpdatedAt" style="min-width: 14rem">
+        <th class="table-head" pSortableColumn="UpdatedAt" style="width:15%">
           <div class="flex justify-content-between align-items-center">
-            Updated Date
+            Updated At
             <p-sortIcon field="UpdatedAt"></p-sortIcon>
             <p-columnFilter type="text" field="UpdatedAt" display="menu" class="ml-auto"></p-columnFilter>
           </div>
         </th>
-        <th class="table-head" pSortableColumn="UpdatedByName" style="min-width: 14rem">
+        <th class="table-head" pSortableColumn="UpdatedByName" style="width:15%">
           <div class="flex justify-content-between align-items-center">
             Updated By
             <p-sortIcon field="UpdatedByName"></p-sortIcon>
@@ -65,7 +65,7 @@
       </tr>
     </ng-template>
 
-    <!-- Body Template -->
+    
     <ng-template pTemplate="body" let-roles>
       <tr>
         <td>{{ roles.Name }}</td>
@@ -78,7 +78,7 @@
         <td>{{ roles.UpdatedByName }}</td>
         <td>
           <div class="d-flex">
-            <button class="btn" pTooltip="Edit" tooltipPosition="top" (click)="onEdit()">
+            <button class="btn" pTooltip="Edit" tooltipPosition="top" (click)="onEdit(roles)">
               <i class="pi pi-pencil" style="font-size: 1.2rem; color: lightslategrey"></i>
             </button> |
             <button class="btn" pTooltip="Delete" tooltipPosition="top" (click)="onDelete()">
@@ -94,7 +94,7 @@
 
 
 
-<p-dialog header="Roles Details" [(visible)]="showform" [style]="{width: '50vw'}">
+<p-dialog header="Roles Details" [(visible)]="showform" [style]="{width: '50vw'}"  [draggable]="false">
   <div class="card_body p-5">
     <form class="row" [formGroup]="rolesForm">
       <div class="col-md-6">
@@ -121,18 +121,6 @@
                   <small class="p-error" *ngIf="rolesForm.get('employeerole')?.errors?.['alphaOnly']">* Only
                       alphabets allowed.</small>
               </div>
-          </div> -->
-      <!-- <div class="col-md-6" *ngIf="isColumnSelected('CreatedAt')">
-              <label for="CreatedAt" class="form-label">Created At</label>
-              <input type="text" pInputText class="form-control user" id="CreatedAt" formControlName="CreatedAt"
-                  maxlength="50" placeholder="Enter Created At"
-                  [ngClass]="{'is-invalid ng-dirty': rolesForm.controls['CreatedAt'].touched && rolesForm.controls['CreatedAt'].errors}" />
-          </div>
-          <div class="col-md-6" *ngIf="isColumnSelected('UpdatedAt')">
-              <label for="UpdatedAt" class="form-label">Updated At</label>
-              <input type="text" pInputText class="form-control user" id="UpdatedAt" formControlName="UpdatedAt"
-                  maxlength="50" placeholder="Enter Updated At"
-                  [ngClass]="{'is-invalid ng-dirty': rolesForm.controls['UpdatedAt'].touched && rolesForm.controls['UpdatedAt'].errors}" />
           </div> -->
       <div class="col-md-6 d-flex align-items-center">
         <label for="IsActive" class="form-label mb-0 mr-2">Is Active</label>

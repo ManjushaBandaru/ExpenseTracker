@@ -34,7 +34,15 @@ export class SecurityService {
   }
 
   GetExpensesData(){
-    return this.Http.get('https://localhost:44319/api/expenses/GetAllExpenses()');
+    return this.Http.get('https://localhost:44319/api/expenses/GetAllExpenses');
+  }
+
+  AddExpensesData(body:any){
+    return this.Http.post('https://localhost:44319/api/expenses/AddupdateExpenses', body);
+  }
+
+  UpdateExpensesData(body:any){
+    return this.Http.put('https://localhost:44319/api/expenses/updateExpenses', body);
   }
 
   GetExpensesDropdowns(data:any){
@@ -54,4 +62,10 @@ export class SecurityService {
   AddDeposits(depositForm:any){
     return this.Http.post('https://localhost:44319/api/expenses/AddupdateDeposite',depositForm)
   }
+  UpdateDeposit(depositForm:any){
+    return this.Http.put('https://localhost:44319/api/expenses/UpdateDeposite',depositForm)
+  }
+  // Getdepositpaymentmethod(){
+  //   return this.Http.get('https://localhost:44319/api/expenses/GetLookUpDropdown?name=${name}')
+  // }
 }

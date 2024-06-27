@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Table } from 'primeng/table';
 import { SecurityService } from 'src/app/Services/security.service';
 
@@ -8,7 +8,7 @@ import { SecurityService } from 'src/app/Services/security.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
 
   userForm!: FormGroup;
   showform: boolean = false;
@@ -23,14 +23,9 @@ export class UsersComponent {
   ]; 
   globalFilterValue: string = '';
   @ViewChild('myTab') myTab!: Table;
-  currentuser:any;
+  currentUserName: string = 'CurrentUserName'; 
 
-  constructor(private securityService: SecurityService, public fb: FormBuilder) {
-    var userString = localStorage.getItem('CURRENTUSER');
-    if (userString) {
-      this.currentuser = JSON.parse(userString);
-    }
-  }
+  constructor(private securityService: SecurityService, public fb: FormBuilder) {}
 
   ngOnInit() {
     this.UsersData();
@@ -54,15 +49,14 @@ export class UsersComponent {
       EMail: ['', [Validators.required, Validators.email]],
       MobileNumber: ['', [Validators.required, Validators.pattern('[0-9]*')]],
       IsActive: [true, Validators.required],
-      CreatedByName: [null], 
-      UpdatedByName: [null], 
+      CreatedByName: [''], 
+      UpdatedByName: [''], 
       CreatedAt: [new Date()], 
       UpdatedAt: [new Date()], 
+      UserRolesReq: this.fb.array([
+        
+      ])
     });
-    this.userForm.get('CreatedByName')?.setValue(this.currentuser.Id);
-    this.userForm.get('UpdatedByName')?.setValue(this.currentuser.Id);
-    this.userForm.get('CreatedAt')?.patchValue(new Date());
-    this.userForm.get('UpdatedAt')?.patchValue(new Date());
   }
 
   UsersData() {
@@ -85,20 +79,22 @@ export class UsersComponent {
 
   Adduser() {
     if (this.userForm.invalid) {
-      // Handle validation errors
+
       return;
     }
-    // var UserRolesReq =[];
-    // UserRolesReq.push(this.userForm.value);
+
+    this.userForm.patchValue({
+      CreatedByName: this.currentUserName,
+      UpdatedByName: this.currentUserName
+    });
+
     this.securityService.AddUser(this.userForm.value).subscribe(
       () => {
-        // Handle success
         this.closeForm();
-        this.UsersData(); // Refresh user list after adding
-        this.userForm.reset(); // Optionally reset the form
+        this.UsersData(); 
+        this.userForm.reset();
       },
       (error) => {
-        // Handle error
         console.error('Error while adding user:', error);
       }
     );
@@ -127,32 +123,52 @@ export class UsersComponent {
       MobileNumber: user.MobileNumber,
       IsActive: user.IsActive,
       CreatedByName: user.CreatedByName,
-      UpdatedByName: this.currentuser.UpdatedByName,
-      CreatedAt: new Date(user.CreatedAt), // Convert string to Date object if necessary
-      UpdatedAt: new Date(),
-      UserRolesReq: user.UserRoles 
+      UpdatedByName: this.currentUserName,
+      CreatedAt: new Date(user.CreatedAt), 
+      UpdatedAt: new Date()
     });
 
-    this.showform = true; // Display the form dialog for editing
+   
+    const rolesArray = this.userForm.get('UserRolesReq') as FormArray;
+    rolesArray.clear();
+    user.UserRoles.forEach((role: any) => {
+      rolesArray.push(this.fb.group(role));
+    });
+
+    this.showform = true;
   }
 
   updateUser() {
     if (this.userForm.invalid) {
-      // Handle validation errors
       return;
     }
 
+    this.userForm.patchValue({
+      UpdatedByName: this.currentUserName,
+      UpdatedAt: new Date()
+    });
+
     this.securityService.UpdateUser(this.userForm.value).subscribe(
       () => {
-        // Handle success
         this.closeForm();
-        this.UsersData(); // Refresh user list after updating
+        this.UsersData(); 
       },
       (error) => {
-        // Handle error
         console.error('Error while updating user:', error);
       }
     );
+  }
+
+  get userRolesReq(): FormArray {
+    return this.userForm.get('UserRolesReq') as FormArray;
+  }
+
+  addUserRole(role: any) {
+    this.userRolesReq.push(this.fb.group(role));
+  }
+
+  removeUserRole(index: number) {
+    this.userRolesReq.removeAt(index);
   }
 
   onDelete(id: any) {
@@ -161,7 +177,6 @@ export class UsersComponent {
       this.securityService.Deleteuser(id).subscribe(
         () => {
           console.log('User deleted successfully with ID:', id);
-          // Remove the user from the array
           this.users = this.users.filter((user: any) => user.Id !== id);
         },
         (error) => {
@@ -175,36 +190,38 @@ export class UsersComponent {
 
   submit() {
     if (this.userForm.invalid) {
-      console.log
       return;
     }
-
+  
     const formData = this.userForm.value;
-
-    // Determine if it's an add or update operation based on Id presence
+  
     if (formData.Id) {
-      // Update user
+    
+      formData.UpdatedByName = this.currentUserName;
+      formData.UpdatedAt = new Date();
+  
       this.securityService.UpdateUser(formData).subscribe(
         () => {
-          // Handle success
           this.closeForm();
-          this.UsersData(); // Refresh user list after update
+          this.UsersData(); 
         },
         (error) => {
-          // Handle error
           console.error('Error updating user:', error);
         }
       );
     } else {
-      // Add new user
+     
+      formData.CreatedByName = this.currentUserName;
+      formData.UpdatedByName = this.currentUserName;
+      formData.CreatedAt = new Date();
+      formData.UpdatedAt = new Date();
+  
       this.securityService.AddUser(formData).subscribe(
         () => {
-          // Handle success
           this.closeForm();
-          this.UsersData(); // Refresh user list after add
+          this.UsersData(); 
         },
         (error) => {
-          // Handle error
           console.error('Error adding user:', error);
         }
       );

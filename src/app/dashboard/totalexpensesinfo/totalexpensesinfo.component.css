@@ -57,7 +57,9 @@ p-table th {
 
 .tablehead {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 20px;
+    /* justify-content: space-between; */
 }
 
 p-table {
