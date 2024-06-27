@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card"><h5>Expenses</h5>
     <p-table #myTab [value]="products" [tableStyle]="{ 'width': '100%' }" [paginator]="true" [rows]="5"
         [showCurrentPageReport]="true"
         [globalFilterFields]="['category', 'description', 'expensedate', 'paidamount', 'paymentmode', 'aprovalstatus', 'uploaddocument']"
@@ -50,8 +50,8 @@
                 <td>{{ product.PaymentMethodName }}</td>
                 <td>{{ product.StatusName }}</td>
                 <td>
-                    <div class="d-flex">
-                        <button class="btn" pTooltip="Edit" tooltipPosition="top" (click)="onEdit()">
+                    <div class="d-flex justify-content-center">
+                        <button class="btn" pTooltip="Edit" tooltipPosition="top" (click)="onEdit(product)">
                             <i class="pi pi-pencil" style="font-size: 1.2rem; color: lightslategrey"></i>
                         </button> |
                         <button class="btn" pTooltip="Delete" tooltipPosition="top" (click)="onDelete()">
@@ -65,14 +65,14 @@
 </div>
 
 
-<p-dialog header="Expense Details" [(visible)]="showform" [style]="{width: '50vw'}">
+<p-dialog header="Expense Details" [(visible)]="showform" [style]="{width: '50vw'}"  [draggable]="false">
     <div class="card_body p-5">
         <form class="row" [formGroup]="ExpenseForm">
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="CategoryId" class="form-label">Category <span style="color: red;">*</span></label><br>
-                    <p-dropdown formControlName="CategoryId" [options]="uniqueCategories" optionLabel="CategoryName" optionValue="CategoryId" appendTo="body"
-                        placeholder="Select a Category" />
+                    <p-dropdown formControlName="CategoryId" [options]="uniqueCategories" optionLabel="CategoryName"
+                        optionValue="CategoryId" appendTo="body" placeholder="Select a Category" />
                     <div
                         *ngIf="ExpenseForm.get('CategoryId')?.invalid && (ExpenseForm.get('CategoryId')?.dirty || ExpenseForm.get('CategoryId')?.touched)">
                         <small class="p-error" *ngIf="ExpenseForm.get('CategoryId')?.errors?.['required']">* Category is
@@ -96,9 +96,10 @@
 
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="ExpenseDate" class="form-label">Expense Date <span style="color: red;">*</span></label>
+                    <label for="ExpenseDate" class="form-label">Purchased Date <span
+                            style="color: red;">*</span></label>
                     <p-calendar formControlName="ExpenseDate" [showIcon]="true" [showOnFocus]="false"
-                        placeholder="Select Expense Date" inputId="buttondisplay" appendTo="body" />
+                        inputId="buttondisplay" appendTo="body" placeholder="Select Expense Date" />
                     <div
                         *ngIf="ExpenseForm.get('ExpenseDate')?.invalid && (ExpenseForm.get('ExpenseDate')?.dirty || ExpenseForm.get('ExpenseDate')?.touched)">
                         <small class="p-error" *ngIf="ExpenseForm.get('ExpenseDate')?.errors?.['required']">* Expense
@@ -121,19 +122,21 @@
                 <div class="col-md-6">
                     <label for="PaymentMethodId" class="form-label">Payment Mode <span
                             style="color: red;">*</span></label><br>
-                    <p-dropdown formControlName="PaymentMethodId" [options]="uniquePaymentMethods" optionLabel="PaymentMethodName" optionValue="PaymentMethodId" appendTo="body"
+                    <p-dropdown formControlName="PaymentMethodId" [options]="uniquePaymentMethods"
+                        optionLabel="PaymentMethodName" optionValue="PaymentMethodId" appendTo="body"
                         placeholder="Select a Payment Mode" />
                     <div
                         *ngIf="ExpenseForm.get('PaymentMethodId')?.invalid && (ExpenseForm.get('PaymentMethodId')?.dirty || ExpenseForm.get('PaymentMethodId')?.touched)">
-                        <small class="p-error" *ngIf="ExpenseForm.get('PaymentMethodId')?.errors?.['required']">* Payment
+                        <small class="p-error" *ngIf="ExpenseForm.get('PaymentMethodId')?.errors?.['required']">*
+                            Payment
                             Mode is required.</small>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label for="StatusId" class="form-label">Approval Status <span
                             style="color: red;">*</span></label><br>
-                    <p-dropdown formControlName="StatusId" [options]="uniqueStatuses" optionLabel="StatusName" optionValue="StatusId"
-                        appendTo="body" placeholder="Select an Approval Status" />
+                    <p-dropdown formControlName="StatusId" [options]="uniqueStatuses" optionLabel="StatusName"
+                        optionValue="StatusId" appendTo="body" placeholder="Select an Approval Status" />
                     <div
                         *ngIf="ExpenseForm.get('StatusId')?.invalid && (ExpenseForm.get('StatusId')?.dirty || ExpenseForm.get('StatusId')?.touched)">
                         <small class="p-error" *ngIf="ExpenseForm.get('StatusId')?.errors?.['required']">* Approval
@@ -142,7 +145,7 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
+            <!-- <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="uploaddocument" class="form-label">Upload Image <span
                             style="color: red;">*</span></label>
@@ -156,7 +159,7 @@
                             Image is required.</small>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </form>
     </div>
     <ng-template pTemplate="footer">

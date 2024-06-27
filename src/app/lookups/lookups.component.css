@@ -14,3 +14,8 @@
     border-radius: 5px;
     margin-bottom: 10px;
 }
+.btnhead{
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
