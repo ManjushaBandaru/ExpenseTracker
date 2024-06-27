@@ -65,7 +65,7 @@
 </div>
 
 
-<p-dialog header="Expense Details" [(visible)]="showform" [style]="{width: '50vw'}"  [draggable]="false">
+<p-dialog header="Add Expenses" [(visible)]="showform" [style]="{width: '50vw'}"  [draggable]="false">
     <div class="card_body p-5">
         <form class="row" [formGroup]="ExpenseForm">
             <div class="row mb-3">
@@ -98,8 +98,8 @@
                 <div class="col-md-6">
                     <label for="ExpenseDate" class="form-label">Purchased Date <span
                             style="color: red;">*</span></label>
-                    <p-calendar formControlName="ExpenseDate" [showIcon]="true" [showOnFocus]="false"
-                        inputId="buttondisplay" appendTo="body" placeholder="Select Expense Date" />
+                    <p-calendar formControlName="ExpenseDate" [showIcon]="true" [showOnFocus]="false" [maxDate]="maxDate"
+                        inputId="buttondisplay" appendTo="body" placeholder="Select Purchase Date" />
                     <div
                         *ngIf="ExpenseForm.get('ExpenseDate')?.invalid && (ExpenseForm.get('ExpenseDate')?.dirty || ExpenseForm.get('ExpenseDate')?.touched)">
                         <small class="p-error" *ngIf="ExpenseForm.get('ExpenseDate')?.errors?.['required']">* Expense

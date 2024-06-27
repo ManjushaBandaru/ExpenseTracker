@@ -23,6 +23,7 @@ export class TotalexpensesinfoComponent implements OnInit {
   uniqueCategories: any[] = [];
   uniquePaymentMethods: any[] = [];
   uniqueStatuses: any[] = [];
+  maxDate: Date = new Date();
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private service:SecurityService) { }
 
