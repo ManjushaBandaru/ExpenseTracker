@@ -47,18 +47,37 @@ export class UsersComponent implements OnInit {
       Password: ['', Validators.required],
       RoleId: ['', Validators.required],
       EMail: ['', [Validators.required, Validators.email]],
-      MobileNumber: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+      MobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       IsActive: [true, Validators.required],
       CreatedByName: [''], 
       UpdatedByName: [''], 
       CreatedAt: [new Date()], 
       UpdatedAt: [new Date()], 
       UserRolesReq: this.fb.array([
-        
+        this.fb.group({
+          RoleId: ['']
+        })
       ])
     });
   }
-
+  onFirstNameInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value.replace(/[^a-zA-Z ]/g, '');
+    inputElement.value = value;
+    this.userForm.controls['FirstName'].setValue(value);
+  }
+  onLastNameInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value.replace(/[^a-zA-Z ]/g, '');
+    inputElement.value = value;
+    this.userForm.controls['LastName'].setValue(value);
+  }
+  onUserNameInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value.replace(/[^a-zA-Z ]/g, '');
+    inputElement.value = value;
+    this.userForm.controls['UserName'].setValue(value);
+  }
   UsersData() {
     this.securityService.GetUsers().subscribe((data: any) => {
       this.users = data;

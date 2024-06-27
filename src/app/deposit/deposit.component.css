@@ -1,13 +1,8 @@
 /* .tablehead{
     display: flex;
-<<<<<<< HEAD
-    justify-content: space-between;
-} */
-=======
     justify-content: flex-end;
     gap: 20px;
 }
->>>>>>> 146afb020da25a4c3480d73323bb31b375506a88
 .table-head{
     background-color: var(--color-default);
     color: white;
@@ -20,7 +15,7 @@
 p-table {
     width: 100%;
     border-collapse: collapse; /* Ensure borders are collapsed */
-}
+
 
 p-table th, p-table td {
     border: 1px solid #ddd; /* Grid lines */
@@ -40,4 +35,10 @@ p-table tr:nth-child(even) {
 
 p-table tr:hover {
     background-color: #ddd; /* Optional: Highlight rows on hover */
+}
+
+.tablehead{
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px
 }

@@ -1,8 +1,8 @@
 <div class="card flex flex-wrap gap-3 p-fluid">
-  <div class="flex-auto d-flex">
-    <div class="col-3 custom-col"> 
-      <div class="flex items-center"> 
-        <label for="buttondisplay" class="font-bold block mb-2"> FromDate: </label>
+  <div class="flex-auto d-flex align-items-center">
+    <div class="col-3 custom-col">
+      <div class="flex items-center">
+        <label for="buttondisplay" class="font-bold block mb-2">From Date:</label>
         <p-calendar 
           [(ngModel)]="date1" 
           [showIcon]="true" 
@@ -14,9 +14,9 @@
         </p-calendar>
       </div>
     </div>
-    <div class="col-3 custom-col"> 
-      <div class="flex items-center"> 
-        <label for="icondisplay" class="font-bold block mb-2"> ToDate: </label>
+    <div class="col-3 custom-col" style="margin-left: 20px;">
+      <div class="flex items-center">
+        <label for="icondisplay" class="font-bold block mb-2">To Date:</label>
         <p-calendar 
           [(ngModel)]="date2" 
           [showIcon]="true" 
@@ -28,37 +28,90 @@
         </p-calendar>
       </div>
     </div>
+    <!-- <div class="button-row ml-4">
+      <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+      <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning ml-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+    </div> -->
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
- 
-  <div class="card bar-graph mb-4">
-    <div class="card-header titles">
-      <div class="monthly-title">
-        Monthly Data Overview
+<!-- 
+   <div class="card" id="main-card">
+    <div class="table-header flex flex-column mb-3">
+      <div class="flex justify-content-center align-items-center mb-2">
+        <div class="report-title">
+          <h2 style="text-align: center;">Expenses Report - {{currentMonth}} {{currentYear}}</h2>
+        </div>
       </div>
-      <div class="button-row">
-        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
-        <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning" style="margin-left: 8px;" pTooltip="PDF" tooltipPosition="bottom"></button>
+      <div class="flex justify-content-between align-items-center">
+        <div class="amounts">
+          <span class="carry-forward-amount">Carry Forward Amount: {{carryForwardAmount}}</span>
+          <span class="total-amount" style="margin-left: 70px;">Total Amount: {{totalAmount}}</span>
+        </div>
       </div>
     </div>
-    <div class="card-body">
-      <p-chart type="bar" [data]="data" [options]="options"></p-chart>
-    </div>
-  </div>
   
-
-
-
-
-
-
+    <p-table #myTab [paginator]="true" [rows]="5" [showCurrentPageReport]="true" [value]="reports"
+      [globalFilterFields]="['PurchasedDate', 'Category', 'PurchasedBy', 'Amount', 'Status']"
+      [tableStyle]="{ 'width': '100%' }"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [rowsPerPageOptions]="[5, 10, 25, 50]"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      paginatorLocale="en-US">
+  
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="table-head" pSortableColumn="PurchasedDate" style="width:20%">
+            <div class="flex justify-content-between align-items-center">
+              Purchased Date
+              <p-sortIcon field="PurchasedDate"></p-sortIcon>
+              <p-columnFilter type="text" field="PurchasedDate" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+          <th class="table-head" pSortableColumn="Category" style="width:20%">
+            <div class="flex justify-content-between align-items-center">
+              Category
+              <p-sortIcon field="Category"></p-sortIcon>
+              <p-columnFilter type="text" field="Category" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+          <th class="table-head" pSortableColumn="PurchasedBy" style="width:20%">
+            <div class="flex justify-content-between align-items-center">
+              Purchased By
+              <p-sortIcon field="PurchasedBy"></p-sortIcon>
+              <p-columnFilter type="text" field="PurchasedBy" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+          <th class="table-head" pSortableColumn="Amount" style="width:20%">
+            <div class="flex justify-content-between align-items-center">
+              Amount
+              <p-sortIcon field="Amount"></p-sortIcon>
+              <p-columnFilter type="text" field="Amount" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+          <th class="table-head" pSortableColumn="Status" style="width:20%">
+            <div class="flex justify-content-between align-items-center">
+              Status
+              <p-sortIcon field="Status"></p-sortIcon>
+              <p-columnFilter type="text" field="Status" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+  
+      <ng-template pTemplate="body" let-deposits>
+        <tr>
+          <td>{{ deposits.PurchasedDate }}</td>
+          <td>{{ deposits.Category }}</td>
+          <td>{{ deposits.PurchasedBy }}</td>
+          <td>{{ deposits.Amount }}</td>
+          <td>{{ deposits.Status }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+   -->
+   <span>
+    <button (click)="exportPdf()" pButton class="p-button doc_button mx-2" id="holiday_PDFBtn"
+        pTooltip="Download Holidays PDF" icon="pi pi-file-pdf"></button>
+</span>

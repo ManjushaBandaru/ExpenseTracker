@@ -3,118 +3,230 @@ import * as XLSX from 'xlsx';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { saveAs } from 'file-saver';
-import { FormGroup } from '@angular/forms';
+// import * as pdfMake from 'pdfmake/build/pdfmake';
+// import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+ 
+// (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.css']
 })
-export class ReportsComponent implements OnInit {
-  data: any;
-  options: any;
-  example: any[] = [];
+export class ReportsComponent  {
   date1: Date | undefined;
   date2: Date | undefined;
+  datePipe: any;
+  selectedYear: any;
+  year: any;
+  alertMessage: any;
+  holidays: any;
+  // carryForwardAmount: number = 0;
+  // totalAmount: number = 0;
+  // reports: any[] = [];
+
+  // currentMonth = new Date().toLocaleString('default', { month: 'long' });
+  // currentYear = new Date().getFullYear();
+
+  // ngOnInit() {
+  //   this.calculateAmounts(); 
+  // }
+
+  // calculateAmounts() {
+  //   this.carryForwardAmount = this.reports.reduce((sum, item) => sum + item.CarryForwardAmount, 0);
+  //   this.totalAmount = this.reports.reduce((sum, item) => sum + item.Amount, 0);
+  // }
+
+  // clear(table: any) {
+  // }
+
+  // onAdd() {
+  // }
 
   constructor() {
-    this.example = [];
+    // (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
   }
 
-  ngOnInit() {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+  
+  getBase64ImageFromURL(url: string) {
+    return new Promise((resolve, reject) => {
+      var img = new Image();
+      img.setAttribute("crossOrigin", "anonymous");
 
-    this.data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      datasets: [
-        {
-          label: 'My First dataset',
-          backgroundColor: documentStyle.getPropertyValue('--blue-500'),
-          borderColor: documentStyle.getPropertyValue('--blue-500'),
-          data: [65, 59, 80, 81, 56, 55, 40, 30, 20, 10, 5, 15] // Example data for each month
-        },
-        {
-          label: 'My Second dataset',
-          backgroundColor: documentStyle.getPropertyValue('--pink-500'),
-          borderColor: documentStyle.getPropertyValue('--pink-500'),
-          data: [28, 48, 40, 19, 86, 27, 90, 70, 50, 35, 25, 45] // Example data for each month
-        }
-      ]
-    };
+      img.onload = () => {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx!.drawImage(img, 0, 0);
+        var dataURL = canvas.toDataURL("image/png");
+        resolve(dataURL);
+      };
 
-    this.options = {
-      maintainAspectRatio: false,
-      aspectRatio: 0.8,
-      plugins: {
-        legend: {
-          labels: {
-            color: textColor
-          }
-        }
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: textColorSecondary,
-            font: {
-              weight: 500
-            }
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false
-          }
-        },
-        y: {
-          ticks: {
-            color: textColorSecondary
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false
-          }
-        }
-      }
-    };
-  }
+      img.onerror = error => {
+        reject(error);
+      };
 
-  exportPdf() {
-    import('jspdf').then((module) => {
-      const jsPDF = module.default;
-
-      import('jspdf-autotable').then((x) => {
-        const doc = new jsPDF();
-        const data: any[][] = this.example.map((example: any) => [
-          // Example mapping logic if needed
-        ]);
-
-        doc.save('example.pdf');
-      });
+      img.src = url;
     });
   }
-
-  exportExcel() {
-    if (!this.example || this.example.length === 0) {
-      console.error('No data available to export.');
-      return;
-    }
-
+  async pdfHeader() {
     try {
-      const data: any[] = this.example.map((example: any) => ({
-        // Example mapping logic if needed
-      }));
+      const headerImage1 = await this.getBase64ImageFromURL('assets/layout/images/Calibrage_logo1.png');
+      const headerImage2 = await this.getBase64ImageFromURL('assets/layout/images/head_right.PNG');
+      const pageWidth = 841.89;
+      const imageWidth = (pageWidth / 4) - 10;
 
-      const worksheet = XLSX.utils.json_to_sheet(data);
+      let row = {
+        columns: [
+          {
+            image: headerImage1,
+            width: imageWidth,
+            alignment: 'left',
+            margin: [0, 0, 0, 0] 
+          },
+          {
+            width: '*',
+            text: '', 
+            alignment: 'center' 
+          },
+          {
+            image: headerImage2,
+            width: imageWidth,
+            alignment: 'right',
+            margin: [0, 0, 0, 0] 
+          }
+        ],
+        alignment: 'justify',
+        margin: [0, 0, 0, 0] 
+      };
 
-      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-      saveAs(new Blob([excelBuffer]), 'example.xlsx'); // Use saveAs from file-saver
-
+      let rowHeader = {
+        columns: [
+          { text: 'Holidays for ' + this.selectedYear.year, style: 'header', alignment: 'center', margin: [0, 0, 0, 10] },
+        ],
+        style: 'header',
+        margin: [0, 0, 0, 0]
+      };
+      const content = [row, rowHeader]; 
+      return content;
     } catch (error) {
-      console.error('Error exporting data to Excel:', error);
+      console.error("Error occurred while formatting key and values:", error);
+      throw error; 
     }
   }
+  async exportPdf() {
+    const pageSize = { width: 595.28, height: 841.89 };
+    const headerImage = await this.pdfHeader();
+    const waterMark = await this.getBase64ImageFromURL('assets/layout/images/transparent_logo.png');
+    const holidaysContent = await this.generateHolidaysContent();
+    const createFooter = (currentPage: number) => {
+      let signatures = {
+        columns: [
+          {
+            width: 'auto',
+            stack: [
+              { text: 'HR Manager', alignment: 'center' },
+              { text: '\nNikhitha Yathamshetty', alignment: 'center' }
+            ]
+          },
+          { width: '*', text: '', alignment: 'center' },
+          {
+            width: 'auto',
+            stack: [
+              { text: 'CEO', alignment: 'center' },
+              { text: '\nM V Srinivasa Rao', alignment: 'center', margin: [-4, 0, 0, 0] }
+            ]
+          }
+        ], margin: [20, 4, 20, 4]
+      };
+      let createFooter = {
+        margin: [0, 0, 0, 0],
+        height: 20,
+        background: '#ff810e',
+        width: 595.28,
+        columns: [
+          { canvas: [{ type: 'rect', x: 0, y: 0, w: 530.28, h: 20, color: '#ff810e' }] },
+          {
+            stack: [
+              {
+                text: `Copyrights © ${this.year} Calibrage Info Systems Pvt Ltd.`,
+                fontSize: 11, color: '#fff', absolutePosition: { x: 20, y: 54 }
+              },
+              {
+                text: `Page ${currentPage}`,
+                color: '#000000', background: '#fff', fontSize: 12, absolutePosition: { x: 540, y: 52 },
+              }
+            ],
+          }
+        ],
+      }
+
+      const footer = [signatures, createFooter]
+      return footer;
+    }
+
+    const docDefinition = {
+      header: () => (headerImage),
+      footer: (currentPage: number) => createFooter(currentPage),
+      background: [{
+        image: waterMark,
+        absolutePosition: { x: (pageSize.width - 200) / 2, y: (pageSize.height - 200) / 2 },
+      }],
+      content: [
+        holidaysContent
+      ],
+      pageMargins: [40, 110, 40, 70.5],
+      styles: {
+        header: { fontSize: 19 },
+        tableheader: { fontSize: 12, alignment: 'center', fillColor: '#dbdbdb' },
+        tabledata: { alignment: 'center', fontSize: 10 },
+        defaultStyle: { font: 'Typography', fontSize: 10 },
+      },
+    };
+
+    if (this.holidays.length !== 0) {
+      const pdfName = `Holidays Report ${DateTimeFormatter()}.pdf`;
+      // pdfMake.createPdf(docDefinition).download(pdfName);
+    }
+    else
+      this.alertMessage.displayInfo(`There are no Holidays Report`);
+  }
+
+  async generateHolidaysContent() {
+    const check = await this.getBase64ImageFromURL('assets/layout/images/check1.PNG');
+    const cancle = await this.getBase64ImageFromURL('assets/layout/images/cancle1.PNG');
+    const content = [
+      [
+        { text: 'S.No.', style: 'tableheader' },
+        { text: 'Holiday Title', style: 'tableheader' },
+        { text: 'From Date', style: 'tableheader' },
+        { text: 'To Date', style: 'tableheader' },
+        { text: 'Is Active', style: 'tableheader' },
+      ],
+      ...this.holidays.map((holiday: { title: any; fromDate: any; toDate: any; isActive: any; }, index: number) => [
+        { text: (index + 1).toString(), style: 'tabledata' },
+        { text: holiday.title || '', fontSize: 10 },
+        { text: this.datePipe.transform(holiday.fromDate, DATE_OF_JOINING) || '', style: 'tabledata' },
+        { text: this.datePipe.transform(holiday.toDate, DATE_OF_JOINING) ? this.datePipe.transform(holiday.toDate, DATE_OF_JOINING) : this.datePipe.transform(holiday.fromDate, DATE_OF_JOINING), style: 'tabledata' },
+        { image: holiday.isActive ? check : cancle, width: 11, height: 11, style: 'tabledata' }
+      ])
+    ];
+    const columnWidths = [50, 155, 110, 110, 50];
+    return {
+      table: {
+        headerRows: 1,
+        widths: columnWidths,
+        body: content,
+      },
+    };
+  }
 }
+function DateTimeFormatter() {
+  throw new Error('Function not implemented.');
+}
+
+function DATE_OF_JOINING(fromDate: any, DATE_OF_JOINING: any) {
+  throw new Error('Function not implemented.');
+}
+
