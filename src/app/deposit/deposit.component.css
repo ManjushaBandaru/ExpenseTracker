@@ -1,7 +1,7 @@
-.tablehead{
+/* .tablehead{
     display: flex;
     justify-content: space-between;
-}
+} */
 .table-head{
     background-color: var(--color-default);
     color: white;
@@ -20,7 +20,7 @@ p-table th, p-table td {
     border: 1px solid #ddd; /* Grid lines */
     text-align: center; /* Center align text horizontally */
     vertical-align: middle; /* Center align text vertically */
-    padding: 8px; /* Padding for better spacing */
+    padding: 8px; 
 }
 
 p-table th {

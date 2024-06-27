@@ -23,21 +23,21 @@
 
         <ng-template pTemplate="header">
             <tr>
-                <th class="table-head" pSortableColumn="FirstName" style="min-width: 14rem">
+                <th class="table-head" pSortableColumn="FirstName" style="width:15%">
                     <div class="flex justify-content-between align-items-center">
                         First Name
                         <p-sortIcon field="FirstName"></p-sortIcon>
                         <p-columnFilter type="text" field="FirstName" display="menu" class="ml-auto"></p-columnFilter>
                     </div>
                 </th>
-                <th class="table-head" pSortableColumn="LastName" style="min-width: 14rem">
+                <th class="table-head" pSortableColumn="LastName" style="width:15%">
                     <div class="flex justify-content-between align-items-center">
                         Last Name
                         <p-sortIcon field="LastName"></p-sortIcon>
                         <p-columnFilter type="text" field="LastName" display="menu" class="ml-auto"></p-columnFilter>
                     </div>
                 </th>
-                <th class="table-head" pSortableColumn="UserName" style="min-width: 14rem">
+                <th class="table-head" pSortableColumn="UserName" style="width:15%">
                     <div class="flex justify-content-between align-items-center">
                         User Name
                         <p-sortIcon field="UserName"></p-sortIcon>
@@ -51,14 +51,14 @@
                         <p-columnFilter type="text" field="Password" display="menu" class="ml-auto"></p-columnFilter>
                     </div>
                 </th> -->
-                <th class="table-head" pSortableColumn="EMail" style="min-width: 14rem">
+                <th class="table-head" pSortableColumn="EMail" style="width:15%">
                     <div class="flex justify-content-between align-items-center">
                         Email
                         <p-sortIcon field="EMail"></p-sortIcon>
                         <p-columnFilter type="text" field="EMail" display="menu" class="ml-auto"></p-columnFilter>
                     </div>
                 </th>
-                <th class="table-head" pSortableColumn="MobileNumber" style="min-width: 14rem">
+                <th class="table-head" pSortableColumn="MobileNumber" style="width:15%">
                     <div class="flex justify-content-between align-items-center">
                         Mobile Number
                         <p-sortIcon field="MobileNumber"></p-sortIcon>
@@ -66,8 +66,7 @@
                             class="ml-auto"></p-columnFilter>
                     </div>
                 </th>
-                <th class="table-head" *ngIf="isColumnSelected('CreatedByName')" pSortableColumn="CreatedByName"
-                    style="min-width: 14rem">
+                <th class="table-head" *ngIf="isColumnSelected('CreatedByName')" pSortableColumn="CreatedByName"style="width:15%">
                     <div class="flex justify-content-between align-items-center">
                         Created By
                         <p-sortIcon field="CreatedByName"></p-sortIcon>
@@ -75,8 +74,7 @@
                             class="ml-auto"></p-columnFilter>
                     </div>
                 </th>
-                <th class="table-head" *ngIf="isColumnSelected('UpdatedByName')" pSortableColumn="UpdatedByName"
-                    style="min-width: 14rem">
+                <th class="table-head" *ngIf="isColumnSelected('UpdatedByName')" pSortableColumn="UpdatedByName"style="width:15%">
                     <div class="flex justify-content-between align-items-center">
                         Updated By
                         <p-sortIcon field="UpdatedByName"></p-sortIcon>
@@ -84,23 +82,21 @@
                             class="ml-auto"></p-columnFilter>
                     </div>
                 </th>
-                <th class="table-head" *ngIf="isColumnSelected('CreatedAt')" pSortableColumn="CreatedAt"
-                    style="min-width: 14rem">
+                <th class="table-head" *ngIf="isColumnSelected('CreatedAt')" pSortableColumn="CreatedAt"style="width:15%">
                     <div class="flex justify-content-between align-items-center">
                         Created At
                         <p-sortIcon field="CreatedAt"></p-sortIcon>
                         <p-columnFilter type="text" field="CreatedAt" display="menu" class="ml-auto"></p-columnFilter>
                     </div>
                 </th>
-                <th class="table-head" *ngIf="isColumnSelected('UpdatedAt')" pSortableColumn="UpdatedAt"
-                    style="min-width: 14rem">
+                <th class="table-head" *ngIf="isColumnSelected('UpdatedAt')" pSortableColumn="UpdatedAt"style="width:15%">
                     <div class="flex justify-content-between align-items-center">
                         Updated At
                         <p-sortIcon field="UpdatedAt"></p-sortIcon>
                         <p-columnFilter type="text" field="UpdatedAt" display="menu" class="ml-auto"></p-columnFilter>
                     </div>
                 </th>
-                <th class="table-head" pSortableColumn="IsActive" style="min-width: 14rem">
+                <th class="table-head" pSortableColumn="IsActive" style="width:15%">
                     <div class="flex justify-content-between align-items-center">
                         Is Active
                         <p-sortIcon field="IsActive"></p-sortIcon>

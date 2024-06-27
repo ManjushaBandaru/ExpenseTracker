@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Table } from 'primeng/table';
 import { SecurityService } from 'src/app/Services/security.service';
 
@@ -9,6 +9,15 @@ import { SecurityService } from 'src/app/Services/security.service';
   styleUrls: ['./deposit.component.css']
 })
 export class DepositComponent implements OnInit {
+  static numberOnly(control: AbstractControl): ValidationErrors | null {
+    const valid = /^[0-9]*$/.test(control.value);
+    return valid ? null : { numberOnly: true };
+  }
+
+  static alphabetOnly(control: AbstractControl): ValidationErrors | null {
+    const valid = /^[a-zA-Z]*$/.test(control.value);
+    return valid ? null : { alphabetOnly: true };
+  }
   deposits: any[] = [];
   uniquePaymentMethods: any[] = [];
   depositForm!: FormGroup;
@@ -25,15 +34,16 @@ export class DepositComponent implements OnInit {
 
   DepositForm() {
     this.depositForm = this.fb.group({
-      Id: [''], 
-      CarryForwardAmount: ['', Validators.required],
+      Id: [''],
+      CarryForwardAmount: ['', [Validators.required]],
       CreditDate: ['', Validators.required],
-      Amount: ['', Validators.required],
-      PaymentMethodId: ['', Validators.required],
-      CreditedTo: ['', Validators.required],
-      CreditedBy: ['', Validators.required]
+      Amount: ['', [Validators.required]],
+      PaymentMethodId: ['', [Validators.required]],
+      CreditedTo: ['', [Validators.required]],
+      CreditedBy: ['', [Validators.required]]
     });
   }
+  
   
   DepositData() {
     this.service.GetDepositData().subscribe((Response: any) => {
@@ -50,7 +60,7 @@ export class DepositComponent implements OnInit {
       ))
     );
   }
-
+ 
   clear(table: Table) {
     this.globalFilterValue = '';
     table.clear();
