@@ -25,7 +25,7 @@ export class DepositComponent implements OnInit {
 
   DepositForm() {
     this.depositForm = this.fb.group({
-      Id: [''], // Ensure Id field is included
+      Id: [''], 
       CarryForwardAmount: ['', Validators.required],
       CreditDate: ['', Validators.required],
       Amount: ['', Validators.required],
@@ -59,20 +59,20 @@ export class DepositComponent implements OnInit {
 
   onAdd() {
     this.showform = true;
-    this.depositForm.reset(); // Reset the form, not the boolean
+    this.depositForm.reset(); 
   }
 
   onEdit(deposit: any) {
     this.showform = true;
   
-    // Ensure CreditDate is transformed to the correct format
+    
     this.depositForm.patchValue({
       Id: deposit.Id,
       CarryForwardAmount: deposit.CarryForwardAmount,
       CreditDate: this.formatDate(deposit.CreditDate),
       Amount: deposit.Amount,
       PaymentMethodId: deposit.PaymentMethodId,
-      CreditedBy: deposit.CreditedBy, // Ensure CreditedBy field is patched
+      CreditedBy: deposit.CreditedBy, 
       CreditedTo: deposit.CreditedTo
     });
   }
@@ -87,39 +87,39 @@ export class DepositComponent implements OnInit {
 
   closeForm() {
     this.showform = false;
-    this.depositForm.reset(); // Reset the form when closing
+    this.depositForm.reset(); 
   }
 
   submit() {
     if (this.depositForm.valid) {
-      const formData = { ...this.depositForm.value }; // Create a copy of form value
+      const formData = { ...this.depositForm.value }; 
 
       if (formData.Id) {
-        // If Id exists, update the deposit
+      
         this.service.UpdateDeposit(formData).subscribe(
           (response: any) => {
             console.log('Deposit updated:', response);
-            this.DepositData(); // Refresh data after updating deposit
-            this.showform = false; // Close the form
-            this.depositForm.reset(); // Reset the form
+            this.DepositData(); 
+            this.showform = false; 
+            this.depositForm.reset(); 
           },
           (error) => {
             console.error('Error updating deposit:', error);
-            // Optionally handle error
+          
           }
         );
       } else {
-        // If Id does not exist, add a new deposit
+        
         this.service.AddDeposits(formData).subscribe(
           (response: any) => {
             console.log('New deposit added:', response);
-            this.DepositData(); // Refresh data after adding new deposit
-            this.showform = false; // Close the form
-            this.depositForm.reset(); // Reset the form
+            this.DepositData(); 
+            this.showform = false; 
+            this.depositForm.reset(); 
           },
           (error) => {
             console.error('Error adding deposit:', error);
-            // Optionally handle error
+           
           }
         );
       }
