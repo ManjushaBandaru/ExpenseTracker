@@ -6,7 +6,7 @@
     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
     paginatorLocale="en-US">
 
-    <!-- Caption Template -->
+    
     <ng-template pTemplate="caption">
       <div class="tablehead">
         <button pButton label="Clear" class="p-button-outlined clearbtn" icon="pi pi-filter-slash"
@@ -16,7 +16,7 @@
       </div>
     </ng-template>
 
-    <!-- Header Template -->
+    
     <ng-template pTemplate="header">
       <tr class="header-row">
         <th class="table-head" pSortableColumn="Name" style="min-width: 10rem">
@@ -65,7 +65,7 @@
       </tr>
     </ng-template>
 
-    <!-- Body Template -->
+    
     <ng-template pTemplate="body" let-roles>
       <tr>
         <td>{{ roles.Name }}</td>
