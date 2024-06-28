@@ -25,26 +25,26 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.initCharts();
-    this.ApprovalListData();
+    // this.ApprovalListData();
   }
 
 
-  ApprovalListData() {
-    this.service.GetApprovalsandPendingApprovals(this.currentYear, this.currentMonth)
-      .subscribe((data: any) => {
-        // Filter data to include only approved approvals
-        this.ApprovalData = data.filter((d: { StatusName: string }) => d.StatusName === 'Approved');
-        console.log(this.ApprovalData);
+  // ApprovalListData() {
+  //   this.service.getPendingsAndApprovalsList(this.currentYear, this.currentMonth)
+  //     .subscribe((data: any) => {
+  //       // Filter data to include only approved approvals
+  //       this.ApprovalData = data.filter((d: { StatusName: string }) => d.StatusName === 'Approved');
+  //       console.log(this.ApprovalData);
 
-        const pendingApprovals = data.filter((d: { StatusName: string }) => d.StatusName === 'Pending');
-        this.totalPendingApprovals = pendingApprovals.length;
-        console.log(this.totalPendingApprovals);
+  //       const pendingApprovals = data.filter((d: { StatusName: string }) => d.StatusName === 'Pending');
+  //       this.totalPendingApprovals = pendingApprovals.length;
+  //       console.log(this.totalPendingApprovals);
 
-        const ApprovedApprovals = data.filter((d: { StatusName: string }) => d.StatusName === 'Approved');
-        this.totalApprovedApprovals = ApprovedApprovals.length;
-        console.log(this.totalApprovedApprovals);
-      });
-  }
+  //       const ApprovedApprovals = data.filter((d: { StatusName: string }) => d.StatusName === 'Approved');
+  //       this.totalApprovedApprovals = ApprovedApprovals.length;
+  //       console.log(this.totalApprovedApprovals);
+  //     });
+  // }
 
   initCharts() {
     const documentStyle = getComputedStyle(document.documentElement);
