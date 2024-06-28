@@ -14,8 +14,7 @@
 
 /* p-table {
     width: 100%;
-    border-collapse: collapse;
-}  */
+    border-collapse: collapse; /* Ensure borders are collapsed */
 
 
 p-table th, p-table td {
@@ -37,8 +36,9 @@ p-table tr:nth-child(even) {
 p-table tr:hover {
     background-color: #ddd; /* Optional: Highlight rows on hover */
 }
-.btnheader{
+
+.tablehead{
     display: flex;
     justify-content: flex-end;
-    gap: 20px;
+    gap: 20px
 }

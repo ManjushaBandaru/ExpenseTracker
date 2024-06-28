@@ -3,12 +3,12 @@
 </p-toolbar> -->
 <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-    
-        
-      <h3>Deposits</h3>
-    
+
+
+        <h3>Deposits</h3>
+
     </div>
-  </nav> -->
+</nav>
 
 
 <div class="card" id="main-card">
@@ -39,8 +39,8 @@
                     <div class="flex justify-content-between align-items-center">
                         Carry Forward Amount
                         <p-sortIcon field="CarryForwardAmount"></p-sortIcon>
-                        <p-columnFilter type="text" field="CarryForwardAmount" display="menu"
-                            class="ml-auto"></p-columnFilter>
+                        <p-columnFilter type="text" field="CarryForwardAmount" display="menu" class="ml-auto">
+                        </p-columnFilter>
                     </div>
                 </th>
                 <th class="table-head" pSortableColumn="CreditDate" style="width:15%">
@@ -61,8 +61,8 @@
                     <div class="flex justify-content-between align-items-center">
                         Payment Mode
                         <p-sortIcon field="PaymentMethodName"></p-sortIcon>
-                        <p-columnFilter type="text" field="PaymentMethodName" display="menu"
-                            class="ml-auto"></p-columnFilter>
+                        <p-columnFilter type="text" field="PaymentMethodName" display="menu" class="ml-auto">
+                        </p-columnFilter>
                     </div>
                 </th>
                 <th class="table-head" pSortableColumn="CreditedBy" style="width:15%">
@@ -112,21 +112,22 @@
             <div class="col-md-6">
                 <label for="CarryForwardAmount" class="form-label">Carry Forward Amount <span
                         style="color: red;">*</span></label>
-                <input type="text" pInputText class="form-control user" id="CarryForwardAmount"
-                    formControlName="CarryForwardAmount" maxlength="20" placeholder="Enter CarryForwardAmount"
+                <!-- <input type="text" pInputText class="form-control user" id="CarryForwardAmount" formControlName="CarryForwardAmount"
+                    maxlength="20" placeholder="Enter CarryForwardAmount"
+                    [ngClass]="{'is-invalid ng-dirty': depositForm.controls['CarryForwardAmount'].touched && depositForm.controls['CarryForwardAmount'].errors}" /> -->
+                <p-inputNumber inputId="integeronly" formControlName="CarryForwardAmount" maxlength="15"
+                    placeholder="Enter CarryForwardAmount"
                     [ngClass]="{'is-invalid ng-dirty': depositForm.controls['CarryForwardAmount'].touched && depositForm.controls['CarryForwardAmount'].errors}" />
-                <div
+                <!-- <div
                     *ngIf="depositForm.get('CarryForwardAmount')?.invalid && (depositForm.get('CarryForwardAmount')?.dirty || depositForm.get('CarryForwardAmount')?.touched)">
                     <small class="p-error" *ngIf="depositForm.get('CarryForwardAmount')?.errors?.['required']">* Carry
                         Forward Amount is required.</small>
-                    <small class="p-error" *ngIf="depositForm.get('CarryForwardAmount')?.errors?.['numberOnly']">* Only
-                        numbers are allowed.</small>
-                </div>
+                </div> -->
             </div>
             <div class="col-md-6">
                 <label for="CreditDate" class="form-label">Credit Date <span style="color: red;">*</span></label>
                 <p-calendar formControlName="CreditDate" [showIcon]="true" [showOnFocus]="false" [maxDate]="todayDate"
-                    placeholder="Select Credit Date" inputId="buttondisplay" appendTo="body"
+                    placeholder="Select Credit Date" inputId="buttondisplay" appendTo="body" 
                     [ngClass]="{'is-invalid ng-dirty': depositForm.controls['CreditDate'].touched && depositForm.controls['CreditDate'].errors}">
                 </p-calendar>
                 <div
@@ -135,19 +136,16 @@
                         is required.</small>
                 </div>
             </div>
-            <div class="col-md-6">
-                <label for="Amount" class="form-label">Amount <span style="color: red;">*</span></label>
-                <input type="text" pInputText class="form-control user" id="Amount" formControlName="Amount"
-                    maxlength="20" placeholder="Enter Amount"
-                    [ngClass]="{'is-invalid ng-dirty': depositForm.controls['Amount'].touched && depositForm.controls['Amount'].errors}" />
-                <div
-                    *ngIf="depositForm.get('Amount')?.invalid && (depositForm.get('Amount')?.dirty || depositForm.get('Amount')?.touched)">
-                    <small class="p-error" *ngIf="depositForm.get('Amount')?.errors?.['required']">* Amount is
-                        required.</small>
-                    <small class="p-error" *ngIf="depositForm.get('Amount')?.errors?.['numberOnly']">* Only numbers are
-                        allowed.</small>
-                </div>
+
+            <label for="Amount" class="form-label">Amount <span style="color: red;">*</span></label>
+            <p-inputNumber inputId="integeronly" formControlName="Amount" maxlength="15" placeholder="Enter Amount"
+                [ngClass]="{'is-invalid ng-dirty': depositForm.controls['Amount'].touched && depositForm.controls['Amount'].errors}" />
+            <div
+                *ngIf="depositForm.get('Amount')?.invalid && (depositForm.get('Amount')?.dirty || depositForm.get('Amount')?.touched)">
+                <small class="p-error" *ngIf="depositForm.get('Amount')?.errors?.['required']">* Amount is
+                    required.</small>
             </div>
+
             <div class="col-md-6">
                 <label for="PaymentMethodName" class="form-label">Payment Method <span
                         style="color: red;">*</span></label><br>
@@ -160,15 +158,15 @@
                     *ngIf="depositForm.get('PaymentMethodId')?.invalid && (depositForm.get('PaymentMethodId')?.dirty || depositForm.get('PaymentMethodId')?.touched)">
                     <small class="p-error" *ngIf="depositForm.get('PaymentMethodId')?.errors?.['required']">* Payment
                         Method Name is required.</small>
-                    <small class="p-error" *ngIf="depositForm.get('PaymentMethodId')?.errors?.['alphabetOnly']">* Only
-                        alphabets are allowed.</small>
                 </div>
             </div>
             <div class="col-md-6">
                 <label for="CreditedBy" class="form-label">Credited By <span style="color: red;">*</span></label>
                 <input type="text" pInputText class="form-control CreditedBy" id="CreditedBy"
-                    formControlName="CreditedBy" maxlength="15" placeholder="Enter CreditedBy"
+                    formControlName="CreditedBy" maxlength="15" (input)="onCreditedByInputChange($event)"
+                    placeholder="Enter CreditedBy"
                     [ngClass]="{'is-invalid ng-dirty': depositForm.controls['CreditedBy'].touched && depositForm.controls['CreditedBy'].errors}" />
+                
                 <div
                     *ngIf="depositForm.get('CreditedBy')?.invalid && (depositForm.get('CreditedBy')?.dirty || depositForm.get('CreditedBy')?.touched)">
                     <small class="p-error" *ngIf="depositForm.get('CreditedBy')?.errors?.['required']">* Credited By is
@@ -183,8 +181,9 @@
             <div class="col-md-6">
                 <label for="CreditedTo" class="form-label">Credited To <span style="color: red;">*</span></label>
                 <input type="text" pInputText class="form-control password" id="CreditedTo" formControlName="CreditedTo"
-                    maxlength="20" placeholder="Enter CreditedTo"
+                    maxlength="20" (input)="onCreditedToInputChange($event)" placeholder="Enter CreditedTo"
                     [ngClass]="{'is-invalid ng-dirty': depositForm.controls['CreditedTo'].touched && depositForm.controls['CreditedTo'].errors}" />
+                    
                 <div
                     *ngIf="depositForm.get('CreditedTo')?.invalid && (depositForm.get('CreditedTo')?.dirty || depositForm.get('CreditedTo')?.touched)">
                     <small class="p-error" *ngIf="depositForm.get('CreditedTo')?.errors?.['required']">* Credited To is

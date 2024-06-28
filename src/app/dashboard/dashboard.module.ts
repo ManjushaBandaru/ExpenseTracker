@@ -26,8 +26,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { InputNumberModule } from 'primeng/inputnumber';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { InputSwitchModule } from 'primeng/inputswitch';
-import { AccordionModule } from 'primeng/accordion';
+import { PasswordModule } from 'primeng/password';
 
 
 
@@ -47,7 +46,7 @@ import { AccordionModule } from 'primeng/accordion';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    CardModule,
+    CardModule,PasswordModule,
     ChartModule,
     TableModule,
     DialogModule,

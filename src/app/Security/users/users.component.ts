@@ -45,20 +45,43 @@ export class UsersComponent implements OnInit {
       LastName: ['', Validators.required],
       UserName: ['', Validators.required],
       Password: ['', Validators.required],
-      RoleId: ['', Validators.required],
+      // RoleId: ['', Validators.required],
       EMail: ['', [Validators.required, Validators.email]],
-      MobileNumber: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+      MobileNumber: ['', [Validators.required,  Validators.pattern("^[0-9]*$")]],
       IsActive: [true, Validators.required],
       CreatedByName: [''], 
       UpdatedByName: [''], 
       CreatedAt: [new Date()], 
       UpdatedAt: [new Date()], 
       UserRolesReq: this.fb.array([
-        
+        this.fb.group({
+          RoleId: ['']
+        })
       ])
     });
   }
 
+  get UserRolesReq(): FormArray {
+    return this.userForm.get('UserRolesReq') as FormArray;
+  }
+  onFirstNameInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value.replace(/[^a-zA-Z ]/g, '');
+    inputElement.value = value;
+    this.userForm.controls['FirstName'].setValue(value);
+  }
+  onLastNameInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value.replace(/[^a-zA-Z ]/g, '');
+    inputElement.value = value;
+    this.userForm.controls['LastName'].setValue(value);
+  }
+  onUserNameInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value.replace(/[^a-zA-Z ]/g, '');
+    inputElement.value = value;
+    this.userForm.controls['UserName'].setValue(value);
+  }
   UsersData() {
     this.securityService.GetUsers().subscribe((data: any) => {
       this.users = data;
@@ -76,29 +99,28 @@ export class UsersComponent implements OnInit {
   closeForm() {
     this.showform = false;
   }
-
   Adduser() {
     if (this.userForm.invalid) {
-
       return;
     }
-
+  
     this.userForm.patchValue({
       CreatedByName: this.currentUserName,
       UpdatedByName: this.currentUserName
     });
-
+  
     this.securityService.AddUser(this.userForm.value).subscribe(
       () => {
         this.closeForm();
-        this.UsersData(); 
+        this.UsersData();
         this.userForm.reset();
       },
       (error) => {
-        console.error('Error while adding user:', error);
+        console.error('Error while adding user:', error); 
       }
     );
   }
+  
 
   onAdd() {
     this.showform = true;
@@ -187,7 +209,6 @@ export class UsersComponent implements OnInit {
       console.error('Invalid ID:', id);
     }
   }
-
   submit() {
     if (this.userForm.invalid) {
       return;
@@ -195,22 +216,29 @@ export class UsersComponent implements OnInit {
   
     const formData = this.userForm.value;
   
+    if (!formData.Id) {
+      // Add role to UserRolesReq FormArray
+      const newRole = {
+        RoleId: formData.RoleId  // Assuming RoleId is properly set in your form
+      };
+      const userRolesReq = this.userForm.get('UserRolesReq') as FormArray;
+      userRolesReq.push(this.fb.group(newRole));
+    }
+  
     if (formData.Id) {
-    
       formData.UpdatedByName = this.currentUserName;
       formData.UpdatedAt = new Date();
   
       this.securityService.UpdateUser(formData).subscribe(
         () => {
           this.closeForm();
-          this.UsersData(); 
+          this.UsersData();
         },
         (error) => {
           console.error('Error updating user:', error);
         }
       );
     } else {
-     
       formData.CreatedByName = this.currentUserName;
       formData.UpdatedByName = this.currentUserName;
       formData.CreatedAt = new Date();
@@ -219,12 +247,17 @@ export class UsersComponent implements OnInit {
       this.securityService.AddUser(formData).subscribe(
         () => {
           this.closeForm();
-          this.UsersData(); 
+          this.UsersData();
         },
         (error) => {
           console.error('Error adding user:', error);
         }
       );
     }
+  
+    // Clear userRolesReq FormArray after adding a role
+    const userRolesReq = this.userForm.get('UserRolesReq') as FormArray;
+    userRolesReq.clear();
   }
+  
 }

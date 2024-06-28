@@ -17,33 +17,35 @@ export class AdminDashboardComponent implements OnInit {
     date: Date[] | undefined;
     basicData: any;
     yearlyBudget: any;
-    year: any;
-    month: any;
+    highestExpenditure: any;
+    monthlyExpenditure: any;
+    yearlyExpenditure: any;
+    monthlyExpenses:any;
+    Year: any;
+    Month: any;
     ApprovalData: any[] = [];
     PendingApprovalData: any[] = [];
     basicOptions: any;
     selectedCategory: any = null;
-
     date1: Date = new Date();
-
-    currentYear: number = new Date().getFullYear();
-    currentMonth: number = new Date().getMonth() + 1;
+    year: number = new Date().getFullYear();
+    month: number = new Date().getMonth() + 1;
+    selectedMonth: Date = new Date(this.year, this.month - 1, 1);
     creditDebitData: any = [];
-
     creditDebitTimeframe: string | undefined;
     categoryTimeframe: string | undefined;
     creditDebitDate: Date | undefined;
     categoryDate: Date | undefined;
-
     creditDebitOptions: any;
     categoryData: any;
     categoryOptions: any;
-
+    cdData:any;
+    cdOptions:any;
     totalApprovedApprovals: number = 0;
     totalPendingApprovals: number = 0;
     currentDate: any;
-    // currentYear: any;
-    // currentMonth: any;
+    currentYear: any;
+    currentMonth: any;
     notifications: any[] = [];
     visible: boolean = false;
     pendingVisible: boolean = false;
@@ -57,7 +59,7 @@ export class AdminDashboardComponent implements OnInit {
     }
     ngOnInit() {
         this.categoryTimeframe = 'date';
-        this.creditDebitTimeframe = 'date';
+        this.creditDebitTimeframe = 'month';
         this.GetCategorygraphBasedonDatemonthandyear();
         this.GetApprovedandPendingStatus();
         this.GetBudgetNotification();
@@ -67,6 +69,8 @@ export class AdminDashboardComponent implements OnInit {
         this.ApprovalListData();
         // this.viewpendingDetails();
         this.GetCreditDebitGraphBasedOnMonthYear();
+        this.getHighestpurchaseCategory();
+        this.GetMonthlyBudgetBasedOnCarryForwardAmount();
     }
 
     GetCategorygraphBasedonDatemonthandyear() {
@@ -108,7 +112,7 @@ export class AdminDashboardComponent implements OnInit {
         console.log(totalAmount);
 
         this.categoryData = {
-            labels: ['Monthly Report'],
+            labels: ['Birthdays'],
             datasets: [
                 {
                     label: '',
@@ -159,31 +163,37 @@ export class AdminDashboardComponent implements OnInit {
         };
     }
 
+
+
     GetCreditDebitGraphBasedOnMonthYear() {
         this.creditDebitData = [];
         const year = this.date1.getFullYear();
+        console.log(year);
         const month = this.date1.getMonth() + 1;
+        console.log(month);
         const day = this.date1.getDate();
         console.log(day);
-        if (this.categoryTimeframe === 'date') {
+        
+        // if (this.creditDebitTimeframe === 'date') {
+        //     this.adminservice.getCreditDebitGraphbasedonMonthYear(year, null).subscribe((data: any) => {
+        //         this.creditDebitData = data;
+        //         console.log(this.creditDebitData);
+        //         this.IntitcreditdebitGraph();
+        //     })
+        // }
+        // else 
+        if (this.creditDebitTimeframe === 'month') {
             this.adminservice.getCreditDebitGraphbasedonMonthYear(year, month).subscribe((data: any) => {
                 this.creditDebitData = data;
                 console.log(this.creditDebitData);
                 this.IntitcreditdebitGraph();
             })
         }
-        else if (this.categoryTimeframe === 'month') {
-            this.adminservice.getCreditDebitGraphbasedonMonthYear(year, month).subscribe((data: any) => {
-                this.creditDebitData = data;
-                console.log(this.creditDebitData);
-                this.IntitcreditdebitGraph();
-            })
-        }
-        else if (this.categoryTimeframe === 'year') {
-            this.adminservice.getCreditDebitGraphbasedonMonthYear(year, null).subscribe((data:any)=>{
+        else if (this.creditDebitTimeframe === 'year') {
+            this.adminservice.getCreditDebitGraphbasedonMonthYear(year, null).subscribe((data: any) => {
                 this.creditDebitData = data
                 console.log(this.creditDebitData);
-            this.IntitcreditdebitGraph();
+                this.IntitcreditdebitGraph();
             })
         }
     }
@@ -198,7 +208,7 @@ export class AdminDashboardComponent implements OnInit {
         console.log(totalAmount);
 
         this.categoryData = {
-            labels: ['Monthly Report'],
+            labels: ['Monthly Expenses'],
             datasets: [
                 {
                     label: '',
@@ -210,7 +220,7 @@ export class AdminDashboardComponent implements OnInit {
                 }
             ]
         };
-        this.categoryOptions = {
+        this.cdOptions = {
             animation: {
                 duration: 500
             },
@@ -247,6 +257,50 @@ export class AdminDashboardComponent implements OnInit {
                 }
             }
         };
+    }
+
+    gotoPreviousDate() {
+        
+    }
+
+    gotoNextDate() {
+
+    }
+
+    gotoPreviousMonth() {
+        if (this.month > 1) {
+            this.month--;
+        } else {
+            this.month = 12;
+            this.year--;
+        }
+        this.selectedMonth = new Date(this.year, this.month - 1, 1);
+        this.selectedMonth.setHours(0, 0, 0, 0);
+    }
+
+    gotoNextMonth() {
+        if (this.month < 12) {
+            this.month++;
+        } else {
+            this.month = 1;
+            this.year++;
+        }
+        this.selectedMonth = new Date(this.year, this.month - 1, 1);
+        this.selectedMonth.setHours(0, 0, 0, 0);
+    }
+
+    onMonthSelect(event: any) {
+        this.selectedMonth = event;
+        this.month = this.selectedMonth.getMonth() + 1;
+        this.year = this.selectedMonth.getFullYear();
+    }
+
+    gotoPreviousYear() {
+
+    }
+
+    gotoNextYear() {
+
     }
 
 
@@ -341,4 +395,46 @@ export class AdminDashboardComponent implements OnInit {
     ViewpendingDetails() {
         this.pendingVisible = true;
     }
+
+    // getHighestpurchaseCategory(){
+    //     this.adminservice.getHighestCategoryPurchase().subscribe(
+    //         (data : any[])=>{
+    //             this.highestExpenditure = data;
+    //             console.log(this.highestExpenditure)
+    //     })
+    // }
+
+    getHighestpurchaseCategory() {
+        this.adminservice.getHighestCategoryPurchase().subscribe(
+          (data: any[]) => {
+            console.log('Received data:', data);
+            this.highestExpenditure = data;
+    
+            // Assuming the API returns separate entries for monthly and yearly expenditures
+            if (data.length > 0) {
+              this.monthlyExpenditure = data[0];
+              this.yearlyExpenditure = data[1];
+            }
+    
+            console.log('Monthly Expenditure:', this.monthlyExpenditure);
+            console.log('Yearly Expenditure:', this.yearlyExpenditure);
+          },
+          error => {
+            console.error('Error fetching highest expenditure data:', error);
+          }
+        );
+      }
+
+      GetMonthlyBudgetBasedOnCarryForwardAmount(){
+        this.adminservice.getmonthlyBudgetReport(this.year, this.month).subscribe(
+            (data: any) => {
+                console.log(data);  // Log the fetched data
+                this.monthlyExpenses = data;
+            },
+            (error: any) => {
+                console.error('Error fetching monthly budget report:', error);
+            }
+        );
+      }
+    
 }
