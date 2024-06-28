@@ -26,6 +26,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { InputNumberModule } from 'primeng/inputnumber';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { AccordionModule } from 'primeng/accordion';
 
 
 
@@ -61,7 +63,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     FileUploadModule,
     ToastModule,
     InputNumberModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    InputSwitchModule,
+    AccordionModule
   ]
 })
 export class DashboardModule { }

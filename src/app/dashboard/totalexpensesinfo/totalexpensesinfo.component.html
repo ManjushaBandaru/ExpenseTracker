@@ -1,4 +1,5 @@
-<div class="card"><h5>Expenses</h5>
+<div class="card">
+    <!-- <h5>Expenses</h5> -->
     <p-table #myTab [value]="products" [tableStyle]="{ 'width': '100%' }" [paginator]="true" [rows]="5"
         [showCurrentPageReport]="true"
         [globalFilterFields]="['category', 'description', 'expensedate', 'paidamount', 'paymentmode', 'aprovalstatus', 'uploaddocument']"
@@ -8,7 +9,9 @@
         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
         paginatorLocale="en-US">
         <ng-template pTemplate="caption">
+            <h5>Expenses Screen</h5>
             <div class="tablehead">
+                
                 <button pButton pRipple label="Clear" [outlined]="true" icon="pi pi-filter-slash" (click)="clear()"
                     class="clearbtn">
                 </button>
@@ -65,7 +68,7 @@
 </div>
 
 
-<p-dialog header="Add Expenses" [(visible)]="showform" [style]="{width: '50vw'}"  [draggable]="false">
+<p-dialog header="Add Expenses" [(visible)]="showform" [style]="{width: '50vw'}" [draggable]="false">
     <div class="card_body p-5">
         <form class="row" [formGroup]="ExpenseForm">
             <div class="row mb-3">
@@ -82,14 +85,16 @@
                 <div class="col-md-6">
                     <label for="Description" class="form-label">Description <span style="color: red;">*</span></label>
                     <input type="text" pInputText class="form-control user" id="Description"
-                        formControlName="Description" maxlength="20" placeholder="Enter Description"
+                        formControlName="Description" maxlength="50" placeholder="Enter Description"
+                        (input)="onDescriptionInputChange($event)"
                         [ngClass]="{'is-invalid ng-dirty': ExpenseForm.controls['Description'].touched && ExpenseForm.controls['Description'].errors}" />
-                    <div
-                        *ngIf="ExpenseForm.get('Description')?.invalid && (ExpenseForm.get('Description')?.dirty || ExpenseForm.get('Description')?.touched)">
-                        <small class="p-error" *ngIf="ExpenseForm.get('Description')?.errors?.['required']">*
-                            Description is required.</small>
-                        <small class="p-error" *ngIf="ExpenseForm.get('Description')?.errors?.['pattern']">* Only
-                            alphabets allowed.</small>
+                    <div class="errormsg">
+                        <div
+                            *ngIf="ExpenseForm.get('Description')?.invalid && (ExpenseForm.get('Description')?.dirty || ExpenseForm.get('Description')?.touched)">
+                            <small class="p-error" *ngIf="ExpenseForm.get('Description')?.errors?.['required']">*
+                                Description is required.</small>
+                        </div>
+                        <div style="text-align: end;"> {{ descriptionLength }}/50</div>
                     </div>
                 </div>
             </div>
@@ -98,8 +103,9 @@
                 <div class="col-md-6">
                     <label for="ExpenseDate" class="form-label">Purchased Date <span
                             style="color: red;">*</span></label>
-                    <p-calendar formControlName="ExpenseDate" [showIcon]="true" [showOnFocus]="false" [maxDate]="maxDate"
-                        inputId="buttondisplay" appendTo="body" placeholder="Select Purchase Date" />
+                    <p-calendar formControlName="ExpenseDate" [showIcon]="true" [showOnFocus]="false"
+                        [maxDate]="maxDate" inputId="buttondisplay" appendTo="body"
+                        placeholder="Select Purchase Date" />
                     <div
                         *ngIf="ExpenseForm.get('ExpenseDate')?.invalid && (ExpenseForm.get('ExpenseDate')?.dirty || ExpenseForm.get('ExpenseDate')?.touched)">
                         <small class="p-error" *ngIf="ExpenseForm.get('ExpenseDate')?.errors?.['required']">* Expense

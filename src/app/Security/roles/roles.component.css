@@ -15,7 +15,8 @@
 /* Table Head */
 .tablehead {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 20px;
 }
 
 .table-head {

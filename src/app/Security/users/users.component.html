@@ -9,13 +9,14 @@
         paginatorLocale="en-US">
 
         <ng-template pTemplate="caption">
+            <h5>Users Screen</h5><br>
             <div class="tablehead">
-                <button pButton pRipple label="Clear" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(myTab)"
-                    class="clearbtn">
-                </button>
                 <p-multiSelect [options]="availableColumns" [(ngModel)]="selectedColumns" optionLabel="header"
                     selectedItemsLabel="{0} columns selected" [style]="{ width: '20em' }" defaultLabel="Choose Columns"
                     display="chip" />
+                <button pButton pRipple label="Clear" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(myTab)"
+                    class="clearbtn">
+                </button>
                 <button pButton type="button" label="Add User" icon="pi pi-plus" (click)="onAdd()" [outlined]="true"
                     class="clearbtn"></button>
             </div>
