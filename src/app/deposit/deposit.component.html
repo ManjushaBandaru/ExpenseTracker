@@ -115,11 +115,11 @@
                 <p-inputNumber inputId="integeronly" formControlName="CarryForwardAmount" maxlength="15"
                     placeholder="Enter CarryForwardAmount"
                     [ngClass]="{'is-invalid ng-dirty': depositForm.controls['CarryForwardAmount'].touched && depositForm.controls['CarryForwardAmount'].errors}" />
-                <div
+                <!-- <div
                     *ngIf="depositForm.get('CarryForwardAmount')?.invalid && (depositForm.get('CarryForwardAmount')?.dirty || depositForm.get('CarryForwardAmount')?.touched)">
                     <small class="p-error" *ngIf="depositForm.get('CarryForwardAmount')?.errors?.['required']">* Carry
                         Forward Amount is required.</small>
-                </div>
+                </div> -->
             </div>
             <div class="col-md-6">
                 <label for="CreditDate" class="form-label">Credit Date <span style="color: red;">*</span></label>

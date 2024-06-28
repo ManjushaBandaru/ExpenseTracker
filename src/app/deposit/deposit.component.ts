@@ -28,13 +28,14 @@ export class DepositComponent implements OnInit {
   DepositForm() {
     this.depositForm = this.fb.group({
       Id: [''], 
-      CarryForwardAmount: ['', Validators.required],
+      CarryForwardAmount: [''],
       CreditDate: ['', Validators.required],
       Amount: ['', Validators.required],
       PaymentMethodId: ['', Validators.required],
       CreditedBy: ['', [Validators.required]],
       CreditedTo: ['', [Validators.required]]
     });
+    
   }
   
   DepositData() {
@@ -77,7 +78,11 @@ export class DepositComponent implements OnInit {
   onAdd() {
     this.showform = true;
     this.depositForm.reset(); 
-  }
+
+  
+}
+
+
 
   onEdit(deposit: any) {
     this.showform = true;
