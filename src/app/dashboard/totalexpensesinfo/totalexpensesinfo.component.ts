@@ -24,6 +24,8 @@ export class TotalexpensesinfoComponent implements OnInit {
   uniquePaymentMethods: any[] = [];
   uniqueStatuses: any[] = [];
   maxDate: Date = new Date();
+  descriptionLength: number = 0;
+
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private service:SecurityService) { }
 
@@ -37,7 +39,7 @@ export class TotalexpensesinfoComponent implements OnInit {
       Id: [''],
       CategoryId: ['', [Validators.required]],
       Description: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
-      ExpenseDate: ['', [Validators.required]],
+      ExpenseDate: [new Date(), [Validators.required]],
       Amount: ['', [Validators.required]],
       PaymentMethodId: ['', [Validators.required]],
       StatusId: ['', [Validators.required]],
@@ -70,10 +72,22 @@ export class TotalexpensesinfoComponent implements OnInit {
     );
   }
   
-
-  onBasicUploadAuto(event: FileUploadEvent) {  
-    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
+  onInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.descriptionLength = inputElement.value.length;
   }
+
+  onDescriptionInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value.replace(/[^a-zA-Z ]/g, '');
+    inputElement.value = value;
+    this.ExpenseForm.controls['Description'].setValue(value);
+    this.descriptionLength = value.length;
+  }
+
+  // onBasicUploadAuto(event: FileUploadEvent) {  
+  //   this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
+  // }
 
   onAdd() {
     this.showform = true;
@@ -111,24 +125,22 @@ export class TotalexpensesinfoComponent implements OnInit {
     this.showform = false;
   }
 
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+}
+
   onEdit(product: any) {
     this.showform = true;
-  
-    // Ensure ExpenseDate is in the dd-MM-yyyy format
-    let expenseDate: string | null = null;
-    if (product.ExpenseDate) {
-      const date = new Date(product.ExpenseDate);
-      const day = ("0" + date.getDate()).slice(-2);
-      const month = ("0" + (date.getMonth() + 1)).slice(-2);
-      const year = date.getFullYear();
-      expenseDate = `${day}-${month}-${year}`;
-    }
-  
+
     this.ExpenseForm.patchValue({
       Id: product.Id,
       CategoryId: product.CategoryId,
       Description: product.Description,
-      ExpenseDate: expenseDate, // Use the formatted date
+      ExpenseDate: this.formatDate(product.ExpenseDate), 
       Amount: product.Amount,
       PaymentMethodId: product.PaymentMethodId,
       StatusId: product.StatusId

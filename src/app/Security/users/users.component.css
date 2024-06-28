@@ -78,8 +78,8 @@ p-table tr:hover {
 
 .tablehead {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-end;
+    gap: 50px;
 }
 
 .isactivecol {
