@@ -45,7 +45,6 @@ export class UsersComponent implements OnInit {
       LastName: ['', Validators.required],
       UserName: ['', Validators.required],
       Password: ['', Validators.required],
-      RoleId: ['', Validators.required],
       EMail: ['', [Validators.required, Validators.email]],
       MobileNumber: ['', [Validators.required, Validators.pattern('[0-9]*')]],
       IsActive: [true, Validators.required],
@@ -54,7 +53,7 @@ export class UsersComponent implements OnInit {
       CreatedAt: [new Date()], 
       UpdatedAt: [new Date()], 
       UserRolesReq: this.fb.array([
-        
+        // RoleId: ['', Validators.required],
       ])
     });
   }
@@ -189,6 +188,7 @@ export class UsersComponent implements OnInit {
   }
 
   submit() {
+    debugger
     if (this.userForm.invalid) {
       return;
     }
@@ -210,7 +210,7 @@ export class UsersComponent implements OnInit {
         }
       );
     } else {
-     
+                                                                                                                
       formData.CreatedByName = this.currentUserName;
       formData.UpdatedByName = this.currentUserName;
       formData.CreatedAt = new Date();

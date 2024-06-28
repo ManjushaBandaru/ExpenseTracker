@@ -1,41 +1,44 @@
 <div class="container">
+    <h5>Super Admin Dashboard</h5><br>
     <div class="row mb-4">
         <div class="col-md-4 mb-4">
-            <div class="card expensecard shadow-sm">
+            <div class="card expensecard shadow-sm h-100">
                 <div class="card-header titles">
                     Highest Expenditure
                 </div>
                 <div class="card-body d-flex text-center">
                     <div class="flex-fill">
                         <strong>Monthly</strong>
-                        <p>{{ monthlyExpenditure?.CategoryName }}: {{ monthlyExpenditure?.TotalAmount | currency: 'INR': 'symbol' }}</p>
+                        <p>{{ monthlyExpenditure?.CategoryName }}: {{ monthlyExpenditure?.TotalAmount | currency: 'INR':
+                            'symbol' }}</p>
                     </div>
                     <div class="vr"></div>
                     <div class="flex-fill">
                         <strong>Yearly</strong>
-                        <p>{{ yearlyExpenditure?.CategoryName }}: {{ yearlyExpenditure?.TotalAmount  | currency: 'INR' :'symbol' }}</p>
+                        <p>{{ yearlyExpenditure?.CategoryName }}: {{ yearlyExpenditure?.TotalAmount | currency: 'INR'
+                            :'symbol' }}</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
-            <div class="card expensecard shadow-sm">
-                <div class="card-header titles">
-                    Approvals Based On Month
+            <div class="card expensecard shadow-sm h-100">
+                <div class="card-header d-flex justify-content-between align-items-center titles">
+                    <span class="text-center flex-fill">Approvals Based On Month</span>
                     <i class="pi pi-eye icon" style="font-size: 1.5rem" (click)="viewapprovalDetails()"></i>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body d-flex align-items-center justify-content-center">
                     <strong>{{ totalApprovedApprovals }}</strong>
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
-            <div class="card expensecard shadow-sm">
-                <div class="card-header titles">
-                    Pending Approvals Based On Month
+            <div class="card expensecard shadow-sm h-100">
+                <div class="card-header d-flex justify-content-between align-items-center titles">
+                    <span class="text-center flex-fill">Pending Approvals Based On Month</span>
                     <i class="pi pi-eye icon" style="font-size: 1.5rem" (click)="viewpendingDetails()"></i>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body d-flex align-items-center justify-content-center">
                     <strong>{{ totalPendingApprovals }}</strong>
                 </div>
             </div>
@@ -83,22 +86,22 @@
                                     style="color: #004f83;"></i>
                             </span> -->
                             <span *ngIf="creditDebitTimeframe === 'month'; else yearContent">
-                                <i class="pi pi-chevron-left iconleft" (click)="gotoPreviousMonth()"
+                                <i class="pi pi-chevron-left iconleft" (click)="GotolastMonth()"
                                     style="color: #004f83;"></i>
                                 <p-calendar class="charts_month_picker" [(ngModel)]="selectedMonth" view="month"
                                     [showIcon]="true" dateFormat="mm/yy" [yearNavigator]="true" />
-                                <i class="pi pi-chevron-right iconright" (click)="gotoNextMonth()"
+                                <i class="pi pi-chevron-right iconright" (click)="GotoNextMonth()"
                                     style="color: #004f83;"></i>
-                                <!-- <p class="text-xs">{{formatMonth(this.month)}}/{{this.year}}</p> -->
+                                <p class="text-xs">{{formatMonthName(this.month)}} {{this.year}}</p>
                             </span>
                             <ng-template #yearContent>
-                                <i class="pi pi-chevron-left iconleft" (click)="gotoPreviousYear()"
+                                <i class="pi pi-chevron-left iconleft" (click)="GoToPreviousYear()"
                                     style="color: #004f83;"></i>
                                 <p-calendar class="charts_month_picker" [(ngModel)]="date" view="year" [showIcon]="true"
                                     dateFormat="yy" />
-                                <i class="pi pi-chevron-right iconright" (click)="gotoNextYear()"
+                                <i class="pi pi-chevron-right iconright" (click)="GoToNextYear()"
                                     style="color: #004f83;"></i>
-                                <!-- <p class="text-xs">{{this.year}}</p> -->
+                                <p class="text-xs">{{this.year}}</p>
                             </ng-template>
                         </div>
                     </div>
@@ -142,27 +145,32 @@
                         </div>
                         <div class="col-6">
                             <span *ngIf="categoryTimeframe === 'date'; else monthContent">
-                                <i class="pi pi-chevron-left iconleft " style="color: #004f83;"></i>
+                                <i class="pi pi-chevron-left iconleft " (click)="gotoPreviousDate()"
+                                    style="color: #004f83;"></i>
                                 <p-calendar class="charts_date_picker" [(ngModel)]="date1" [showIcon]="true"
-                                    [yearNavigator]="true" />
-                                <i class="pi pi-chevron-right iconright" style="color: #004f83;"></i>
-                                <!-- <p class="text-xs">{{ this.selectedDate}}</p> -->
+                                    [yearNavigator]="true" [maxDate]="maxDate" (ngModelChange)="onDaySelect($event)" />
+                                <i class="pi pi-chevron-right iconright" (click)="gotoNextDate()"
+                                    style="color: #004f83;"></i>
+                                <p class="text-xs">{{formatDate(this.date1)}}</p>
                             </span>
                             <ng-template #monthContent>
                                 <span *ngIf="categoryTimeframe === 'month'; else yearContent">
-                                    <i class="pi pi-chevron-left iconleft " style="color: #004f83;"></i>
+                                    <i class="pi pi-chevron-left iconleft " (click)="gotoPreviousMonth()"
+                                        style="color: #004f83;"></i>
                                     <p-calendar class="charts_month_picker" [(ngModel)]="month" view="month"
-                                        [showIcon]="true" dateFormat="mm/yy" [yearNavigator]="true"
-                                        inputId="monthpicker" />
-                                    <i class="pi pi-chevron-right iconright" style="color: #004f83;"></i>
-                                    <!-- <p class="text-xs">{{formatMonth(this.month)}}/{{this.year}}</p> -->
+                                        [showIcon]="true" dateFormat="mm/yy" [yearNavigator]="true" [maxDate]="maxDate"
+                                        (ngModelChange)="onMonthSelect($event)" inputId="monthpicker" />
+                                    <i class="pi pi-chevron-right iconright" (click)="gotoNextMonth()"
+                                        style="color: #004f83;"></i>
+                                    <p class="text-xs">{{formatMonthName(this.month)}} {{this.year}}</p>
                                 </span>
                                 <ng-template #yearContent>
-                                    <i class="pi pi-chevron-left iconleft " style="color: #004f83;"></i>
+                                    <i class="pi pi-chevron-left iconleft " (click)="gotoPreviousYear()"
+                                        style="color: #004f83;"></i>
                                     <p-calendar class="charts_month_picker" [(ngModel)]="date" view="year"
-                                        [showIcon]="true" dateFormat="yy" />
+                                        [showIcon]="true" [maxDate]="maxDate" dateFormat="yy" />
                                     <i class="pi pi-chevron-right iconright" style="color: #004f83;"></i>
-                                    <!-- <p class="text-xs">{{this.year}}</p> -->
+                                    <p class="text-xs">{{this.year}}</p>
                                 </ng-template>
                             </ng-template>
                         </div>
@@ -176,39 +184,46 @@
         </div>
     </div>
     <div class="row mb-4">
-        <div class="col-md-4 mt-4" *ngIf="monthlyExpenses">
-            <div class="card expensecard shadow-sm">
+        <div class="col-md-4 mt-4">
+            <div class="card expensecard shadow-sm h-100">
                 <div class="card-header titles">
                     Investment And Expenditure Monthly
                 </div>
-                <div class="card-body d-flex text-center">
-                    <div class="flex-fill">
-                        <strong>Carry Forward</strong>
-                        <p>{{ monthlyExpenses.CarryForwarded | currency: 'INR' : 'symbol' }}</p>
-                    </div>
-                    <div class="vr"></div>
-                    <div class="flex-fill">
-                        <strong>Credit</strong>
-                        <p>{{ monthlyExpenses.TotalBudget | currency: 'INR' : 'symbol' }}</p>
-                    </div>
-                    <div class="vr"></div>
-                    <div class="flex-fill">
-                        <strong>Debit</strong>
-                        <p>{{ monthlyExpenses.TotalExpenses | currency: 'INR' : 'symbol' }}</p>
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <div class="col-12">
+                        <div *ngFor="let expense of monthlyExpenses" class="mb-3">
+                            <div class="d-flex justify-content-center">
+                                <div class="flex-fill text-center">
+                                    <strong>Carry Forward</strong>
+                                    <p>{{ expense.CarryForwarded | currency: 'INR' : 'symbol' }}</p>
+                                </div>
+                                <div class="vr"></div>
+                                <div class="flex-fill">
+                                    <strong>Credit</strong>
+                                    <p>{{ expense.TotalBudget | currency: 'INR' : 'symbol' }}</p>
+                                </div>
+                                <div class="vr"></div>
+                                <div class="flex-fill">
+                                    <strong>Debit</strong>
+                                    <p>{{ expense.TotalExpenses | currency: 'INR' : 'symbol' }}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
         <div class="col-md-4 mt-4">
-            <div class="card expensecard shadow-sm">
+            <div class="card expensecard shadow-sm h-100">
                 <div class="card-header titles">
                     Notifications
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
                     <ng-container *ngIf="notifications.length > 0; else noNotifications">
-                        <div *ngFor="let notification of notifications">
+                        <div *ngFor="let notification of notifications" [ngClass]="{'text-danger': notification.amount < 500}">
                             <div>
                                 <strong>{{ notification.Notification }}</strong>
+                                <span *ngIf="notification.amount < 500"> - Amount: {{ notification.amount }}</span>
                             </div>
                         </div>
                     </ng-container>
@@ -217,14 +232,14 @@
                     </ng-template>
                 </div>
             </div>
-        </div>
+        </div>        
         <div class="col-md-4 mt-4">
-            <div class="card expensecard shadow-sm">
+            <div class="card expensecard shadow-sm h-100">
                 <div class="card-header titles">
                     Investment And Expenditure Yearly
                 </div>
-                <div class="card-body flex text-center">
-                    <div *ngFor="let budget of yearlyBudget">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <div *ngFor="let budget of yearlyBudget" class="col-12 d-flex">
                         <div class="col-12 d-flex">
                             <div class="col-6">
                                 <strong>Credit</strong>
@@ -245,8 +260,9 @@
 
 <p-dialog header="Approval Details" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }"
     [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
-    <p-table #myTab [paginator]="ApprovalData.length > 5" [rows]="5" [showCurrentPageReport]="true" [value]="ApprovalData"
-        [globalFilterFields]="['CategoryName', 'TotalAmount','StatusName']" [tableStyle]="{ 'width': '100%' }"
+    <p-table #myTab [paginator]="ApprovalData.length > 5" [rows]="5" [showCurrentPageReport]="true"
+        [value]="ApprovalData" [globalFilterFields]="['CategoryName', 'TotalAmount','StatusName']"
+        [tableStyle]="{ 'width': '100%' }"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [rowsPerPageOptions]="[5, 10, 25, 50]"
         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -285,8 +301,9 @@
 
 <p-dialog header="Pending Approval Details" [modal]="true" [(visible)]="pendingVisible" [style]="{ width: '50rem' }"
     [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
-    <p-table #myTab  [paginator]="PendingApprovalData.length > 5"  [rows]="5" [showCurrentPageReport]="true" [value]="PendingApprovalData"
-        [globalFilterFields]="['CategoryName', 'TotalAmount','StatusName']" [tableStyle]="{ 'width': '100%' }"
+    <p-table #myTab [paginator]="PendingApprovalData.length > 5" [rows]="5" [showCurrentPageReport]="true"
+        [value]="PendingApprovalData" [globalFilterFields]="['CategoryName', 'TotalAmount','StatusName']"
+        [tableStyle]="{ 'width': '100%' }"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [rowsPerPageOptions]="[5, 10, 25, 50]"
         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

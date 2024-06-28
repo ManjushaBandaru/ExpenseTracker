@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ChartModule } from 'primeng/chart';
 import { AdminService } from 'src/app/Services/admin.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 interface City {
     name: string;
@@ -20,7 +21,7 @@ export class AdminDashboardComponent implements OnInit {
     highestExpenditure: any;
     monthlyExpenditure: any;
     yearlyExpenditure: any;
-    monthlyExpenses:any;
+    monthlyExpenses: any;
     Year: any;
     Month: any;
     ApprovalData: any[] = [];
@@ -39,8 +40,8 @@ export class AdminDashboardComponent implements OnInit {
     creditDebitOptions: any;
     categoryData: any;
     categoryOptions: any;
-    cdData:any;
-    cdOptions:any;
+    cdData: any;
+    cdOptions: any;
     totalApprovedApprovals: number = 0;
     totalPendingApprovals: number = 0;
     currentDate: any;
@@ -51,8 +52,11 @@ export class AdminDashboardComponent implements OnInit {
     pendingVisible: boolean = false;
     categoryGraphData: any;
     selectedDate: any;
+    days: any[] = [];
+    maxDate: Date = new Date(); 
 
-    constructor(private route: Router, private adminservice: AdminService) {
+    constructor(private route: Router, private adminservice: AdminService , private toastr: ToastrService) {
+        this.maxDate.setHours(0, 0, 0, 0); // Set time to beginning of the day
         this.currentDate = new Date();
         this.currentYear = this.currentDate.getFullYear();
         this.currentMonth = this.currentDate.getMonth() + 1;
@@ -67,7 +71,6 @@ export class AdminDashboardComponent implements OnInit {
         const month = 'null';
         this.GetYearBudget();
         this.ApprovalListData();
-        // this.viewpendingDetails();
         this.GetCreditDebitGraphBasedOnMonthYear();
         this.getHighestpurchaseCategory();
         this.GetMonthlyBudgetBasedOnCarryForwardAmount();
@@ -76,7 +79,7 @@ export class AdminDashboardComponent implements OnInit {
     GetCategorygraphBasedonDatemonthandyear() {
         this.categoryGraphData = [];
         const year = this.date1.getFullYear();
-        const month = this.date1.getMonth() + 1;
+        const month = new Date(this.selectedMonth).getMonth() + 1;  // getMonth() returns 0-11, so add 1
         const day = this.date1.getDate();
         console.log(day);
         if (this.categoryTimeframe === 'date') {
@@ -89,16 +92,18 @@ export class AdminDashboardComponent implements OnInit {
         else if (this.categoryTimeframe === 'month') {
             this.adminservice.GetCategoriegraphBasedOnDateMonthYear(year, month, null).subscribe((data: any) => {
                 this.categoryGraphData = data;
-                console.log(this.categoryGraphData);
+                console.log(this.categoryGraphData, 'categoryGraphData');
                 this.IntitCategoryGraph();
+
             })
         }
         else if (this.categoryTimeframe === 'year') {
-            // this.adminservice.GetCategoriegraphBasedOnDateMonthYear(year, null, null).subscribe((data:any)=>{
-            //     this.categoryGraphData = data
-            //     console.log(this.categoryGraphData);
-            // this.IntitCategoryGraph();
-            // })
+            this.adminservice.GetCategoriegraphBasedOnDateMonthYear(year, null, null).subscribe((data: any) => {
+                this.categoryGraphData = data;
+                console.log(this.categoryGraphData, 'categoryGraphData');
+                this.IntitCategoryGraph();
+
+            })
         }
     }
 
@@ -107,23 +112,27 @@ export class AdminDashboardComponent implements OnInit {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-        console.log(this.categoryGraphData);
-        const totalAmount = this.categoryGraphData?.find((each: { TotalAmount: any; }) => each.TotalAmount);
-        console.log(totalAmount);
+
+        const labels = this.categoryGraphData.map((each: { CategoryName: string; }) => each.CategoryName);
+        const data = this.categoryGraphData.map((each: { TotalAmount: number; }) => each.TotalAmount);
+
+        console.log(labels);
+        console.log(data);
 
         this.categoryData = {
-            labels: ['Birthdays'],
+            labels: labels,
             datasets: [
                 {
                     label: '',
-                    data: [totalAmount?.TotalAmount],
-                    backgroundColor: ['rgba(255, 159, 64, 0.2)'],
-                    borderColor: ['rgb(255, 159, 64)'],
+                    data: data,
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgb(255, 159, 64)',
                     borderWidth: 1,
                     barThickness: 30
                 }
             ]
         };
+
         this.categoryOptions = {
             animation: {
                 duration: 500
@@ -154,8 +163,11 @@ export class AdminDashboardComponent implements OnInit {
                     }
                 },
                 x: {
+                    ticks: {
+                        color: textColorSecondary,
+                    },
                     grid: {
-                        color: surfaceBorder,
+                        color: 'transparent',
                         drawBorder: false
                     }
                 }
@@ -163,25 +175,21 @@ export class AdminDashboardComponent implements OnInit {
         };
     }
 
-
-
     GetCreditDebitGraphBasedOnMonthYear() {
         this.creditDebitData = [];
-        const year = this.date1.getFullYear();
-        console.log(year);
-        const month = this.date1.getMonth() + 1;
-        console.log(month);
+        // const year = this.date1.getFullYear();
+        // console.log(year);
+        // const month = this.date1.getMonth() + 1;
+        // console.log(month);
         const day = this.date1.getDate();
         console.log(day);
-        
-        // if (this.creditDebitTimeframe === 'date') {
-        //     this.adminservice.getCreditDebitGraphbasedonMonthYear(year, null).subscribe((data: any) => {
-        //         this.creditDebitData = data;
-        //         console.log(this.creditDebitData);
-        //         this.IntitcreditdebitGraph();
-        //     })
-        // }
-        // else 
+
+        this.creditDebitData = [];
+        const year = this.selectedMonth.getFullYear(); // Use selectedMonth
+        console.log(year);
+        const month = this.selectedMonth.getMonth() + 1; // Use selectedMonth
+        console.log(month);
+
         if (this.creditDebitTimeframe === 'month') {
             this.adminservice.getCreditDebitGraphbasedonMonthYear(year, month).subscribe((data: any) => {
                 this.creditDebitData = data;
@@ -203,23 +211,27 @@ export class AdminDashboardComponent implements OnInit {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-        console.log(this.creditDebitData);
-        const totalAmount = this.creditDebitData?.find((each: { TotalAmount: any; }) => each.TotalAmount);
-        console.log(totalAmount);
 
-        this.categoryData = {
-            labels: ['Monthly Expenses'],
+        const creditAmount = this.creditDebitData.map((each: { TotalDeposits: number; }) => each.TotalDeposits);
+        const debitAmount = this.creditDebitData.map((each: { TotalExpenses: number; }) => each.TotalExpenses);
+
+        console.log(creditAmount);
+        console.log(debitAmount);
+
+        this.cdData = {
+            labels: ['Credit', 'Debit'],
             datasets: [
                 {
                     label: '',
-                    data: [totalAmount?.TotalAmount],
-                    backgroundColor: ['rgba(255, 159, 64, 0.2)'],
-                    borderColor: ['rgb(255, 159, 64)'],
+                    data: [creditAmount, debitAmount],  // Add zero for the debit position
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgb(255, 159, 64)',
                     borderWidth: 1,
                     barThickness: 30
                 }
             ]
         };
+
         this.cdOptions = {
             animation: {
                 duration: 500
@@ -250,8 +262,11 @@ export class AdminDashboardComponent implements OnInit {
                     }
                 },
                 x: {
+                    ticks: {
+                        color: textColorSecondary,
+                    },
                     grid: {
-                        color: surfaceBorder,
+                        color: 'transparent',
                         drawBorder: false
                     }
                 }
@@ -259,12 +274,50 @@ export class AdminDashboardComponent implements OnInit {
         };
     }
 
+
+    formatDate(date: Date): string {
+        const day = this.padZero(date.getDate());
+        const month = this.padZero(date.getMonth() + 1);  // getMonth() returns 0-11, so add 1
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    }
+
+    padZero(value: number): string {
+        return value < 10 ? '0' + value : value.toString();
+    }
+    formatMonthName(month: number): string {
+        const months = [
+          'January', 'February', 'March', 'April', 'May', 'June',
+          'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+        return months[month - 1]; // Adjust for 0-based index of getMonth()
+      }
+
     gotoPreviousDate() {
-        
+        this.date1.setDate(this.date1.getDate() - 1);
+        this.date1.setHours(0, 0, 0, 0);
+        this.handleDateChange();
     }
 
     gotoNextDate() {
+    const currentDate = new Date();
+    if (this.date1.getTime() >= currentDate.getTime()) {
+      this.toastr.warning('Cannot select future dates.');
+      return;
+    }
+    // Logic to navigate to the next date
+    this.date1.setDate(this.date1.getDate() + 1);
+  }
 
+    onDaySelect(event: any) {
+        this.date1 = event;
+        this.date1.setHours(0, 0, 0, 0);
+        this.handleDateChange();
+    }
+
+    handleDateChange() {
+        console.log('Date changed:', this.date1);
+        this.GetCategorygraphBasedonDatemonthandyear();
     }
 
     gotoPreviousMonth() {
@@ -276,9 +329,18 @@ export class AdminDashboardComponent implements OnInit {
         }
         this.selectedMonth = new Date(this.year, this.month - 1, 1);
         this.selectedMonth.setHours(0, 0, 0, 0);
+        this.GetCategorygraphBasedonDatemonthandyear();
     }
 
     gotoNextMonth() {
+        const currentDate = new Date();
+        const nextMonth = new Date(this.year, this.month, 1); // Set to the beginning of the next month
+    
+        if (nextMonth > currentDate) {
+            this.toastr.warning('Cannot select future months.');
+            return;
+        }
+    
         if (this.month < 12) {
             this.month++;
         } else {
@@ -287,7 +349,9 @@ export class AdminDashboardComponent implements OnInit {
         }
         this.selectedMonth = new Date(this.year, this.month - 1, 1);
         this.selectedMonth.setHours(0, 0, 0, 0);
+        this.GetCategorygraphBasedonDatemonthandyear();
     }
+    
 
     onMonthSelect(event: any) {
         this.selectedMonth = event;
@@ -296,13 +360,64 @@ export class AdminDashboardComponent implements OnInit {
     }
 
     gotoPreviousYear() {
-
+        // Decrease the current year by 1
+        this.year--;
+    
+        // Optionally, update any other relevant variables or states in your component
+        // Example: Update selectedMonth if needed
+        this.selectedMonth = new Date(this.year, this.month - 1, 1);
+        this.selectedMonth.setHours(0, 0, 0, 0);
+    
+        // Call a method that depends on the year change, if any
+        // Example: Update graph or data based on the new year
+        this.GetCategorygraphBasedonDatemonthandyear();
     }
 
     gotoNextYear() {
 
     }
 
+    GotolastMonth() {
+        debugger;
+        if (this.month > 1) {
+            this.month--;
+        } else {
+            this.month = 12;
+            this.year--;
+        }
+        this.selectedMonth = new Date(this.year, this.month - 1, 1);
+        this.selectedMonth.setHours(0, 0, 0, 0);
+        this.GetCreditDebitGraphBasedOnMonthYear();
+    }
+
+    GotoNextMonth() {
+        const currentDate = new Date();
+        const nextMonth = new Date(this.year, this.month, 1);
+    
+        if (nextMonth.getTime() > currentDate.getTime()) {
+            this.toastr.warning('Cannot select future months.');
+            return;
+        }
+    
+        if (this.month < 12) {
+            this.month++;
+        } else {
+            this.month = 1;
+            this.year++;
+        }
+    
+        this.selectedMonth = new Date(this.year, this.month - 1, 1);
+        this.selectedMonth.setHours(0, 0, 0, 0);
+        this.GetCreditDebitGraphBasedOnMonthYear();
+    }
+
+    GoToPreviousYear(){
+
+    }
+
+    GoToNextYear(){
+        
+    }
 
     OnClick() {
         this.route.navigate(['/sidenav/dashboard/totalexpensesinfo']);
@@ -373,14 +488,6 @@ export class AdminDashboardComponent implements OnInit {
             (data: any[]) => {
                 this.yearlyBudget = data;
                 console.log(this.yearlyBudget);
-
-                // const credits = data.filter((d: { type: string }) => d.type === 'credit');
-                // this.credit = credits.reduce((sum: number, item: { amount: number }) => sum + item.amount, 0);
-                // console.log('Total Credit:', this.credit);
-
-                // const debits = data.filter((d: { type: string }) => d.type === 'debit');
-                // this.debit = debits.reduce((sum: number, item: { amount: number }) => sum + item.amount, 0);
-                // console.log('Total Debit:', this.debit);
             },
             (error: any) => {
                 console.error('Error fetching yearly budget', error);
@@ -396,36 +503,28 @@ export class AdminDashboardComponent implements OnInit {
         this.pendingVisible = true;
     }
 
-    // getHighestpurchaseCategory(){
-    //     this.adminservice.getHighestCategoryPurchase().subscribe(
-    //         (data : any[])=>{
-    //             this.highestExpenditure = data;
-    //             console.log(this.highestExpenditure)
-    //     })
-    // }
 
     getHighestpurchaseCategory() {
         this.adminservice.getHighestCategoryPurchase().subscribe(
-          (data: any[]) => {
-            console.log('Received data:', data);
-            this.highestExpenditure = data;
-    
-            // Assuming the API returns separate entries for monthly and yearly expenditures
-            if (data.length > 0) {
-              this.monthlyExpenditure = data[0];
-              this.yearlyExpenditure = data[1];
-            }
-    
-            console.log('Monthly Expenditure:', this.monthlyExpenditure);
-            console.log('Yearly Expenditure:', this.yearlyExpenditure);
-          },
-          error => {
-            console.error('Error fetching highest expenditure data:', error);
-          }
-        );
-      }
+            (data: any[]) => {
+                console.log('Received data:', data);
+                this.highestExpenditure = data;
 
-      GetMonthlyBudgetBasedOnCarryForwardAmount(){
+                if (data.length > 0) {
+                    this.monthlyExpenditure = data[0];
+                    this.yearlyExpenditure = data[1];
+                }
+
+                console.log('Monthly Expenditure:', this.monthlyExpenditure);
+                console.log('Yearly Expenditure:', this.yearlyExpenditure);
+            },
+            error => {
+                console.error('Error fetching highest expenditure data:', error);
+            }
+        );
+    }
+
+    GetMonthlyBudgetBasedOnCarryForwardAmount() {
         this.adminservice.getmonthlyBudgetReport(this.year, this.month).subscribe(
             (data: any) => {
                 console.log(data);  // Log the fetched data
@@ -435,6 +534,6 @@ export class AdminDashboardComponent implements OnInit {
                 console.error('Error fetching monthly budget report:', error);
             }
         );
-      }
-    
+    }
+
 }
