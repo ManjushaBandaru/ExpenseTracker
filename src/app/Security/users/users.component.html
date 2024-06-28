@@ -1,3 +1,13 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+
+        <h3>Users</h3>
+
+    </div>
+</nav>
+
+
 <div class="card" id="main-card">
     <p-table #myTab [paginator]="true" [rows]="5" [showCurrentPageReport]="true" [value]="users"
         [columns]="selectedColumns"
@@ -7,7 +17,6 @@
         [rowsPerPageOptions]="[5, 10, 25, 50]"
         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
         paginatorLocale="en-US">
-
         <ng-template pTemplate="caption">
             <div class="tablehead">
                 <button pButton pRipple label="Clear" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(myTab)"
@@ -44,13 +53,13 @@
                         <p-columnFilter type="text" field="UserName" display="menu" class="ml-auto"></p-columnFilter>
                     </div>
                 </th>
-                <!-- <th class="table-head" pSortableColumn="Password" style="min-width: 14rem">
+                <th class="table-head" pSortableColumn="Password" style="min-width: 14rem">
                     <div class="flex justify-content-between align-items-center">
                         Password
                         <p-sortIcon field="Password"></p-sortIcon>
                         <p-columnFilter type="text" field="Password" display="menu" class="ml-auto"></p-columnFilter>
                     </div>
-                </th> -->
+                </th>
                 <th class="table-head" pSortableColumn="EMail" style="width:15%">
                     <div class="flex justify-content-between align-items-center">
                         Email
@@ -112,7 +121,7 @@
                 <td>{{ users.FirstName }}</td>
                 <td>{{ users.LastName }}</td>
                 <td>{{ users.UserName }}</td>
-                <!-- <td>{{users.Password}}</td> -->
+                <td>{{users.Password}}</td>
                 <td>{{ users.EMail }}</td>
                 <td>{{ users.MobileNumber }}</td>
                 <td *ngIf="isColumnSelected('CreatedByName')">{{ users.CreatedByName }}</td>
@@ -146,7 +155,7 @@
             <div class="col-md-6">
                 <label for="FirstName" class="form-label">First Name <span style="color: red;">*</span></label>
                 <input type="text" pInputText class="form-control user" id="FirstName" formControlName="FirstName"
-                    maxlength="20" placeholder="Enter First Name"
+                    maxlength="20" placeholder="Enter First Name" (input)="onFirstNameInputChange($event)"
                     [ngClass]="{'is-invalid ng-dirty': userForm.controls['FirstName'].touched && userForm.controls['FirstName'].errors}" />
                 <div
                     *ngIf="userForm.get('FirstName')?.invalid && (userForm.get('FirstName')?.dirty || userForm.get('FirstName')?.touched)">
@@ -159,7 +168,7 @@
             <div class="col-md-6">
                 <label for="LastName" class="form-label">Last Name <span style="color: red;">*</span></label>
                 <input type="text" pInputText class="form-control user" id="LastName" formControlName="LastName"
-                    maxlength="20" placeholder="Enter Last Name"
+                    maxlength="20" placeholder="Enter Last Name" (input)="onLastNameInputChange($event)"
                     [ngClass]="{'is-invalid ng-dirty': userForm.controls['LastName'].touched && userForm.controls['LastName'].errors}" />
                 <div
                     *ngIf="userForm.get('LastName')?.invalid && (userForm.get('LastName')?.dirty || userForm.get('LastName')?.touched)">
@@ -172,7 +181,7 @@
             <div class="col-md-6">
                 <label for="UserName" class="form-label">User Name <span style="color: red;">*</span></label>
                 <input type="text" pInputText class="form-control user" id="UserName" formControlName="UserName"
-                    maxlength="20" placeholder="Enter User Name"
+                    maxlength="20" placeholder="Enter User Name" (input)="onUserNameInputChange($event)"
                     [ngClass]="{'is-invalid ng-dirty': userForm.controls['UserName'].touched && userForm.controls['UserName'].errors}" />
                 <div
                     *ngIf="userForm.get('UserName')?.invalid && (userForm.get('UserName')?.dirty || userForm.get('UserName')?.touched)">
@@ -239,9 +248,6 @@
                 <label for="IsActive" class="form-label mb-0 mr-2">Is Active <span style="color: red;">*</span></label>
                 <p-checkbox formControlName="IsActive" binary="true" class="checkbox-container"></p-checkbox>
             </div>
-
-
-
         </form>
     </div>
     <ng-template pTemplate="footer">

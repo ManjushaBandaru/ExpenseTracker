@@ -36,3 +36,9 @@ p-table tr:nth-child(even) {
 p-table tr:hover {
     background-color: #ddd; /* Optional: Highlight rows on hover */
 }
+
+.tablehead{
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px
+}

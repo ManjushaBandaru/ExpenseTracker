@@ -46,3 +46,11 @@
 .custom-col {
   margin-left: 20px; /* Adjust margin as needed */
 }
+.card th,td{
+  border: 1px solid black;
+}
+.ml-4 {
+  margin-left: 500px; /* Adjust the value as needed */
+}
+
+

@@ -9,21 +9,14 @@ import { SecurityService } from 'src/app/Services/security.service';
   styleUrls: ['./deposit.component.css']
 })
 export class DepositComponent implements OnInit {
-  static numberOnly(control: AbstractControl): ValidationErrors | null {
-    const valid = /^[0-9]*$/.test(control.value);
-    return valid ? null : { numberOnly: true };
-  }
-
-  static alphabetOnly(control: AbstractControl): ValidationErrors | null {
-    const valid = /^[a-zA-Z]*$/.test(control.value);
-    return valid ? null : { alphabetOnly: true };
-  }
   deposits: any[] = [];
   uniquePaymentMethods: any[] = [];
   depositForm!: FormGroup;
   showform: boolean = false;
   globalFilterValue: string = '';
   todayDate: Date = new Date();
+  CreditedByLength: number = 0;
+  CreditedToLength: number = 0;
 
   constructor(private fb: FormBuilder, private service: SecurityService) { }
 
@@ -34,16 +27,16 @@ export class DepositComponent implements OnInit {
 
   DepositForm() {
     this.depositForm = this.fb.group({
-      Id: [''],
-      CarryForwardAmount: ['', [Validators.required]],
+      Id: [''], 
+      CarryForwardAmount: [''],
       CreditDate: ['', Validators.required],
-      Amount: ['', [Validators.required]],
-      PaymentMethodId: ['', [Validators.required]],
-      CreditedTo: ['', [Validators.required]],
-      CreditedBy: ['', [Validators.required]]
+      Amount: ['', Validators.required],
+      PaymentMethodId: ['', Validators.required],
+      CreditedBy: ['', [Validators.required]],
+      CreditedTo: ['', [Validators.required]]
     });
+    
   }
-  
   
   DepositData() {
     this.service.GetDepositData().subscribe((Response: any) => {
@@ -60,17 +53,36 @@ export class DepositComponent implements OnInit {
       ))
     );
   }
- 
+
   clear(table: Table) {
     this.globalFilterValue = '';
     table.clear();
     this.DepositData();
   }
+  onCreditedByInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value.replace(/[^a-zA-Z ]/g, '');
+    inputElement.value = value;
+    this.depositForm.controls['CreditedBy'].setValue(value);
+    this.CreditedByLength = value.length;
+  }
+
+  onCreditedToInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value.replace(/[^a-zA-Z ]/g, '');
+    inputElement.value = value;
+    this.depositForm.controls['CreditedTo'].setValue(value);
+    this.CreditedByLength = value.length;
+  }
 
   onAdd() {
     this.showform = true;
     this.depositForm.reset(); 
-  }
+
+  
+}
+
+
 
   onEdit(deposit: any) {
     this.showform = true;
